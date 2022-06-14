@@ -1,0 +1,148 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if title %} {{title}} {% else %} SWM LOTTERY {% endif %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'lottery/css/b5css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lottery/css/mdb/mdb.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'lottery/css/lottery.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<body>
+    <nav class=" bg-success py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <a class="navbar-brand" href="/">
+                        <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
+                    </a>
+                </div>
+                <div class="col-6 text-end">Login Details</div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bonuses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Result</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Winners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container">
+        <div class="row">
+            <div class="offset-sm-3 col-sm-6">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <b>{{ message }}</b>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% block sidebar %} {% endblock sidebar %} {% block content %} {% endblock content %}
+    <footer class="bg-gradient bg-success text-white py-4">
+        <div class="container">
+            <article class="row">
+                <div class="col-12 col-md-6">
+                    <div class=" pb-4">
+                        <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
+                    </div>
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo necessitatibus dolor expedita ab cupiditate autem tempore, vitae voluptate quae. Et incidunt dicta quod amet, perspiciatis rerum velit vel facere itaque?
+                    </p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h3 class="pb-2">Quick Links</h3>
+                    <p>
+                        <a href="#" class="text-light">
+                            Login
+                        </a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light">
+                            Results
+                        </a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light">
+                            Bonuses
+                        </a>
+                    </p>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h3>Follow Us @</h3>
+                </div>
+            </article>
+
+        </div>
+    </footer>
+    <footer class="bg-success text-white">
+        <div class="container">
+            <article class="row">
+                <div class="col-12 py-4 px-2 text-center">
+                    <p class="p-0">
+                        <span>
+                            &copy; copy right all rights reserved. | SWM lottery
+                        </span>
+                        <span class=" text-success">|</span>
+                        <span class=" text-muted">
+                            Terms & Conditions
+                        </span>
+                    </p>
+                    <p>
+                        Developed by | <span class=" text-warning">Ballad-tech</span> softwares.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'lottery/js/b5js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
+    </script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        /**** javascript code for aos file ****/
+        AOS.init({
+            delay: 0,
+            duration: 800,
+            easing: 'ease-in-sine',
+        });
+    </script>
+
+</body>
+
+</html>
