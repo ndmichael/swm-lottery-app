@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Games</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'all-games' %}">Games</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Bonuses</a>
@@ -48,10 +48,11 @@
                         <a class="nav-link" href="#">Winners</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="{% url 'about' %}">About
+                            Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -132,6 +133,12 @@
     <script src="{% static 'lottery/js/b5js/bootstrap.min.js' %}"></script>
     <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
     </script>
+
+    <!-- <script>
+        $('label').click(function(e) {
+            $(this).addClass('highlight').toggle("highlight", this.checked)
+        })
+    </script> -->
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
