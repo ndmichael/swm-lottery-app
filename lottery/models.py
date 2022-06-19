@@ -11,10 +11,11 @@ class Profile(models.Model):
         ('others', 'OTHERS')
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    city = models.CharField(max_length=30, choices="")
-    gender = models.CharField(max_length=10, choices=gender)
+    city = models.CharField(max_length=30, choices="", null=True, blank=True)
+    gender = models.CharField(max_length=10, choices=gender, null=True, blank=True)
     dob = models.DateField(default=timezone.now)
-    address = models.TextField()
+    phone_number = models.CharField(max_length=20)
+    address = models.TextField(null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
