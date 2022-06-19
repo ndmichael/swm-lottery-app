@@ -9,29 +9,30 @@
 {% get_providers as socialaccount_providers %}
 
 <div class="container my-5" style="min-height: 65vh;">
-    <div class="row pb-4">
-        <div class="col-12 col-sm-6 mx-auto text-center">
-            <p class=" text-primary">Welcome Back.</p>
-            <small class="text-muted">you can login to your profile now.
-            </small>
-        </div>
-    </div>
     <div class="row">
-        <div class="offset-md-2 col-12 col-md-4 mx-auto">
-            <div class="shadow p-4 rounded">
-                <h1 class="h4 text-center">{% trans "Login Into BOI Worldwide" %}
-                </h1>
+        <div class="offset-md-2 col-12 col-md-8 mx-auto">
+            <div class="shadow p-3 p-md-5 rounded-9 bg-success text-white">
+                <div class=" text-center">
+                    <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
+                    <p class="text-white-50 pt-3">{% trans "Log Into Your Account" %}
+                    </p>
+                </div>
                 <br />
                 <form class="login" method="POST" action="{% url 'account_login' %}">
                     {% csrf_token %} {{ form|crispy }} {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
-
-                    <div class="py-4">
-                        <button class="btn btn-danger btn-block primaryAction" type="submit">{% trans "Sign In" %}</button>
+                    <div class="text-end ">
+                        <a class="button text-white" href="{% url 'account_reset_password' %}">
+                            {% trans "Forgot Password?" %}
+                        </a>
                     </div>
-                    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">
-                        {% trans "Forgot Password?" %}
-                    </a>
+                    <div class="py-4 text-center">
+                        <b>
+                            <button
+                                class="btn btn-light btn-lg primaryAction px-5 rounded-9 text-success"
+                                type="submit">{% trans "Log In" %}</button>
+                        </b>
+                    </div>
                 </form>
                 <div class="row">
                     <div class="col-12">
