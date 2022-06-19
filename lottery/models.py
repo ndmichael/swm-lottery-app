@@ -19,7 +19,7 @@ class Profile(models.Model):
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f'{self.user.first_name}'
+        return f'{self.user.username}'
 
 
 class Drawing(models.Model):
@@ -47,7 +47,7 @@ class Ticket(models.Model):
     def __str__(self):
         return f'{self.id}'
 
-class Picks(models.Model):
+class Pick(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_pick")
     ticket_id = models.OneToOneField(Ticket, on_delete=models.CASCADE, related_name="ticket_pick")
     ball_number = models.CharField(max_length=6)
