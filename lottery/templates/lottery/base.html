@@ -16,16 +16,22 @@
 </head>
 
 <body>
-    <nav class=" bg-success py-2">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <a class="navbar-brand" href="/">
-                        <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
-                    </a>
-                </div>
-                <div class="col-6 text-end">Login Details</div>
-            </div>
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
+            </a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link  text-white" href="{% url 'account_login' %}">Login</a>
+                </li>
+                <span class=" text-white pt-2">|</span>
+                <li class="nav-item border-right border-4">
+                    <a class="nav-link text-white" aria-current="page" href="{% url 'account_signup' %}">Sign
+                        Up</a>
+                </li>
+
+            </ul>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
