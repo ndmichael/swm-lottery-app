@@ -22,6 +22,7 @@
                 <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
             </a>
             <ul class="navbar-nav ms-auto">
+                {% if not user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link  text-white" href="{% url 'account_login' %}">Login</a>
                 </li>
@@ -30,6 +31,13 @@
                     <a class="nav-link text-white" aria-current="page" href="{% url 'account_signup' %}">Sign
                         Up</a>
                 </li>
+                {% else %}
+                <li class="nav-item border-right border-4">
+                    <a class="nav-link text-white" aria-current="page" href="{% url 'account_signup' %}">
+                        <i class="bi bi-person text-light" style=" font-size:20px"></i>
+                    </a>
+                </li>
+                {% endif %}
 
             </ul>
         </div>
