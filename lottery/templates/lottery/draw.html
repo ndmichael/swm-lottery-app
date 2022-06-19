@@ -1,0 +1,21 @@
+{% extends 'lottery/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
+<section class="my-5">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-8 mx-auto">
+                <div>
+                    <h1>PICK A DRAW</h1>
+                    <form action="">
+                        {% csrf_token %} {% for field in form %} {% for choice in field %}
+                        <div class="form-check form-check-inline">
+                            {{choice}}
+                        </div>
+                        {% endfor %} {% endfor %}
+                    </form>
+                </div>
+            </article>
+        </section>
+    </div>
+</section>
+
+{% endblock content %}
