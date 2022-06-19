@@ -1,12 +1,17 @@
-{% extends "lottery/base.html" %} {% load crispy_forms_tags %} {% load i18n %} {% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
+{% extends "account/base.html" %} {% load crispy_forms_tags %} {% load i18n %} {% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
 
 
 
 <div class="container py-5">
-    <div class="row">
+    <div class="row shadow p-3 rounded-7">
         <div class="offset-md-2 col-12 col-md-8">
-            <div class="form-override">
-                <h1>{% trans "Create Account" %}</h1>
+            <div class="py-4">
+                <div class="text-center">
+                    <h1>{% trans "Fill In Your Details To Register" %}</h1>
+                    <p class="muted">
+                        Join Million other Nigerians around the globe in wimming massive gifts and prizes.
+                    </p>
+                </div>
                 <br />
                 <form class="signup" id="signup_form" method="post" enctype="multipart/form-data" action="{% url 'account_signup' %}">
                     {% csrf_token %}
@@ -25,13 +30,13 @@
                             {{ form.phoneNumber|as_crispy_field }}
                         </div>
                         <div class="form-group col-4 col-md-4">
-                            {{ form.country|as_crispy_field }}
-                        </div>
-                        <div class="form-group col-4 col-md-4">
                             {{ form.city|as_crispy_field }}
                         </div>
                         <div class="form-group col-4">
                             {{ form.gender|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-4 col-md-4">
+                            {{ form.dob|as_crispy_field }}
                         </div>
                         <div class="form-group col-12">
                             {{ form.address|as_crispy_field }}
@@ -44,11 +49,11 @@
                         </div>
 
                     </div>
-                    <div class="pt-4">
+                    <div class="pt-4 text-center">
                         {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
-                        <button class="btn btn-danger btn-lg" type="submit">
-                            {% trans "CreateAccount" %} &raquo;
+                        <button class="btn btn-success rounded-pill btn-lg" type="submit">
+                            {% trans "Create Account" %}
                         </button>
                     </div>
                 </form>
