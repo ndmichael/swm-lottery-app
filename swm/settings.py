@@ -144,7 +144,7 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 7
-ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "index"
 
 # 1 day
@@ -154,7 +154,7 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
 
-ACCOUNT_FORMS = {"signup": "clients.forms.MyCustomSignupForm"}
+ACCOUNT_FORMS = {"signup": "clients.forms.MyCustomSignupForm", "login": "clients.forms.SelfLoginForm"}
 
 
 # Default primary key field type
