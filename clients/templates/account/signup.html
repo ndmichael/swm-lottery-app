@@ -27,15 +27,18 @@
                             {{ form.email|as_crispy_field }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ form.phoneNumber|as_crispy_field }}
+                            {{ form.username|as_crispy_field }}
                         </div>
-                        <div class="form-group col-4 col-md-4">
+                        <div class="form-group col-md-6">
                             {{ form.city|as_crispy_field }}
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-md-6">
+                            {{ form.phone_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-6">
                             {{ form.gender|as_crispy_field }}
                         </div>
-                        <div class="form-group col-4 col-md-4">
+                        <div class="form-group col-6 col-md-4">
                             {{ form.dob|as_crispy_field }}
                         </div>
                         <div class="form-group col-12">
