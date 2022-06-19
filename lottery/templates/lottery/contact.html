@@ -1,0 +1,41 @@
+{% extends 'lottery/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
+<section class=" py-5">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-8 text-center mx-auto">
+                <h1 class="h4">
+                    Contact us today if you need support and we will be glad to assist you.
+                </h1>
+                <p>
+                    Most commonly asked questions are already been answered in our FAQ page. Please check to see if your questions has been answered, If not fill the form below and get started.
+                </p>
+            </article>
+        </section>
+        <section class="row  py-5">
+            <article class="col-12 col-md-6">
+                <form method="POST">
+                    {% csrf_token %} {{form|crispy}}
+                    <div class=" text-end">
+                        <button type="submit" class="btn btn-lg btn-success rounded-9">
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </article>
+            <article class="col-12 col-md-6">
+                <div class="text-center">
+                    <img src="{% static 'lottery/images/customercare.png' %}" alt="" class=" img-fluid" style="height:300px; width:400px; object-fit: cover;">
+                </div>
+
+                <div class="p-3 p-md-5">
+                    <h3 class=" text-success">SWM LOTTERY GLOBAL CONCEPT LTD.
+                    </h3>
+                    <p class=" text-success">
+                        Bulama House D5 Ibo Road, Sabon Gari, Kano. <br> RC Number - 1932563 <br> 08144415161 <br> Lttrglbl@gmail.com
+                    </p>
+                </div>
+            </article>
+        </section>
+    </div>
+</section>
+{% endblock content %}
