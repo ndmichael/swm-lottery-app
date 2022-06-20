@@ -32,10 +32,20 @@
                         Up</a>
                 </li>
                 {% else %}
-                <li class="nav-item border-right border-4">
-                    <a class="nav-link text-white" aria-current="page" href="{% url 'account_signup' %}">
-                        <i class="bi bi-person text-light" style=" font-size:20px"></i>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color:#00ff00" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Welcome, {{user.username}}
+                        <i class="bi bi-person text-light"
+                            style=" font-size:20px"></i>
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                        </li>
+                    </ul>
                 </li>
                 {% endif %}
 
