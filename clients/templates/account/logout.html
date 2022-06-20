@@ -1,4 +1,4 @@
-{% extends "ibanking/base.html" %} {% load static %} {% load i18n %} {% block head_title %}{% trans "Sign Out" %}{% endblock %} {% block content %}
+{% extends "account/base.html" %} {% load static %} {% load i18n %} {% block head_title %}{% trans "Sign Out" %}{% endblock %} {% block content %}
 
 <div class="container flex-fill">
     <div class="row">
@@ -12,8 +12,8 @@
                     {% csrf_token %} {% if redirect_field_value %}
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
                     <button type="submit" class="btn btn-lg btn-dark">
-            {% trans 'Sign Out' %}
-          </button>
+                        {% trans 'Sign Out' %}
+                    </button>
                 </form>
             </div>
         </div>
