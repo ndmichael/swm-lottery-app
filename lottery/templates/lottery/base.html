@@ -158,11 +158,32 @@
     <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
     </script>
 
-    <!-- <script>
-        $('label').click(function(e) {
-            $(this).addClass('highlight').toggle("highlight", this.checked)
+    <!-- <script src="{% static 'lottery/js/countdown.js' %}"></script> -->
+
+    <script>
+        let limit = 6
+        $('.test').click(function(e) {
+            $(this).closest('label').toggleClass("highlight");
+
+            if ($('.test:checked').length == limit) {
+                $(".test").not(":checked").attr("disabled", true).addClass("faded");
+                var res = $(".test").not(":checked").closest('label').addClass("checkFaded")
+                console.log(res)
+            } else
+                $(".test").not(":checked").removeAttr('disabled');
+        });
+
+        $('.test2').click(function(e) {
+            $(this).closest('label').toggleClass("highlight");
+
+            if ($('.test2:checked').length == 1) {
+                $(".test2").not(":checked").attr("disabled", true).addClass("faded");
+                var res = $(".test2").not(":checked").closest('label').addClass("checkFaded")
+                console.log(res)
+            } else
+                $(".test").not(":checked").removeAttr('disabled');
         })
-    </script> -->
+    </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

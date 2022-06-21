@@ -44,7 +44,7 @@
             </article>
             <article class="col-12 col-sm-3 align-self-center">
                 <div class="pt-3 ">
-                    <a href=" " class=" btn btn-lg btn-success rounded-9">
+                    <a href="{% url 'pick' g_data.type g_data.id %}" class=" btn btn-lg btn-success rounded-9">
                         Play Now
                     </a>
                 </div>
@@ -66,9 +66,14 @@
                         <h1 class=" text-success">
                             <span style="color: lightgreen">&#8358;</span>100,000
                         </h1>
-                        <p>Next draw in0 hours 12 minutes</p>
+                        <p>
+                            <b>
+                                <span id="hr-min"></span> minutes
+                                <span id="hr-sec"></span> seconds
+                            </b>
+                        </p>
                         <div class="pt-3">
-                            <a href=" " class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' b_data.type b_data.id %}" class=" btn btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -84,9 +89,15 @@
                         <span>SWM Gold</span>
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>10,000,000
                         </h1>
-                        <p>Next draw in 2days 3hours 12 minutes</p>
+                        <p>
+                            <b>
+                                <span id="hr3-hr"></span> hours
+                                <span id="hr3-min"></span> minutes
+                                <span id="hr3-sec"></span> seconds
+                            </b>
+                        </p>
                         <div class="pt-3">
-                            <a href=" " class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' g_data.type g_data.id %}" class=" btn btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -103,9 +114,15 @@
                         <span>SWM Silver</span>
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>1,000,000
                         </h1>
-                        <p>Next draw in 2hours 12 minutes</p>
+                        <p>
+                            <b>
+                                <span id="3day"></span> days
+                                <span id="3day-hr"></span> hours
+                                <span id="3day-min"></span> minutes
+                            </b>
+                        </p>
                         <div class="pt-3">
-                            <a href=" " class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' s_data.type s_data.id %}" class=" btn btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -122,9 +139,15 @@
                         <span>SWM Platinum</span>
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>100,000,000
                         </h1>
-                        <p>Next draw in 2hours 12 minutes</p>
+                        <p>
+                            <b>
+                                <span id="7days"></span> days
+                                <span id="7days-hr"></span> hours
+                                <span id="7days-min"></span> minutes
+                            </b>
+                        </p>
                         <div class="pt-3">
-                            <a href=" " class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' p_data.type p_data.id %}" class=" btn btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
