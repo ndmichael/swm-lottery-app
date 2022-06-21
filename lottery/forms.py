@@ -87,7 +87,6 @@ class DrawForm(forms.ModelForm):
     )
 
     sp_numbers = (
-        ("1", "1"),
         (1, 1),
         (2, 2),
         (3, 3),
@@ -113,7 +112,8 @@ class DrawForm(forms.ModelForm):
         choices=numbers, widget=forms.CheckboxSelectMultiple(attrs={"class": "test"})
     )
     special_number = forms.ChoiceField(
-        choices=sp_numbers, widget=forms.CheckboxSelectMultiple(attrs={"class": "test2"})
+        choices=sp_numbers,
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "test2"}),
     )
 
     class Meta:

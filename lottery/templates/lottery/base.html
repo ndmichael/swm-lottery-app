@@ -166,11 +166,14 @@
             $(this).closest('label').toggleClass("highlight");
 
             if ($('.test:checked').length == limit) {
-                $(".test").not(":checked").attr("disabled", true).addClass("checkFaded");
+                $(".test").not(":checked").attr("disabled", true)
                 var res = $(".test").not(":checked").closest('label').addClass("checkFaded")
-                console.log(res)
-            } else
+                    // console.log(res)
+            } else {
                 $(".test").not(":checked").removeAttr('disabled');
+                var res = $(".test").not(":checked").closest('label').removeClass("checkFaded")
+            }
+
         });
 
         $('.test2').click(function(e) {
@@ -180,9 +183,26 @@
                 $(".test2").not(":checked").attr("disabled", true).addClass("checkFaded");
                 var res = $(".test2").not(":checked").closest('label').addClass("checkFaded")
                 console.log(res)
-            } else
-                $(".test").not(":checked").removeAttr('disabled');
+            } else {
+                $(".test2").not(":checked").removeAttr('disabled');
+                var res = $(".test2").not(":checked").closest('label').removeClass("checkFaded")
+            }
         })
+    </script>
+
+    <script>
+        setInterval(() => {
+            var now = new Date().getTime();
+            var distance = date - d
+            var hours = Math.floor((distance % day) / hour);
+            var minutes = Math.floor((distance % hour) / minute);
+            var seconds = Math.floor((distance % minute) / second);
+            var days = Math.floor(distance / day);
+            console.log(seconds)
+            document.getElementById("hr-min").innerHTML = minutes
+            document.getElementById("hr-sec").innerHTML = seconds
+
+        }, 1000);
     </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
