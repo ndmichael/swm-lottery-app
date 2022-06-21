@@ -166,7 +166,7 @@
             $(this).closest('label').toggleClass("highlight");
 
             if ($('.test:checked').length == limit) {
-                $(".test").not(":checked").attr("disabled", true).addClass("faded");
+                $(".test").not(":checked").attr("disabled", true).addClass("checkFaded");
                 var res = $(".test").not(":checked").closest('label').addClass("checkFaded")
                 console.log(res)
             } else
@@ -177,7 +177,7 @@
             $(this).closest('label').toggleClass("highlight");
 
             if ($('.test2:checked').length == 1) {
-                $(".test2").not(":checked").attr("disabled", true).addClass("faded");
+                $(".test2").not(":checked").attr("disabled", true).addClass("checkFaded");
                 var res = $(".test2").not(":checked").closest('label').addClass("checkFaded")
                 console.log(res)
             } else

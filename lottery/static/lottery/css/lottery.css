@@ -11,8 +11,8 @@ label>input[type="checkbox"] {
 }
 
 .checkFaded {
-    font-weight: 100;
-    color: rgb(66, 65, 65);
+    font-weight: 100 !important;
+    color: rgb(66, 65, 65) !important;
 }
 
 .form-check>label {
