@@ -1,15 +1,26 @@
 {% extends 'lottery/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
-<section>
+<section class="py-5" style="min-height: 70vh;">
     <div class="container">
         <section class="row">
-            <article class="col-12 col-md-7">
-                <div>
-
+            <article class="col-12 offset-md-1 mx-auto">
+                <h1 class=" text-success text-center pb-4">
+                    About SWM Lottery
+                </h1>
+            </article>
+            <article class="col-12 col-md-5 offset-md-1 align-self-center">
+                <div class="px-md-4">
+                    <img src="{% static 'lottery/images/about.png' %}" class=" img-fluid" alt="about us photo" />
                 </div>
             </article>
             <article class="col-12 col-md-5">
                 <div class="py-4 px-2 p-md-5">
-
+                    <p>
+                        SWM LOTTERY GLOBAL CONCEPT LTD, aka "SWM Lottery" is a business in Nigeria set up in April 2022 with the intention of engaging in lotto service. SWM is legally registered and regulated by the National Lotteries Regulation Commission, and with other necessary
+                        bodies. It's main office is located in Kano with other branches coming soon.
+                        <br /> All games are to played through our online channels. SWM Lottery offers four unique games, SWM Bronze, SWM Silver, SWM Gold, and SWM Platinum. The games are that of numbers starting from 1 - 59 wherein each user is to select
+                        6 numbers of their choice and an additional number which serves as bonus a number from 1 - 20.
+                        <br /><br /> SWM Lottery is known for it's uniqueness in administrative support, instant payment procedures, optimal commision and quality customer support system.
+                    </p>
                 </div>
             </article>
         </section>
