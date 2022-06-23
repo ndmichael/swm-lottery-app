@@ -27,7 +27,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY_SWM")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.environ.get("DEBUG_VALUE") == "True"
+# DEBUG = os.environ.get("DEBUG_VALUE") == "True"
+DEBUG = "False"
 
 SITE_ID = 1
 
