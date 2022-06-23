@@ -26,8 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY_SWM")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = os.environ.get("DEBUG_VALUE") == "True"
+DEBUG = False
+# DEBUG = os.environ.get("DEBUG_VALUE") == "True"
 
 
 SITE_ID = 1
@@ -170,8 +170,8 @@ ACCOUNT_FORMS = {
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
-PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM", True)
-PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM", True)
+PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
+PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
 # print(type(PAYSTACK_SECRET_KEY))
 # print(type(PAYSTACK_PUBLIC_KEY))
 
