@@ -168,7 +168,8 @@ ACCOUNT_FORMS = {
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-PAYSTACK_SECRET_KEY = ""
+PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
+PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

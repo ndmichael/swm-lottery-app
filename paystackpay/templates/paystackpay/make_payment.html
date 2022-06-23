@@ -1,0 +1,44 @@
+{% extends 'account/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
+
+<section class="" style="min-height: 73vh; padding-top: 14vh;">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-6 mx-auto">
+                <h1>Make Payment For: NG {{payment.amount}}</h1>
+                <script src="https://js.paystack.co/v1/inline.js"></script>
+
+                <p class=" pt-4">
+                    <input type="submit" onclick="payWithPayStack()" class="btn btn-success btn-lg rounded-9" value="Make Payment">
+                </p>
+            </article>
+        </section>
+    </div>
+</section>
+
+<script>
+    function payWithPayStack() {
+        let currency = "NGN"
+        let plan = ""
+        let ref = "{{payment.ref}}"
+        let obj = {
+            key: "{{paystack_public_key}}",
+            email: "{{ request.user.email }}",
+            amount: "{{payment.amount_value}}",
+            ref: ref,
+            callback: function(res) {
+                window.location.href = "{% url 'verify-payment' payment.ref %}";
+            }
+        }
+        if (Boolean(currency)) {
+            obj.currency = currency.toUpperCase()
+        }
+        if (Boolean(plan)) {
+            obj.plan = plan;
+        }
+        var handler = PaystackPop.setup(obj);
+        handler.openIframe();
+    }
+</script>
+
+
+{% endblock content %}

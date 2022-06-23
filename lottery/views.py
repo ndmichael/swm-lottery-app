@@ -21,7 +21,17 @@ def index(request):
 
 
 def games(request):
-    return render(request, "lottery/games.html")
+    bronze_data = Drawing.objects.filter(status=True).filter(type="bronze").first()
+    silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
+    gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
+    platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
+    context = {
+        "b_data": bronze_data,
+        "s_data": silver_data,
+        "g_data": gold_data,
+        "p_data": platinum_data,
+    }
+    return render(request, "lottery/games.html", context)
 
 
 def about(request):

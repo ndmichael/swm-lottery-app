@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.admin import User
 from django.utils import timezone
+import secrets
 
 # Create your models here.
 
@@ -8,12 +9,13 @@ from django.utils import timezone
 class Profile(models.Model):
     gender = (("male", "MALE"), ("female", "FEMALE"), ("others", "OTHERS"))
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    city = models.CharField(max_length=30, choices="", null=True, blank=True)
+    city = models.CharField(max_length=30, null=True, blank=True)
     gender = models.CharField(max_length=10, choices=gender, null=True, blank=True)
     dob = models.DateField(default=timezone.now)
     phone_number = models.CharField(max_length=20)
     address = models.TextField(null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"{self.user.username}"
@@ -42,8 +44,17 @@ class Ticket(models.Model):
         User, on_delete=models.CASCADE, related_name="user_ticket"
     )
     status = models.BooleanField(default=False)
+    ticket_id = models.CharField(max_length=50, default="")
     correct_count = models.CharField(max_length=30)
     date = models.DateTimeField(default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        while not self.ref:
+            ticket_id = secrets.token_urlsafe(8)
+            objects_with_similar_ticket_id = Ticket.objects.filter(ticket_id=ticket_id)
+            if not objects_with_similar_ticket_id:
+                self.ticket_id = ticket_id
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.id}"
