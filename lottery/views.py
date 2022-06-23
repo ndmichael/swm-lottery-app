@@ -7,11 +7,17 @@ import json
 
 
 def index(request):
+    obj = Drawing.objects.filter(status=True).first()
     bronze_data = Drawing.objects.filter(status=True).filter(type="bronze").first()
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
+    startdate = obj.created.strftime("%Y-%m-%dT%H:%M:%S")
+    enddate = obj.enddate().strftime("%Y-%m-%dT%H:%M:%S")
+    print(startdate, enddate)
     context = {
+        "startdate": startdate,
+        "enddate": enddate,
         "b_data": bronze_data,
         "s_data": silver_data,
         "g_data": gold_data,

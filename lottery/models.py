@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.admin import User
 from django.utils import timezone
+import datetime
 import secrets
 
 # Create your models here.
@@ -31,6 +32,9 @@ class Drawing(models.Model):
     type = models.CharField(max_length=20, choices=choices)
     created = models.DateTimeField(default=timezone.now)
     status = models.BooleanField(default=False)
+
+    def enddate(self):
+        return self.created + datetime.timedelta(hours=1)
 
     def __str__(self):
         return f"{self.type}"

@@ -32,6 +32,12 @@
                         Up</a>
                 </li>
                 {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-white">
+                        <b style="font-size: 24px;">&#8358;{{user.profile.balance}}</b>
+                    </a>
+
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color:#00ff00" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{user.username}}
@@ -40,6 +46,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'initiate-payment' %}">deposit</a>
+                        </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -132,14 +140,15 @@
                     <h3>Follow Us @</h3>
                     <p class="">
                         <span class="pe-4">
-                            <a href="">
+                            <a
+                                href="https://web.facebook.com/SWM-Lottery-102134939217961">
                                 <img src="{% static 'lottery/images/instagram_icon.png' %}"
                                     alt="instagram icon" class="img-fluid"
                                     style="height: 40px; width: 40px;">
                             </a>
                         </span>
                         <span>
-                            <a href="">
+                            <a href="https://www.instagram.com/swmlottery/">
                                 <img src="{% static 'lottery/images/facebook_icon.png' %}"
                                     alt="instagram icon" class="img-fluid"
                                     style="height: 40px; width: 40px;">
@@ -200,7 +209,7 @@
         });
 
         $('.test2').click(function(e) {
-            $(this).closest('label').toggleClass("highlight");
+            $(this).closest('label').toggleClass("highlight-sp");
 
             if ($('.test2:checked').length == 1) {
                 $(".test2").not(":checked").attr("disabled", true).addClass("checkFaded");
@@ -214,19 +223,19 @@
     </script>
 
     <script>
-        var d = "{{b_data.iso}}"
-        setInterval(() => {
-            var now = new Date().getTime();
-            var distance = date - d
-            var hours = Math.floor((distance % day) / hour);
-            var minutes = Math.floor((distance % hour) / minute);
-            var seconds = Math.floor((distance % minute) / second);
-            var days = Math.floor(distance / day);
-            console.log(seconds)
-            document.getElementById("hr-min").innerHTML = minutes
-            document.getElementById("hr-sec").innerHTML = seconds
+        var sd = "{{startdate}}"
+        var ed = "{{enddate}}"
+        sdate = new Date("{{startdate}}")
+        edate = new Date("{{enddate}}")
+        var distance = (edate.getTime() - sdate.getTime());
 
-        }, 1000);
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        console.log(distance)
+        console.log(hours, minutes, seconds, days)
     </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
