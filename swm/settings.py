@@ -172,6 +172,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # PAYSTACK_PUBLIC_KEY = "pk_live_c7e82d2938db41ccc9154877974da28e23c42606"
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
 PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
+# print(type(PAYSTACK_SECRET_KEY))
+# print(type(PAYSTACK_PUBLIC_KEY))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
