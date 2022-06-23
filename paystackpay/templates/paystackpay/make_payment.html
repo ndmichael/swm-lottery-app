@@ -4,7 +4,7 @@
     <div class="container">
         <section class="row">
             <article class="col-12 col-md-6 mx-auto">
-                <h1>Make Payment For: NG {{payment.amount}}</h1>
+                <h1>Make Payment For: NGN{{payment.amount}}</h1>
                 <script src="https://js.paystack.co/v1/inline.js"></script>
 
                 <p class=" pt-4">
@@ -17,6 +17,8 @@
 
 <script>
     function payWithPayStack() {
+        console.log("{{paystack_public_key}}")
+        console.log("{{paystack_secret_key}}")
         let currency = "NGN"
         let plan = ""
         let ref = "{{payment.ref}}"
