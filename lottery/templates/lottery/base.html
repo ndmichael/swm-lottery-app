@@ -190,13 +190,22 @@
     <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
     </script>
 
-    <script src="{% static 'lottery/js/countdown.js' %}"></script>
+    <script>
+        $(".reset").click(function(e) {
+            $(".draw").removeAttr("checked")
+            $(".draw").closest('label').removeClass("highlight-sp").removeClass("checkFaded");
+            $(".draw").not(":checked").removeAttr('disabled');
+
+            $(".draw").closest('label').removeClass("highlight");
+        });
+    </script>
+
+    <!-- <script src="{% static 'lottery/js/countdown.js' %}"></script> -->
 
     <script>
         let limit = 6
         $('.test').click(function(e) {
             $(this).closest('label').toggleClass("highlight");
-
             if ($('.test:checked').length == limit) {
                 $(".test").not(":checked").attr("disabled", true)
                 var res = $(".test").not(":checked").closest('label').addClass("checkFaded")
@@ -205,19 +214,17 @@
                 $(".test").not(":checked").removeAttr('disabled');
                 var res = $(".test").not(":checked").closest('label').removeClass("checkFaded")
             }
-
         });
 
         $('.test2').click(function(e) {
             $(this).closest('label').toggleClass("highlight-sp");
 
             if ($('.test2:checked').length == 1) {
-                $(".test2").not(":checked").attr("disabled", true).addClass("checkFaded");
-                var res = $(".test2").not(":checked").closest('label').addClass("checkFaded")
-                console.log(res)
+                $(".test2").not(":checked").attr("disabled", true);
+                $(".test2").not(":checked").closest('label').addClass("checkFaded")
             } else {
                 $(".test2").not(":checked").removeAttr('disabled');
-                var res = $(".test2").not(":checked").closest('label').removeClass("checkFaded")
+                $(".test2").not(":checked").closest('label').removeClass("checkFaded")
             }
         })
     </script>

@@ -109,11 +109,12 @@ class DrawForm(forms.ModelForm):
         (20, 20),
     )
     ball_number = forms.MultipleChoiceField(
-        choices=numbers, widget=forms.CheckboxSelectMultiple(attrs={"class": "test"})
+        choices=numbers,
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "draw test"}),
     )
     special_number = forms.ChoiceField(
         choices=sp_numbers,
-        widget=forms.CheckboxSelectMultiple(attrs={"class": "test2"}),
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "draw test2"}),
     )
 
     class Meta:
