@@ -1,0 +1,67 @@
+label>input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.highlight {
+    background: #006633;
+    color: white !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 1);
+}
+
+.highlight-sp {
+    background: #00ff00;
+    color: white !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 1);
+}
+
+.checkFaded {
+    font-weight: 100 !important;
+    color: rgb(66, 65, 65) !important;
+}
+
+.form-check>label {
+    cursor: pointer;
+    width: 55px;
+    height: 55px;
+    /* background: lightgreen; */
+    border: 1px solid grey;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 5px 0;
+}
+
+.form-check>label:hover {
+    border: 4px solid #00ff00;
+    box-shadow: 0 0 15px rgba(08, 08, 08, 0.2);
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#hero_page {
+    background-image: url("/static/lottery/images/banner.d4474e959839.jpg");
+    background-size: cover;
+    min-height: 70vh;
+    height: 70vh;
+    width: 100%;
+}
+
+.btn-success {
+    background: #006633;
+}
+
+.text-success {
+    color: #006633 !important;
+}
+
+.bg-success {
+    background: #006633 !important;
+}
