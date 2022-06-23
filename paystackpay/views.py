@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def initiate_payment(request):
-    paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
-    paystack_secret_key = settings.PAYSTACK_SECRET_KEY
+    # paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
+    # paystack_secret_key = settings.PAYSTACK_SECRET_KEY
     if request.method == "POST":
         p_form = PaymentForm(request.POST)
         if p_form.is_valid():
@@ -20,8 +20,8 @@ def initiate_payment(request):
             payment.save()
             context = {
                 "payment": payment,
-                "paystack_public_key": paystack_public_key,
-                "paystack_secret_key": paystack_secret_key,
+                "paystack_public_key": settings.PAYSTACK_PUBLIC_KEY,
+                "paystack_secret_key": settings.PAYSTACK_SECRET_KEY,
             }
             return render(request, "paystackpay/make_payment.html", context)
     else:

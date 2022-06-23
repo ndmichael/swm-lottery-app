@@ -170,8 +170,9 @@ ACCOUNT_FORMS = {
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
-PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
-PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
+if DEBUG:
+    PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
+    PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
 # print(type(PAYSTACK_SECRET_KEY))
 # print(type(PAYSTACK_PUBLIC_KEY))
 
