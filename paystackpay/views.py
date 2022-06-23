@@ -10,8 +10,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def initiate_payment(request):
-    # paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
-    # paystack_secret_key = settings.PAYSTACK_SECRET_KEY
     if request.method == "POST":
         p_form = PaymentForm(request.POST)
         if p_form.is_valid():
