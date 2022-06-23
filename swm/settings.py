@@ -27,8 +27,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY_SWM")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-# DEBUG = os.environ.get("DEBUG_VALUE") == "True"
-DEBUG = True
+DEBUG = os.environ.get("DEBUG_VALUE") == "True"
+
 
 SITE_ID = 1
 
@@ -169,8 +169,7 @@ ACCOUNT_FORMS = {
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# PAYSTACK_SECRET_KEY = "sk_live_10860bb06cb3124736355596dcffc10d24ea633f"
-# PAYSTACK_PUBLIC_KEY = "pk_live_c7e82d2938db41ccc9154877974da28e23c42606"
+
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
 PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
 # print(type(PAYSTACK_SECRET_KEY))
