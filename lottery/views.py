@@ -60,6 +60,7 @@ def draw(request, type, id):
     if request.method == "POST":
         ball_number = request.POST.getlist("ball_number")
         special_number = request.POST.getlist("special_number")
+        print("len: ", len(special_number))
         if draw.type == "bronze" and user.profile.balance >= 100:
             ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
             picks = Pick(

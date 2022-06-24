@@ -111,7 +111,7 @@ class Pick(models.Model):
     ticket_id = models.OneToOneField(
         Ticket, on_delete=models.CASCADE, related_name="ticket_pick"
     )
-    ball_number = models.CharField(max_length=6)
+    ball_number = models.CharField(max_length=50)
     special_number = models.CharField(max_length=1)
     date = models.DateTimeField(default=timezone.now)
 
