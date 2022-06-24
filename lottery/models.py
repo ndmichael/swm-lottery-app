@@ -112,7 +112,7 @@ class Pick(models.Model):
         Ticket, on_delete=models.CASCADE, related_name="ticket_pick"
     )
     ball_number = models.CharField(max_length=50)
-    special_number = models.CharField(max_length=1)
+    special_number = models.CharField(max_length=20)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
