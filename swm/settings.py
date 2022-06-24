@@ -32,7 +32,7 @@ DEBUG = os.environ.get("DEBUG_VALUE") == "True"
 
 SITE_ID = 1
 
-ALLOWED_HOSTS = ["swmlottery.herokuapp.com", "localhost"]
+ALLOWED_HOSTS = ["swmlottery.com", "www.swmlottery.com", "localhost"]
 
 
 # Application definition
