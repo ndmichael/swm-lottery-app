@@ -181,3 +181,8 @@ PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 django_heroku.settings(locals())
+
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
+    SECURE_SSL_REDIRECT = True
