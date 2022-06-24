@@ -45,40 +45,38 @@
         </section>
         <section class="row">
             <article class="col-12 col-md-8 mx-auto">
-                <div>
-                    <form action="" method="POST" class="pt-4">
-                        {% csrf_token %} {% for field in form %}
-                        <!-- <div>
+                <form method="POST" class="pt-4">
+                    {% csrf_token %} {% for field in form %}
+                    <!-- <div>
                             <h3 class=" text-success">{{field.label}}</h3>
                         </div> -->
-                        {% for choice in field %}
-                        <div class="form-check form-check-inline m-0 p-1">
-                            {{choice}}
-                        </div>
-                        {% endfor %}
-                        <br />
-                        <hr /> {% endfor %}
+                    {% for choice in field %}
+                    <div class="form-check form-check-inline m-0 p-1">
+                        {{choice}}
+                    </div>
+                    {% endfor %}
+                    <br />
+                    <hr /> {% endfor %}
 
-                        <p class="pt-4">
-                            {% if draw.type == 'platinum' %}
-                            <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
-                                Buy Ticket &#8358;500
-                            </button> {% elif draw.type == 'gold' %}
-                            <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
-                                Buy Ticket &#8358;350
-                            </button> {% elif draw.type == 'silver' %}
-                            <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
-                                Buy Ticket &#8358;200
-                            </button> {% elif draw.type == 'bronze' %}
-                            <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
-                                Buy Ticket &#8358;100
-                            </button> {% endif %}
-                            <button type="button" class=" btn btn-dark rounded-pill reset">
-                                clear
-                            </button>
-                        </p>
-                    </form>
-                </div>
+                    <p class="pt-4">
+                        {% if draw.type == 'platinum' %}
+                        <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
+                            Buy Ticket &#8358;500
+                        </button> {% elif draw.type == 'gold' %}
+                        <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
+                            Buy Ticket &#8358;350
+                        </button> {% elif draw.type == 'silver' %}
+                        <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
+                            Buy Ticket &#8358;200
+                        </button> {% elif draw.type == 'bronze' %}
+                        <button class=" btn btn-success btn-lg rounded-9 px-5 py-4" type="submit" style="font-weight: 700; font-size:20px">
+                            Buy Ticket &#8358;100
+                        </button> {% endif %}
+                        <button type="button" class=" btn btn-dark rounded-pill reset">
+                            clear
+                        </button>
+                    </p>
+                </form>
             </article>
         </section>
     </div>

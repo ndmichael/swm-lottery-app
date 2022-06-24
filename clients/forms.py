@@ -32,8 +32,44 @@ class SelfLoginForm(LoginForm):
 
 
 class MyCustomSignupForm(SignupForm):
-    # field_order = ['first_name', 'last_name',  'username',
-    #                'email', 'password1', 'password2', 'balance','country', 'address', 'dob','image']
+    states = (
+        ("Abia State", "Abia State"),
+        ("Adamawa State", "Adamawa State"),
+        ("Akwa Ibom State", "Akwa Ibom State"),
+        ("Anambra State", "Anambra State"),
+        ("Bauchi State", "Bauchi State"),
+        ("Bayelsa State", "Bayelsa State"),
+        ("Benue State", "Benue State"),
+        ("Borno State", "Borno State"),
+        ("Cross River State", "Cross River State"),
+        ("Delta State", "Delta State"),
+        ("Ebonyi State", "Ebonyi State"),
+        ("Edo State", "Edo State"),
+        ("Ekiti State", "Ekiti State"),
+        ("Enugu State", "Enugu State"),
+        ("Gombe State", "Gombe State"),
+        ("Imo State", "Imo State"),
+        ("Jigawa State", "Jigawa State"),
+        ("Kaduna State", "Kaduna State"),
+        ("Kano State", "Kano State"),
+        ("Katsina State", "Katsina State"),
+        ("Kebbi State", "Kebbi State"),
+        ("Kogi State", "Kogi State"),
+        ("Kwara State", "Kwara State"),
+        ("Lagos State", "Lagos State"),
+        ("Nasarawa State", "Nasarawa State"),
+        ("Niger State", "Niger State"),
+        ("Ogun State", "Ogun State"),
+        ("Ondo State", "Ondo State"),
+        ("Osun State", "Osun State"),
+        ("Oyo State", "Oyo State"),
+        ("Plateau State", "Plateau State"),
+        ("Rivers State", "Rivers State"),
+        ("Sokoto State", "Sokoto State"),
+        ("Taraba State", "Taraba State"),
+        ("Yobe State", "Yobe State"),
+        ("Zamfara State", "Zamfara State"),
+    )
     gender = (("male", "MALE"), ("female", "FEMALE"), ("others", "OTHERS"))
     first_name = forms.CharField(max_length=30, label="First Name")
     last_name = forms.CharField(max_length=30, label="Last name")
@@ -43,7 +79,7 @@ class MyCustomSignupForm(SignupForm):
     )
     # country = CountryField(blank=True).formfield()
     dob = forms.DateField(widget=DateInput)
-    city = forms.CharField(max_length=20, required=False)
+    city = forms.ChoiceField(required=False, choices=states)
     gender = forms.ChoiceField(choices=gender, required=False)
 
     def save(self, request):

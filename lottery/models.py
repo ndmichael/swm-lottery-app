@@ -8,9 +8,47 @@ import secrets
 
 
 class Profile(models.Model):
+    states = (
+        ("Abia State", "Abia State"),
+        ("Adamawa State", "Adamawa State"),
+        ("Akwa Ibom State", "Akwa Ibom State"),
+        ("Anambra State", "Anambra State"),
+        ("Bauchi State", "Bauchi State"),
+        ("Bayelsa State", "Bayelsa State"),
+        ("Benue State", "Benue State"),
+        ("Borno State", "Borno State"),
+        ("Cross River State", "Cross River State"),
+        ("Delta State", "Delta State"),
+        ("Ebonyi State", "Ebonyi State"),
+        ("Edo State", "Edo State"),
+        ("Ekiti State", "Ekiti State"),
+        ("Enugu State", "Enugu State"),
+        ("Gombe State", "Gombe State"),
+        ("Imo State", "Imo State"),
+        ("Jigawa State", "Jigawa State"),
+        ("Kaduna State", "Kaduna State"),
+        ("Kano State", "Kano State"),
+        ("Katsina State", "Katsina State"),
+        ("Kebbi State", "Kebbi State"),
+        ("Kogi State", "Kogi State"),
+        ("Kwara State", "Kwara State"),
+        ("Lagos State", "Lagos State"),
+        ("Nasarawa State", "Nasarawa State"),
+        ("Niger State", "Niger State"),
+        ("Ogun State", "Ogun State"),
+        ("Ondo State", "Ondo State"),
+        ("Osun State", "Osun State"),
+        ("Oyo State", "Oyo State"),
+        ("Plateau State", "Plateau State"),
+        ("Rivers State", "Rivers State"),
+        ("Sokoto State", "Sokoto State"),
+        ("Taraba State", "Taraba State"),
+        ("Yobe State", "Yobe State"),
+        ("Zamfara State", "Zamfara State"),
+    )
     gender = (("male", "MALE"), ("female", "FEMALE"), ("others", "OTHERS"))
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    city = models.CharField(max_length=30, null=True, blank=True)
+    city = models.CharField(max_length=30, null=True, blank=True, choices=states)
     gender = models.CharField(max_length=10, choices=gender, null=True, blank=True)
     dob = models.DateField(default=timezone.now)
     phone_number = models.CharField(max_length=20)
@@ -41,23 +79,25 @@ class Drawing(models.Model):
 
 
 class Ticket(models.Model):
-    drawing_id = models.OneToOneField(
+    drawing_id = models.ForeignKey(
         Drawing, on_delete=models.CASCADE, related_name="draw_ticket"
     )
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_ticket"
     )
     status = models.BooleanField(default=False)
-    ticket_id = models.CharField(max_length=50, default="")
-    correct_count = models.CharField(max_length=30)
+    ticket_code = models.CharField(max_length=50, default="")
+    correct_count = models.CharField(max_length=30, null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
-        while not self.ref:
-            ticket_id = secrets.token_urlsafe(8)
-            objects_with_similar_ticket_id = Ticket.objects.filter(ticket_id=ticket_id)
-            if not objects_with_similar_ticket_id:
-                self.ticket_id = ticket_id
+        while not self.ticket_code:
+            ticket_code = secrets.token_urlsafe(8)
+            objects_with_similar_ticket_code = Ticket.objects.filter(
+                ticket_code=ticket_code
+            )
+            if not objects_with_similar_ticket_code:
+                self.ticket_code = ticket_code
         super().save(*args, **kwargs)
 
     def __str__(self):

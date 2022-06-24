@@ -220,32 +220,36 @@
 
         $('.test2').click(function(e) {
             $(this).closest('label').toggleClass("highlight-sp");
-
             if ($('.test2:checked').length == 1) {
                 $(".test2").not(":checked").attr("disabled", true);
                 $(".test2").not(":checked").closest('label').addClass("checkFaded")
             } else {
-                $(".test2").not(":checked").removeAttr('disabled');
+                $(".test2").not(":checked").removeAttr('disabled')
                 $(".test2").not(":checked").closest('label').removeClass("checkFaded")
             }
         })
     </script>
 
-    <!-- <script>
-        var sd = "{{startdate}}"
-        var ed = "{{enddate}}"
-        sdate = new Date("{{startdate}}")
-        edate = new Date("{{enddate}}")
-        var distance = (edate.getTime() - sdate.getTime());
+    <script>
+        var sdate = new Date("{{startdate}}")
+        var edate = new Date("{{enddate}}")
 
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
-        console.log(distance)
-        console.log(hours, minutes, seconds, days)
-    </script> -->
+        // function hour() {
+        var distance = edate.getTime() - sdate.getTime()
+        setInterval(() => {
+            console.log(distance)
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+            // document.getElementById("hr-min").innerHTML = minutes
+            // document.getElementById("hr-sec").innerHTML = seconds
+
+        }, 1000);
+        // }
+    </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

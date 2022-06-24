@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from .forms import DrawForm, ContactForm
-from .models import Drawing
-import json
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import PickForm, ContactForm
+from .models import Drawing, Ticket, Pick
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -51,7 +53,67 @@ def contact(request):
     return render(request, "lottery/contact.html", context)
 
 
+@login_required
 def draw(request, type, id):
     draw = get_object_or_404(Drawing, id=id)
-    context = {"form": DrawForm, "draw": draw}
+    user = get_object_or_404(User, id=request.user.id)
+    if request.method == "POST":
+        ball_number = request.POST.getlist("ball_number")
+        special_number = request.POST.getlist("special_number")
+        if draw.type == "bronze" and user.profile.balance >= 100:
+            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            picks = Pick(
+                user_id=user,
+                ticket_id=ticket,
+                ball_number=ball_number,
+                special_number=special_number,
+            )
+            ticket.save()
+            picks.save()
+            user.profile.balance -= 100
+            user.profile.save()
+
+        elif draw.type == "silver" and user.profile.balance >= 200:
+            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            picks = Pick(
+                user_id=user,
+                ticket_id=ticket,
+                ball_number=ball_number,
+                special_number=special_number,
+            )
+            ticket.save()
+            picks.save()
+            user.profile.balance -= 200
+            user.profile.save()
+        elif draw.type == "gold" and user.profile.balance >= 350:
+            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            picks = Pick(
+                user_id=user,
+                ticket_id=ticket,
+                ball_number=ball_number,
+                special_number=special_number,
+            )
+            ticket.save()
+            picks.save()
+            user.profile.balance -= 350
+            user.profile.save()
+        elif draw.type == "platinum" and user.profile.balance >= 500:
+            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            picks = Pick(
+                user_id=user,
+                ticket_id=ticket,
+                ball_number=ball_number,
+                special_number=special_number,
+            )
+            ticket.save()
+            picks.save()
+            user.profile.balance -= 500
+            user.profile.save()
+        else:
+            messages.warning(request, f"Insufficient balance.")
+            return redirect("initiate-payment")
+        messages.success(request, f"{ticket.ticket_code} has been confirmed for game.")
+
+    form = PickForm()
+    context = {"form": form, "draw": draw}
     return render(request, "lottery/draw.html", context)

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Drawing
+from .models import Drawing, Pick
 
 # from crispy_forms.bootstrap import InlineCheckboxes
 
@@ -23,7 +23,7 @@ class ContactForm(forms.Form):
         )
 
 
-class DrawForm(forms.ModelForm):
+class PickForm(forms.Form):
     numbers = (
         (1, 1),
         (2, 2),
@@ -110,13 +110,13 @@ class DrawForm(forms.ModelForm):
     )
     ball_number = forms.MultipleChoiceField(
         choices=numbers,
-        widget=forms.CheckboxSelectMultiple(attrs={"class": "draw test"}),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={"class": "draw test", "required": True}
+        ),
     )
-    special_number = forms.ChoiceField(
+    special_number = forms.MultipleChoiceField(
         choices=sp_numbers,
-        widget=forms.CheckboxSelectMultiple(attrs={"class": "draw test2"}),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={"class": "draw test2", "required": True}
+        ),
     )
-
-    class Meta:
-        model = Drawing
-        fields = ["ball_number", "special_number"]
