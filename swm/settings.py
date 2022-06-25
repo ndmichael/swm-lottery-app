@@ -175,6 +175,10 @@ PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
 # print(type(PAYSTACK_SECRET_KEY))
 # print(type(PAYSTACK_PUBLIC_KEY))
 
+
+TIME_ZONE = "Africa/Lagos"
+USE_TZ = False
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
