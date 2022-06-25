@@ -79,7 +79,7 @@
                         <a class="nav-link" href="#">Result</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Winners</a>
+                        <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'about' %}">About
@@ -231,24 +231,24 @@
     </script>
 
     <script>
-        var sdate = new Date("{{startdate}}")
-        var edate = new Date("{{enddate}}")
+        var edate = new Date("{{p_enddate}}")
+        console.log("db1 ", edate)
+        console.log(new Date())
 
-
-        // function hour() {
-        var distance = edate.getTime() - sdate.getTime()
-        setInterval(() => {
-            console.log(distance)
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-
-            // document.getElementById("hr-min").innerHTML = minutes
-            // document.getElementById("hr-sec").innerHTML = seconds
-
-        }, 1000);
-        // }
+        var trigger = function(trig) {
+            setInterval(() => {
+                var now = new Date().toString()
+                var trig_time = new Date(trig).toString();
+                if (now == trig_time) {
+                    alert("Boom Yaka")
+                    console.log("The time is now!!!")
+                }
+            }, 1000)
+        }
+        trigger("{{b_enddate}}");
+        trigger("{{s_enddate}}");
+        trigger("{{g_enddate}}");
+        trigger("{{p_enddate}}");
     </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
