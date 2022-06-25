@@ -68,11 +68,20 @@ class Drawing(models.Model):
         ("platinum", "PLATINUM"),
     )
     type = models.CharField(max_length=20, choices=choices)
-    created = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(default=datetime.datetime.now)
     status = models.BooleanField(default=False)
 
     def enddate(self):
-        return self.created + datetime.timedelta(hours=1)
+        if self.type == "bronze":
+            return self.created + datetime.timedelta(hours=0, minutes=2)
+        elif self.type == "silver":
+            return self.created + datetime.timedelta(hours=0, minutes=4)
+        elif self.type == "gold":
+            return self.created + datetime.timedelta(hours=0, minutes=6)
+        elif self.type == "platinum":
+            return self.created + datetime.timedelta(hours=0, minutes=8)
+        else:
+            return self.created
 
     def __str__(self):
         return f"{self.type}"

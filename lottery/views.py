@@ -126,3 +126,7 @@ def draw(request, type, id):
 
 def faq(request):
     return render(request, "lottery/faq.html")
+
+
+def bonus(request):
+    return render(request, "lottery/bonus.html")
