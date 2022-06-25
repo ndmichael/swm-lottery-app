@@ -1,0 +1,250 @@
+{% extends 'lottery/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
+
+<div class=" p-5 container">
+    <div class=" row pb-5">
+        <div class=" col-12 py-2" style=" background-color: #F5F5F5; color: black;">
+            <h2>
+                <b>FREQUENTLY ASKED QUESTIONS</b>
+                </h1>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12">
+            <h3 class=" pt-5 pb-2" style="color: black;">
+                <b>BASIC</b>
+            </h3>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                What is SWM Lottery?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                SWM LOTTERY GLOBAL CONCEPT LTD, aka "SWM Lottery" is a business in Nigeria set up in April 2022 with the intention of engaging in lotto service. SWM is Legally registered and regulated by the National Lotteries Regulation Commission, and with other necessary
+                bodies.
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How can I sign up/ register?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                You can sign up or register by clicking the sign up button on the menu, after which you're to fill in your detail correctly. Click on the create account button once you've confirmed that your details were entered correctly, after which you'll get a verification
+                email from us stating that your account has been created.
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How much do I need to register?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2 pb-5">
+                You can sign up or register by clicking the sign up button on the menu, after which you're to fill in your detail correctly. Click on the create account button once you've confirmed that your details were entered correctly, after which you'll get a verification
+                email from us stating that your account has been created.
+            </h6>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12">
+            <h3 class=" pt-5 pb-2" style="color: black;">
+                <b>PROFILE</b>
+            </h3>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                Can I change my username?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                No, usernames can only be entered once during creation of account and cannot be editable.
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How can I change my password?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                Go to the profile page by clicking on the icon on the menu bar, there you'd find a form to enter old password and new password. Fill it and click "Submit".
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                What if I forget my password?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                In the situation where you've forgotten your password, you can always reset your password in the Log In page by clicking "Forgot Password", after which a password reset mail will be sent to your mail box.
+            </h6>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12">
+            <h3 class=" pt-5 pb-2" style="color: black;">
+                <b>GAME</b>
+            </h3>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How do I play?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                To play, every user is expected to first make a deposit to fund their wallet, after which they can then head out to the game section and click games, then select their choice of game and click play.
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How soon after the draws will the results be out?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                Results for each draws are immediate.
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How do I check my ticket?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                Go to profile section on the menu bar, select profile then click on "Tickets".
+                </h4>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                Do tickets expire?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                No, tickets don't expire.
+            </h6>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                What is the minimum and maximum amount I can play on the game?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                The minimum amount a user can play with is N100 and maximum any amount.
+            </h6>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                How much can I withdraw at once?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                You can withdraw any amount of you choice, as long as you have that amount of money in your wallet.
+            </h6>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                Will there be charges for withdrawals?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                SWM Lottery does'nt charge any fee for withdrawals or deposits made.
+            </h6>
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class=" col-12" style="background-color: #F5F5F5;">
+            <h4 class=" py-2" style="color: black;">
+                Can I receive support from SWM Lottery?
+            </h4>
+        </div>
+    </div>
+    <div class=" row">
+        <div class=" col-12" style="background-color: #fff; font-style: normal;">
+            <h6 class=" py-2">
+                Yes you can. Kindly head out to our "Contact Us" page to send us a message and we'll be sure to respond as soon as possible.
+                </h4>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
