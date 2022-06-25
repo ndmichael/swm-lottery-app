@@ -9,17 +9,21 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    obj = Drawing.objects.filter(status=True).first()
     bronze_data = Drawing.objects.filter(status=True).filter(type="bronze").first()
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-    startdate = obj.created.strftime("%Y-%m-%dT%H:%M:%S")
-    enddate = obj.enddate().strftime("%Y-%m-%dT%H:%M:%S")
-    print(startdate, enddate)
+
+    b_enddate = bronze_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
+    s_enddate = silver_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
+    g_enddate = gold_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
+    p_enddate = platinum_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
+    print("bd: ", str(s_enddate))
     context = {
-        "startdate": startdate,
-        "enddate": enddate,
+        "b_enddate": b_enddate,
+        "s_enddate": s_enddate,
+        "g_enddate": g_enddate,
+        "p_enddate": p_enddate,
         "b_data": bronze_data,
         "s_data": silver_data,
         "g_data": gold_data,
@@ -118,3 +122,7 @@ def draw(request, type, id):
     form = PickForm()
     context = {"form": form, "draw": draw}
     return render(request, "lottery/draw.html", context)
+
+
+def faq(request):
+    return render(request, "lottery/faq.html")
