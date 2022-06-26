@@ -71,15 +71,16 @@ class Drawing(models.Model):
     created = models.DateTimeField(default=datetime.datetime.now)
     status = models.BooleanField(default=False)
 
+    @property
     def enddate(self):
         if self.type == "bronze":
-            return self.created + datetime.timedelta(hours=0, minutes=2)
+            return self.created + datetime.timedelta(hours=1, minutes=2)
         elif self.type == "silver":
-            return self.created + datetime.timedelta(hours=0, minutes=4)
+            return self.created + datetime.timedelta(hours=3, minutes=4)
         elif self.type == "gold":
-            return self.created + datetime.timedelta(hours=0, minutes=6)
+            return self.created + datetime.timedelta(hours=72, minutes=6)
         elif self.type == "platinum":
-            return self.created + datetime.timedelta(hours=0, minutes=8)
+            return self.created + datetime.timedelta(hours=168, minutes=8)
         else:
             return self.created
 
