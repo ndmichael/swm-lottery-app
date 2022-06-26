@@ -133,4 +133,4 @@ def bonus(request):
 
 
 def result(request):
-    return render(request, "lottery/winner.html")
+    return render(request, "lottery/result.html")

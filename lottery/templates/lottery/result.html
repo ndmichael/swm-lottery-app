@@ -1,15 +1,15 @@
 {% extends 'lottery/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
-      <div class=" container">
+<section class="py-5">
+    <div class=" container">
         <div class=" row">
             <div class=" col-12 text-center p-5" style="color: #006633;">
                 <h1><b>SWM LATEST LOTTO RESULTS</b></h1>
-                <h5 style="color: #040404; font-weight: 100;">Change out the results to see if you're a lucky winner. Do this by checking and comparing your ticket with the
-                    numbers on the result ticket. If you happen to be the lucky winner, do contact our support if your 
-                    wallet haven't been funded yet.
+                <h5 style="color: #040404; font-weight: 100;">Change out the results to see if you're a lucky winner. Do this by checking and comparing your ticket with the numbers on the result ticket. If you happen to be the lucky winner, do contact our support if your wallet haven't been funded
+                    yet.
                 </h5>
             </div>
         </div>
-      </div>
+    </div>
 
     <div class=" container">
         <div class=" jumbotron-fluid" style="background-color: #fff;">
@@ -55,7 +55,7 @@
                     <h6 class=" pt-2"><b>SWM SILVER LOTTERY</b></h6>
                 </div>
                 <div class=" col-4 text-center p-2" style="color: #006633;">
-                 <span class=" regular">5</span>
+                    <span class=" regular">5</span>
                     <span class=" regular">11</span>
                     <span class=" regular">43</span>
                     <span class=" regular">2</span>
@@ -118,5 +118,6 @@
             </div>
         </div>
     </div>
+</section>
 
-    {% endblock content %}
+{% endblock content %}

@@ -65,3 +65,28 @@ label>input[type="checkbox"] {
 .bg-success {
     background: #006633 !important;
 }
+
+
+/*
+* css for results 
+*/
+
+.regular {
+    height: 30px;
+    width: 30px;
+    color: #fff;
+    background-color: #006633;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 2px;
+}
+
+.special {
+    height: 30px;
+    width: 30px;
+    color: #fff;
+    background-color: #00FF00;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 2px;
+}

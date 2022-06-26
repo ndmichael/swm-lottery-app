@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from clients.views import profile
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("lottery.urls")),
     path("", include("paystackpay.urls")),
+    path("profile/<str:username>", profile, name="profile"),
     path("accounts/", include("allauth.urls")),
 ]
 
