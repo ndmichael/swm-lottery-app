@@ -13,11 +13,10 @@ def index(request):
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-
-    b_enddate = bronze_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
-    s_enddate = silver_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
-    g_enddate = gold_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
-    p_enddate = platinum_data.enddate().strftime("%Y-%m-%dT%H:%M:%S")
+    b_enddate = bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+    s_enddate = silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+    g_enddate = gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+    p_enddate = platinum_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
     print("bd: ", str(s_enddate))
     context = {
         "b_enddate": b_enddate,
