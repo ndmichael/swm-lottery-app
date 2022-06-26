@@ -77,7 +77,6 @@ def draw(request, type, id):
             picks.save()
             user.profile.balance -= 100
             user.profile.save()
-
         elif draw.type == "silver" and user.profile.balance >= 200:
             ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
             picks = Pick(
@@ -118,6 +117,7 @@ def draw(request, type, id):
             messages.warning(request, f"Insufficient balance.")
             return redirect("initiate-payment")
         messages.success(request, f"{ticket.ticket_code} has been confirmed for game.")
+        return redirect("profile", request.user)
 
     form = PickForm()
     context = {"form": form, "draw": draw}

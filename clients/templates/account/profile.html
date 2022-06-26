@@ -1,28 +1,23 @@
-{% extends 'lottery/base.html' %}{% load static %} {% block content %}
+{% extends 'lottery/base.html' %}{% load crispy_forms_tags %}{% load static %} {% block content %}
 
 <section class="py-5">
     <div class="container py-5">
         <div class="row">
             <div class="col-12 col-md-4">
-                <div class="">
+                <div class=" text-center">
                     <i class="bi bi-person-circle text-success" style="font-size: 6em;"></i>
-                    <div class=" text-center">
-                        <div class=" col-6 pb-4">
-                            <a href="#" class=" btn  btn-success text-center rounded-9">
-                                My Tickets
-                            </a>
-                        </div>
-                        <div class=" col-6 pb-4">
+                    <div class=" text-center" style="text-align: center !important;">
+                        <div class="col-12 pb-4 text-center">
                             <a href="{% url 'initiate-payment' %}" class=" btn btn-success text-center rounded-9">
                                 Make Deposit
                             </a>
                         </div>
-                        <div class=" col-6 pb-4">
+                        <div class=" col-12 pb-4 text-center">
                             <a href="#withdrawal" class=" btn btn-success text-center rounded-9">
                                 Withdrawal
                             </a>
                         </div>
-                        <div class=" col-6">
+                        <div class=" col-12 text-center">
                             <a href="{% url 'account_logout' %}" class=" btn btn-dark text-center rounded-9">
                                 Logout
                             </a>
@@ -33,7 +28,7 @@
             </div>
             <div class="col-12 col-md-8">
                 <div class=" row">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6 mt-4">
                         <table class="table bg-success table-borderless text-white rounded-7">
                             <tbody>
                                 <tr>
@@ -83,7 +78,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for ticket in tickets %}
+                    {% if tickets %} {% for ticket in tickets %}
                     <tr>
                         <td style="font-weight: 800 !important;">
                             <b>{{ticket.ticket_code}}</b>
@@ -116,11 +111,43 @@
                         <td>No Winning</td>
                         {% endif %}
                     </tr>
-                    {% endfor %}
+                    {% endfor %} {% else %}
+                    <h1>Ticket not available yet</h1>
+                    {% endif %}
 
                 </tbody>
             </table>
         </div>
+    </div>
+</section>
+
+<section class="py-5" id="withdrawal">
+    <div class="container">
+        <section class="row border border-2 border-success p-4">
+            <div class="col-12">
+                <h1 class=" pb-4">
+                    WITHDRAW FUNDS
+                </h1>
+                <form action="" class="row">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-group col-6 col-md-4">
+                            {{ w_form.select_bank|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-6 col-md-4">
+                            {{ w_form.account_number|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-12 col-md-4">
+                            {{ w_form.withdraw_amount|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-12 pt-5">
+                            <input type="text" class=" btn btnn-lg btn-success" value="REQUEST">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </section>
     </div>
 </section>
 

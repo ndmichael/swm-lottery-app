@@ -115,3 +115,47 @@ class MyCustomSignupForm(SignupForm):
         self.fields["phone_number"].widget.attrs.update({"class": "form-control-lg"})
         self.fields["gender"].widget.attrs.update({"class": "form-control-lg"})
         self.fields["city"].widget.attrs.update({"class": "form-control-lg"})
+
+
+class WithdrawalForm(forms.Form):
+    banks = (
+        ("", "PLEASE SELECT"),
+        ("Access Bank", "Access Bank"),
+        ("Fidelity Bank", "Fidelity Bank Plc"),
+        ("Ecobank", "Ecobank"),
+        ("First Bank", "First Bank"),
+        ("Guaranty Trust Bank", "Guaranty Trust Bank"),
+        ("Union Bank", "Union Bank"),
+        ("United Bank", "United Bank"),
+        ("Zenith Bank", "Zenith Bank"),
+        ("Wema Bank", "Wema Bank"),
+        ("Sterling Bank", "Sterling Bank"),
+    )
+    select_bank = forms.ChoiceField(choices=banks)
+    account_number = forms.IntegerField()
+    withdraw_amount = forms.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+    )
+    agreement = forms.BooleanField()
+
+    def __init__(self, *args, **kwargs):
+        super(WithdrawalForm, self).__init__(*args, **kwargs)
+        self.fields["select_bank"].widget.attrs.update(
+            {
+                "class": "form-control-lg rounded-9",
+            }
+        )
+        self.fields["account_number"].widget.attrs.update(
+            {
+                "class": "form-control-lg rounded-9",
+                "placeholder": "ENTER ACCOUNT NUMBER",
+            }
+        )
+        self.fields["withdraw_amount"].widget.attrs.update(
+            {"class": "form-control-lg rounded-9"}
+        )
+        self.fields["agreement"].widget.attrs.update(
+            {"class": "form-control-lg rounded-9"}
+        )
+        self.fields["agreement"].widget.attrs["placeholder"] = ""
