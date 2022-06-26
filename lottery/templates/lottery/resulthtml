@@ -1,0 +1,122 @@
+{% extends 'lottery/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
+      <div class=" container">
+        <div class=" row">
+            <div class=" col-12 text-center p-5" style="color: #006633;">
+                <h1><b>SWM LATEST LOTTO RESULTS</b></h1>
+                <h5 style="color: #040404; font-weight: 100;">Change out the results to see if you're a lucky winner. Do this by checking and comparing your ticket with the
+                    numbers on the result ticket. If you happen to be the lucky winner, do contact our support if your 
+                    wallet haven't been funded yet.
+                </h5>
+            </div>
+        </div>
+      </div>
+
+    <div class=" container">
+        <div class=" jumbotron-fluid" style="background-color: #fff;">
+            <div class=" row" style="background-color: #006633;">
+                <div class=" col-4 text-center p-2 pt-3" style="color: #fff;">
+                    <h5>GAME</h5>
+                </div>
+                <div class=" col-4 text-center p-2 pt-3" style="color: #fff;">
+                    <h5>WINNING NUMBERS</h5>
+                </div>
+                <div class=" col-4 text-center p-2 pt-3" style="color: #fff;">
+                    <h5>TIME OF LAST DRAW</h5>
+                </div>
+            </div>
+            <div class=" row p-2" style="background-color: #fff;">
+                <div class=" col-1 p-2">
+                    <img src="/bronze.png" width="40px" alt="" srcset="">
+                </div>
+                <div class=" col-3 text-center p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2"><b>SWM BRONZE LOTTERY</b></h6>
+                </div>
+                <div class=" col-4 text-center p-2" style="color: #006633;">
+                    <span class=" regular">8</span>
+                    <span class=" regular">4</span>
+                    <span class=" regular">3</span>
+                    <span class=" regular">9</span>
+                    <span class=" regular">33</span>
+                    <span class=" regular">24</span>
+                    <span class=" special">4</span>
+                </div>
+                <div class=" col-2 text-center" style="color: #006633;">
+                    <h5><b>22 Jun 2022 <p>01:30pm</p></b></h5>
+                </div>
+                <div class=" col-2 p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2 pl-5 text-center"><b>GAME</b></h6>
+                </div>
+            </div>
+            <div class=" row p-2" style="background-color: #F5F5F5;">
+                <div class=" col-1 p-2">
+                    <img src="/silver.png" width="40px" alt="" srcset="">
+                </div>
+                <div class=" col-3 text-center p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2"><b>SWM SILVER LOTTERY</b></h6>
+                </div>
+                <div class=" col-4 text-center p-2" style="color: #006633;">
+                 <span class=" regular">5</span>
+                    <span class=" regular">11</span>
+                    <span class=" regular">43</span>
+                    <span class=" regular">2</span>
+                    <span class=" regular">21</span>
+                    <span class=" regular">7</span>
+                    <span class=" special">13</span>
+                </div>
+                <div class=" col-2 text-center" style="color: #006633;">
+                    <h5><b>22 Jun 2022 <p>01:30pm</p></b></h5>
+                </div>
+                <div class=" col-2 p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2 pl-5 text-center"><b>GAME</b></h6>
+                </div>
+            </div>
+            <div class=" row p-2" style="background-color: #fff;">
+                <div class=" col-1 p-2">
+                    <img src="/gold.png" width="40px" alt="" srcset="">
+                </div>
+                <div class=" col-3 text-center p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2"><b>SWM GOLD LOTTERY</b></h6>
+                </div>
+                <div class=" col-4 text-center p-2" style="color: #006633;">
+                    <span class=" regular">27</span>
+                    <span class=" regular">9</span>
+                    <span class=" regular">12</span>
+                    <span class=" regular">8</span>
+                    <span class=" regular">24</span>
+                    <span class=" regular">35</span>
+                    <span class=" special">11</span>
+                </div>
+                <div class=" col-2 text-center" style="color: #006633;">
+                    <h5><b>22 Jun 2022 <p>01:30pm</p></b></h5>
+                </div>
+                <div class=" col-2 p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2 pl-5 text-center"><b>GAME</b></h6>
+                </div>
+            </div>
+            <div class=" row p-2" style="background-color: #F5F5F5;">
+                <div class=" col-1 p-2">
+                    <img src="/platinum.png" width="40px" alt="" srcset="">
+                </div>
+                <div class=" col-3 text-center p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2"><b>SWM PLATINUM LOTTERY</b></h6>
+                </div>
+                <div class=" col-4 text-center p-2" style="color: #006633;">
+                    <span class=" regular">7</span>
+                    <span class=" regular">3</span>
+                    <span class=" regular">4</span>
+                    <span class=" regular">28</span>
+                    <span class=" regular">59</span>
+                    <span class=" regular">46</span>
+                    <span class=" special">3</span>
+                </div>
+                <div class=" col-2 text-center" style="color: #006633;">
+                    <h5><b>22 Jun 2022 <p>01:30pm</p></b></h5>
+                </div>
+                <div class=" col-2 p-2 d-flex" style="color: #006633;">
+                    <h6 class=" pt-2 pl-5 text-center"><b>GAME</b></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
