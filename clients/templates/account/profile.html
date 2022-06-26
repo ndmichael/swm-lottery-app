@@ -4,31 +4,29 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-12 col-md-4">
-                <div class=" text-center">
+                <div class="">
                     <i class="bi bi-person-circle text-success" style="font-size: 6em;"></i>
-                    <div>
-                        <nav class="nav flex-column">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                <button type="button" class=" btn  btn-success text-center rounded-9">
-                                    My Tickets
-                                </button>
+                    <div class=" text-center">
+                        <div class=" col-6 pb-4">
+                            <a href="#" class=" btn  btn-success text-center rounded-9">
+                                My Tickets
                             </a>
-                            <a class="nav-link" href="#">
-                                <button type="button" class=" btn btn-success text-center rounded-9">
-                                    Deposits
-                                </button>
+                        </div>
+                        <div class=" col-6 pb-4">
+                            <a href="{% url 'initiate-payment' %}" class=" btn btn-success text-center rounded-9">
+                                Make Deposit
                             </a>
-                            <a class="nav-link" href="#">
-                                <button type="button" class=" btn btn-success text-center rounded-9">
-                                    Withdrawals
-                                </button>
+                        </div>
+                        <div class=" col-6 pb-4">
+                            <a href="#withdrawal" class=" btn btn-success text-center rounded-9">
+                                Withdrawal
                             </a>
-                            <a class="nav-link" href="#">
-                                <button type="button" class=" btn btn-danger text-center rounded-9">
-                                    Logout
-                                </button>
+                        </div>
+                        <div class=" col-6">
+                            <a href="{% url 'account_logout' %}" class=" btn btn-dark text-center rounded-9">
+                                Logout
                             </a>
-                        </nav>
+                        </div>
                     </div>
 
                 </div>
@@ -59,6 +57,7 @@
                                     {% endif %}
                                 </tr>
                                 <tr>
+                                    <td>State</td>
                                     {% if user.profile.city %}
                                     <td>{{user.profile.city}}</td>
                                     {% endif %}
@@ -68,6 +67,59 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!--end of firsst row-->
+
+        <div class=" row  py-5">
+            <table class="table table-responsive text-success">
+                <thead class="" style="color: white; background-color: #006633;">
+                    <tr>
+                        <th scope="col">Ticket ID</th>
+                        <th scope="col">Date/Time</th>
+                        <th scope="col">Game</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Expected Win</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for ticket in tickets %}
+                    <tr>
+                        <td style="font-weight: 800 !important;">
+                            <b>{{ticket.ticket_code}}</b>
+                        </td>
+                        <td>{{ticket.date}}</td>
+                        <td>{{ticket.drawing_id.type}}</td>
+                        {% if ticket.drawing_id.type == 'bronze' %}
+                        <td>&#8358;100</td>
+                        {% elif ticket.drawing_id.type == 'silver' %}
+                        <td>&#8358;200</td>
+                        {% elif ticket.drawing_id.type == 'gold' %}
+                        <td>&#8358;350</td>
+                        {% elif ticket.drawing_id.type == 'platinum' %}
+                        <td>&#8358;500</td>
+                        {% else %}
+                        <td>&#8358;0</td>
+                        {% endif %} {% if ticket.drawing_id.type == 'bronze' %}
+                        <td>&#8358;100000</td>
+                        {% elif ticket.drawing_id.type == 'silver' %}
+                        <td>&#8358;1000000</td>
+                        {% elif ticket.drawing_id.type == 'gold' %}
+                        <td>&#8358;10000000</td>
+                        {% elif ticket.drawing_id.type == 'platinum' %}
+                        <td>&#8358;100000000</td>
+                        {% else %}
+                        <td>&#8358;0</td>
+                        {% endif %} {% if ticket.correct_count %}
+                        <td>WON</td>
+                        {% else %}
+                        <td>No Winning</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
