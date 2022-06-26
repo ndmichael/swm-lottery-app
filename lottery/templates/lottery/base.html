@@ -47,7 +47,8 @@
                             style=" font-size:20px"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile' user.username %}">profile</a>
+                        </li>
                         <li><a class="dropdown-item" href="{% url 'initiate-payment' %}">deposit</a>
                         </li>
                         <li>
@@ -76,7 +77,7 @@
                         <a class="nav-link" href="{% url 'bonus' %}">Bonuses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Result</a>
+                        <a class="nav-link" href="{% url 'result' %}">Result</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'faq' %}">FAQ</a>

@@ -130,3 +130,7 @@ def faq(request):
 
 def bonus(request):
     return render(request, "lottery/bonus.html")
+
+
+def result(request):
+    return render(request, "lottery/winner.html")
