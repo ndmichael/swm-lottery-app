@@ -67,9 +67,7 @@
                             <span style="color: lightgreen">&#8358;</span>100,000
                         </h1>
                         <p id="demo">
-                            <b>
-
-                            </b>
+                            {% include "lottery/bronze_timer.html" %}
                         </p>
                         <div class="pt-3">
                             <a href="{% url 'pick' b_data.type b_data.id %}" class=" btn btn-success rounded-9">
@@ -89,9 +87,7 @@
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>10,000,000
                         </h1>
                         <p>
-                            <b>
-
-                            </b>
+                            {% include "lottery/bronze_timer.html" %}
                         </p>
                         <div class="pt-3">
                             <a href="{% url 'pick' g_data.type g_data.id %}" class=" btn btn-success rounded-9">
@@ -112,9 +108,7 @@
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>1,000,000
                         </h1>
                         <p>
-                            <b>
-
-                            </b>
+                            {% include "lottery/gold_timer.html" %}
                         </p>
                         <div class="pt-3">
                             <a href="{% url 'pick' s_data.type s_data.id %}" class=" btn btn-success rounded-9">
@@ -135,9 +129,7 @@
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>100,000,000
                         </h1>
                         <p>
-                            <b>
-
-                            </b>
+                            {% include "lottery/platinum_timer.html" %}
                         </p>
                         <div class="pt-3">
                             <a href="{% url 'pick' p_data.type p_data.id %}" class=" btn btn-success rounded-9">
