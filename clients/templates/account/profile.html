@@ -69,7 +69,7 @@
             <table class="table table-responsive text-success">
                 <thead class="" style="color: white; background-color: #006633;">
                     <tr>
-                        <th scope="col">Ticket ID</th>
+                        <th scope="col">Numbers Choices</th>
                         <th scope="col">Date/Time</th>
                         <th scope="col">Game</th>
                         <th scope="col">Amount</th>
@@ -81,7 +81,7 @@
                     {% if tickets %} {% for ticket in tickets %}
                     <tr>
                         <td style="font-weight: 800 !important;">
-                            <b>{{ticket.ticket_code}}</b>
+                            {{ticket.ticket_pick.ball_number}}{{ticket.ticket_pick.special_number}}
                         </td>
                         <td>{{ticket.date}}</td>
                         <td>{{ticket.drawing_id.type}}</td>
@@ -108,7 +108,7 @@
                         {% endif %} {% if ticket.correct_count %}
                         <td>WON</td>
                         {% else %}
-                        <td>No Winning</td>
+                        <td>Pending</td>
                         {% endif %}
                     </tr>
                     {% endfor %} {% else %}

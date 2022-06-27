@@ -16,5 +16,4 @@ def profile(request, username):
         "tickets": tickets,
         "w_form": w_form,
     }
-
     return render(request, "account/profile.html", context)

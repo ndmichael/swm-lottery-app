@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, games, draw, contact, about, faq, bonus, result
+from .views import index, games, draw, contact, about, faq, bonus, result, reset_draw
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path("faq/", faq, name="faq"),
     path("bonus/", bonus, name="bonus"),
     path("result/", result, name="result"),
+    path("drawing/", reset_draw, name="reset_draw"),
 ]

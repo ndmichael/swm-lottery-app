@@ -4,6 +4,7 @@ from .models import Drawing, Ticket, Pick
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponse
 
 # Create your views here.
 
@@ -13,11 +14,13 @@ def index(request):
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-    b_enddate = bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    s_enddate = silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    g_enddate = gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    p_enddate = platinum_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    print("bd: ", str(s_enddate))
+    b_enddate = bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if bronze_data else ""
+    s_enddate = silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if silver_data else ""
+    g_enddate = gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if gold_data else ""
+    p_enddate = (
+        platinum_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if platinum_data else ""
+    )
+
     context = {
         "b_enddate": b_enddate,
         "s_enddate": s_enddate,
@@ -61,8 +64,8 @@ def draw(request, type, id):
     draw = get_object_or_404(Drawing, id=id)
     user = get_object_or_404(User, id=request.user.id)
     if request.method == "POST":
-        ball_number = request.POST.getlist("ball_number")
-        special_number = request.POST.getlist("special_number")
+        ball_number = list(request.POST.getlist("ball_number"))
+        special_number = list(request.POST.getlist("special_number"))
         print("len: ", len(special_number))
         if draw.type == "bronze" and user.profile.balance >= 100:
             ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
@@ -133,3 +136,16 @@ def bonus(request):
 
 def result(request):
     return render(request, "lottery/result.html")
+
+
+def reset_draw(request):
+    if request.POST.get("action") == "post":
+        drawid = int(request.POST.get("draw_id"))
+        draw = get_object_or_404(Drawing, id=drawid)
+        draw.status = False
+        draw.save()
+        new_draw = Drawing.objects.create(type=draw.type, status=True)
+        return JsonResponse({"result": new_draw.enddate})
+    else:
+        print("failed")
+    return HttpResponse("Error access denied")

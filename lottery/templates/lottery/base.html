@@ -232,24 +232,58 @@
     </script>
 
     <script>
-        var edate = new Date("{{p_enddate}}")
-        console.log("db1 ", edate)
-        console.log(new Date())
+        var db_caller = function(draw_type) {
+            if (draw_type == "bronze") {
+                id = "{{b_data.id}}"
+            } else if (draw_type == "silver") {
+                id = "{{s_data.id}}"
+            } else if (draw_type == "gold") {
+                id = "{{g_data.id}}"
+            } else {
+                id = "{{p_data.id}}"
+            }
+            console.log("{% url 'reset_draw' %}")
+            $.ajax({
+                url: "{% url 'reset_draw' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': id,
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    if (draw_type == "bronze") {
+                        $('#bronze_date').html(response['result']);
+                    } else if (draw_type == "silver") {
+                        $('#silver_date').html(response['result']);
+                    } else if (draw_type == "gold") {
+                        $('#gold_date').html(response['result']);
+                    } else {
+                        $('#platinum_date').html(response['result']);
+                    }
 
-        var trigger = function(trig) {
+                },
+                error: function(rs, e) {
+                    console.log(rs.response)
+                }
+            });
+        }
+    </script>
+
+    <script>
+        var trigger = function(trig, type) {
             setInterval(() => {
                 var now = new Date().toString()
                 var trig_time = new Date(trig).toString();
-                if (now == trig_time) {
-                    alert("Boom Yaka")
-                    console.log("The time is now!!!")
+                if (now === trig_time) {
+                    db_caller(type)
                 }
             }, 1000)
         }
-        trigger("{{b_enddate}}");
-        trigger("{{s_enddate}}");
-        trigger("{{g_enddate}}");
-        trigger("{{p_enddate}}");
+        trigger("{{b_enddate}}", "{{b_data.type}}");
+        trigger("{{s_enddate}}", "{{s_data.type}}");
+        trigger("{{g_enddate}}", "{{g_data.type}}");
+        trigger("{{p_enddate}}", "{{p_data.type}}");
     </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
