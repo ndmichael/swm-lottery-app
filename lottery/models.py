@@ -78,9 +78,9 @@ class Drawing(models.Model):
         elif self.type == "silver":
             return self.created + datetime.timedelta(hours=3, minutes=0)
         elif self.type == "gold":
-            return self.created + datetime.timedelta(hours=72, minutes=0)
+            return self.created + datetime.timedelta(days=3, hours=0, minutes=0)
         elif self.type == "platinum":
-            return self.created + datetime.timedelta(hours=168, minutes=0)
+            return self.created + datetime.timedelta(days=7, hours=0, minutes=0)
         else:
             return self.created
 
