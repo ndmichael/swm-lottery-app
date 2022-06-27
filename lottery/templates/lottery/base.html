@@ -108,7 +108,7 @@
         </div>
     </section>
 
-    {% block sidebar %} {% endblock sidebar %} {% block content %} {% endblock content %}
+    {% block sidebar %} {% endblock sidebar %} {% block content %} {% endblock content %} {% block datetime %} {% endblock datetime %}
     <footer class="bg-gradient bg-success text-white py-4">
         <div class="container">
             <article class="row">
@@ -192,6 +192,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="{% static 'lottery/js/b5js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'lottery/js/b5js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
     </script>
 
@@ -254,6 +255,7 @@
                     'action': 'post'
                 },
                 success: function(response) {
+                    console.log(response)
                     if (draw_type == "bronze") {
                         $('#bronze_date').html(response['result']);
                     } else if (draw_type == "silver") {
