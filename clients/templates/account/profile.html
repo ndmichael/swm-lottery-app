@@ -80,8 +80,11 @@
                 <tbody>
                     {% if tickets %} {% for ticket in tickets %}
                     <tr>
-                        <td style="font-weight: 800 !important;">
-                            {{ticket.ticket_pick.ball_number}}{{ticket.ticket_pick.special_number}}
+                        <td class="" style="font-weight: 800 !important;">
+                            {% for number in ticket.ticket_pick.ball_numbers.all %}
+                                <span class="regular text-center">{{number}}</span>
+                            {% endfor %}
+                            <span  class="special text-center">{{ticket.ticket_pick.special_number}}</span>
                         </td>
                         <td>{{ticket.date}}</td>
                         <td>{{ticket.drawing_id.type}}</td>

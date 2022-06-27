@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PickForm, ContactForm
-from .models import Drawing, Ticket, Pick
+from .models import Drawing, Ticket, Pick, BallNumbers
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
+from django.template import loader
+import json
 
 # Create your views here.
 
@@ -64,19 +66,20 @@ def draw(request, type, id):
     draw = get_object_or_404(Drawing, id=id)
     user = get_object_or_404(User, id=request.user.id)
     if request.method == "POST":
-        ball_number = list(request.POST.getlist("ball_number"))
-        special_number = list(request.POST.getlist("special_number"))
-        print("len: ", len(special_number))
+        ball_numbers = request.POST.getlist("ball_numbers")
+        special_number = request.POST.get("special_number")
+        print(ball_numbers)
         if draw.type == "bronze" and user.profile.balance >= 100:
             ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
-                ball_number=ball_number,
                 special_number=special_number,
             )
             ticket.save()
             picks.save()
+            for ball in ball_numbers:
+                picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 100
             user.profile.save()
         elif draw.type == "silver" and user.profile.balance >= 200:
@@ -144,6 +147,7 @@ def reset_draw(request):
         draw = get_object_or_404(Drawing, id=drawid)
         draw.status = False
         draw.save()
+
         new_draw = Drawing.objects.create(type=draw.type, status=True)
         return JsonResponse({"result": new_draw.enddate})
     else:
