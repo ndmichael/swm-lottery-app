@@ -108,13 +108,13 @@ class PickForm(forms.Form):
         (19, 19),
         (20, 20),
     )
-    ball_number = forms.MultipleChoiceField(
+    ball_numbers = forms.ChoiceField(
         choices=numbers,
         widget=forms.CheckboxSelectMultiple(
             attrs={"class": "draw test", "required": True}
         ),
     )
-    special_number = forms.MultipleChoiceField(
+    special_number = forms.ChoiceField(
         choices=sp_numbers,
         widget=forms.CheckboxSelectMultiple(
             attrs={"class": "draw test2", "required": True}
