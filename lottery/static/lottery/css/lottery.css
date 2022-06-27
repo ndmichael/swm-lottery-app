@@ -90,3 +90,33 @@ label>input[type="checkbox"] {
     display: inline-block;
     padding: 2px;
 }
+
+.game_image {
+    height: 170px;
+    width: 170px;
+    transform: translateX(-110px);
+}
+
+.ball_image {
+    height: 170px;
+    width: 170px;
+}
+
+@media(max-width: 48em) {
+    #hero_page {
+        background-image: url("/static/lottery/images/banner-mobile.jpg");
+        background-size: cover;
+        min-height: 50vh;
+        height: 50vh;
+        width: 100%;
+    }
+    .ball_image {
+        height: 80px;
+        width: 100px;
+        padding-right: 25px !important;
+    }
+    .game_image {
+        height: 120px;
+        width: 120px;
+    }
+}
