@@ -74,13 +74,13 @@ class Drawing(models.Model):
     @property
     def enddate(self):
         if self.type == "bronze":
-            return self.created + datetime.timedelta(hours=1, minutes=0)
+            return self.created + datetime.timedelta(hours=0, minutes=3)
         elif self.type == "silver":
-            return self.created + datetime.timedelta(hours=3, minutes=0)
+            return self.created + datetime.timedelta(hours=0, minutes=5)
         elif self.type == "gold":
-            return self.created + datetime.timedelta(hours=72, minutes=0)
+            return self.created + datetime.timedelta(hours=0, minutes=5)
         elif self.type == "platinum":
-            return self.created + datetime.timedelta(hours=168, minutes=0)
+            return self.created + datetime.timedelta(hours=0, minutes=5)
         else:
             return self.created
 
@@ -97,7 +97,7 @@ class Ticket(models.Model):
     )
     status = models.BooleanField(default=False)
     ticket_code = models.CharField(max_length=50, default="")
-    correct_count = models.CharField(max_length=30, null=True, blank=True)
+    correct_count = models.BooleanField(default=False)
     date = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -114,6 +114,13 @@ class Ticket(models.Model):
         return f"{self.id}"
 
 
+class BallNumbers(models.Model):
+    ball = models.CharField(max_length=6)
+
+    def __str__(self):
+        return f"{self.ball}"
+
+
 class Pick(models.Model):
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_pick"
@@ -121,19 +128,20 @@ class Pick(models.Model):
     ticket_id = models.OneToOneField(
         Ticket, on_delete=models.CASCADE, related_name="ticket_pick"
     )
-    ball_number = models.CharField(max_length=50)
-    special_number = models.CharField(max_length=20)
+    ball_numbers = models.ManyToManyField(BallNumbers)
+    special_number = models.CharField(max_length=1)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.ball_number}{self.special_number}"
+        return f"{self.ball_numbers}{self.special_number}"
 
 
 class WinningPick(models.Model):
     drawing_id = models.OneToOneField(
         Drawing, on_delete=models.CASCADE, related_name="winning_draw"
     )
-    correct_number = models.CharField(max_length=7)
+    correct_number = models.ManyToManyField(BallNumbers)
+    special_number = models.CharField(max_length=1, default="")
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
