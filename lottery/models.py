@@ -129,7 +129,7 @@ class Pick(models.Model):
         Ticket, on_delete=models.CASCADE, related_name="ticket_pick"
     )
     ball_numbers = models.ManyToManyField(BallNumbers)
-    special_number = models.CharField(max_length=1)
+    special_number = models.CharField(max_length=10)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -141,7 +141,7 @@ class WinningPick(models.Model):
         Drawing, on_delete=models.CASCADE, related_name="winning_draw"
     )
     correct_number = models.ManyToManyField(BallNumbers)
-    special_number = models.CharField(max_length=1, default="")
+    special_number = models.CharField(max_length=10, default="")
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

@@ -23,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("lottery.urls")),
     path("", include("paystackpay.urls")),
+    path("", include("adminapp.urls")),
     path("profile/<str:username>", profile, name="profile"),
     path("accounts/", include("allauth.urls")),
 ]

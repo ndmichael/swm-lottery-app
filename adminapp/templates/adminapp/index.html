@@ -1,0 +1,28 @@
+{% extends "account/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+<section class=" bg-light" style="min-height:75vh; padding-top: 20vh; ">
+    <div class="container">
+        <section class="row">
+            <article class="col-6 col-md-4 offset-md-2 pb-4">
+                <a href="{% url 'admin_games' 'bronze' %}" class=" bg-white shadow text-center p-4 d-block">
+                    <img src=" {% static 'lottery/images/bronze.png' %} " class="img-fluid" alt=" " style="height: 80px;">
+                </a href="">
+            </article>
+            <article class="col-6 col-md-4 pb-4">
+                <a href="" class=" bg-white shadow text-center p-4 d-block">
+                    <img src=" {% static 'lottery/images/silver.png' %} " class="img-fluid" alt=" " style="height: 80px;">
+                </a href="">
+            </article>
+            <article class="col-6 col-md-4 offset-md-2  pb-4">
+                <a href="" class=" bg-white shadow text-center p-4 d-block">
+                    <img src=" {% static 'lottery/images/gold.png' %} " class="img-fluid" alt=" " style="height: 80px;">
+                </a href="">
+            </article>
+            <article class="col-6 col-md-4 pb-4">
+                <a href="" class=" bg-white shadow text-center p-4 d-block">
+                    <img src=" {% static 'lottery/images/platinum.png' %} " class="img-fluid" alt=" " style="height: 80px;">
+                </a href="">
+            </article>
+        </section>
+    </div>
+</section>
+{% endblock content %}

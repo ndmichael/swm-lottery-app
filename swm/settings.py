@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "lottery",
     "clients",
     "paystackpay",
+    "adminapp",
     "crispy_forms",
     "django.contrib.admin",
     "django.contrib.auth",
