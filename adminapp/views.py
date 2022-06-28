@@ -64,6 +64,8 @@ def winner(request, ticket_id):
         winningpick.save()
         for ball in correct_number:
             winningpick.correct_number.add(BallNumbers.objects.create(ball=ball))
+        ticket.correct_count = True
+        ticket.save()
         redirect("admin_index", request.user.username)
         messages.success(request, f"{user.username} has been confirmed as winner.")
     w_form = WinnerForm()
