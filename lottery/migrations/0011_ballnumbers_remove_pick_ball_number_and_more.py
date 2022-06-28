@@ -7,34 +7,42 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('lottery', '0010_alter_profile_date'),
+        ("lottery", "0010_alter_profile_date"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BallNumbers',
+            name="BallNumbers",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ball', models.CharField(max_length=6)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("ball", models.CharField(max_length=20)),
             ],
         ),
         migrations.RemoveField(
-            model_name='pick',
-            name='ball_number',
+            model_name="pick",
+            name="ball_number",
         ),
         migrations.AlterField(
-            model_name='drawing',
-            name='created',
+            model_name="drawing",
+            name="created",
             field=models.DateTimeField(default=datetime.datetime.now),
         ),
         migrations.AlterField(
-            model_name='pick',
-            name='special_number',
-            field=models.CharField(max_length=1),
+            model_name="pick",
+            name="special_number",
+            field=models.CharField(max_length=10),
         ),
         migrations.AddField(
-            model_name='pick',
-            name='ball_numbers',
-            field=models.ManyToManyField(to='lottery.ballnumbers'),
+            model_name="pick",
+            name="ball_numbers",
+            field=models.ManyToManyField(to="lottery.ballnumbers"),
         ),
     ]
