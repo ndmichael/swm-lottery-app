@@ -118,11 +118,57 @@
     </script>
 
 
-    <!-- <script>
-        $('label').click(function(e) {
-            $(this).addClass('highlight').toggle("highlight", this.checked)
-        })
-    </script> -->
+    <script>
+        var f = function(trig, trig_id) {
+            var diff = new Date(trig)
+            var curr_date = new Date()
+            console.log(curr_date, diff)
+            if (curr_date.toString() == diff.toString()) {
+                $.ajax({
+                    url: "{% url 'reset_draw' %}",
+                    type: 'POST',
+                    data: {
+                        'draw_id': trig_id,
+                        'csrfmiddlewaretoken': "{{ csrf_token }}",
+                        'action': 'post'
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        location.reload()
+                    },
+                    error: function(rs, e) {
+                        console.log(rs.response)
+                    }
+                });
+            }
+
+        };
+
+        setInterval(() => {
+            f("{{b_enddate}}", "{{b_data.id}}")
+        }, 1000);
+        setInterval(() => {
+            f("{{s_enddate}}", "{{s_data.id}}")
+        }, 1000);
+        setInterval(() => {
+            f("{{g_enddate}}", "{{g_data.id}}")
+        }, 1000);
+        setInterval(() => {
+            f("{{p_enddate}}", "{{p_data.id}}")
+        }, 1000);
+    </script>
+
+
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        /**** javascript code for aos file ****/
+        AOS.init({
+            delay: 0,
+            duration: 800,
+            easing: 'ease-in-sine',
+        });
+    </script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
