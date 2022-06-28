@@ -14,11 +14,13 @@ def index(request, username):
     if not request.user.is_staff:
         redirect("index")
         messages.success(request, "You do not have permission to access this page.")
+
     return render(request, "adminapp/index.html")
 
 
 @login_required
 def admin_games(request, game_type):
+    print(game_type)
     if not request.user.is_staff:
         redirect("index")
         messages.success(request, "You do not have permission to access this page.")

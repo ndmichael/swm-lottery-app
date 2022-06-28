@@ -87,6 +87,7 @@ def draw(request, type, id):
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
+                draw_type=draw.type,
                 special_number=special_number,
             )
             ticket.save()
