@@ -25,5 +25,5 @@ def admin_games(request, game_type):
         draw = Drawing.objects.get(type=game_type, status=True)
         details = Ticket.objects.filter(drawing_id=draw).order_by("-date")
 
-        context = {"details": details, "type": game_type}
+    context = {"details": details, "type": game_type}
     return render(request, "adminapp/admin_games.html", context)
