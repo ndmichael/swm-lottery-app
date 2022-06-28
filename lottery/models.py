@@ -96,6 +96,7 @@ class Ticket(models.Model):
         User, on_delete=models.CASCADE, related_name="user_ticket"
     )
     status = models.BooleanField(default=False)
+    draw_type = models.CharField(max_length=50, default="bronze")
     ticket_code = models.CharField(max_length=50, default="")
     correct_count = models.BooleanField(default=False)
     date = models.DateTimeField(default=timezone.now)

@@ -108,7 +108,7 @@
         </div>
     </section>
 
-    {% block sidebar %} {% endblock sidebar %} {% block content %} {% endblock content %} {% block datetime %} {% endblock datetime %}
+    {% block sidebar %} {% endblock sidebar %} {% block content %} {% endblock content %}
     <footer class="bg-gradient bg-success text-white py-4">
         <div class="container">
             <article class="row">
@@ -235,17 +235,18 @@
     </script>
 
     <script>
-        var db_caller = function(draw_type) {
-            if (draw_type == "bronze") {
+        var db_caller = function(d_type) {
+            console.log(d_type)
+            if (d_type == 'bronze') {
                 id = "{{b_data.id}}"
-            } else if (draw_type == "silver") {
+            } else if (d_type == 'silver') {
                 id = "{{s_data.id}}"
-            } else if (draw_type == "gold") {
+            } else if (d_type == 'gold') {
                 id = "{{g_data.id}}"
-            } else {
+            } else if (d_type == 'platinum') {
                 id = "{{p_data.id}}"
             }
-            console.log("{% url 'reset_draw' %}")
+
             $.ajax({
                 url: "{% url 'reset_draw' %}",
                 type: 'POST',
@@ -256,39 +257,34 @@
                 },
                 success: function(response) {
                     console.log(response)
-                    if (draw_type == "bronze") {
-                        $('#bronze_date').html(response['result']);
-                    } else if (draw_type == "silver") {
-                        $('#silver_date').html(response['result']);
-                    } else if (draw_type == "gold") {
-                        $('#gold_date').html(response['result']);
-                    } else {
-                        $('#platinum_date').html(response['result']);
-                    }
-
+                    location.reload()
                 },
                 error: function(rs, e) {
                     console.log(rs.response)
                 }
             });
         }
+        setInterval(() => (db_caller("{{b_data.type}}")), 1000 * 60 * 2)
+        setInterval(() => (db_caller("{{s_data.type}}")), 1000 * 60 * 4)
+            // setInterval(() => (db_caller("{{g_data.type}}")), 1000 * 60 * 6)
+            // setInterval(() => (db_caller("{{p_data.type}}")), 1000 * 60 * 8)
     </script>
 
-    <script>
-        var trigger = function(trig, type) {
+    <!-- <script>
+        var d_typeger = function(d_type, type) {
             setInterval(() => {
                 var now = new Date().toString()
-                var trig_time = new Date(trig).toString();
-                if (now === trig_time) {
+                var d_type_time = new Date(d_type).toString();
+                if (now === d_type_time) {
                     db_caller(type)
                 }
             }, 1000)
         }
-        trigger("{{b_enddate}}", "{{b_data.type}}");
-        trigger("{{s_enddate}}", "{{s_data.type}}");
-        trigger("{{g_enddate}}", "{{g_data.type}}");
-        trigger("{{p_enddate}}", "{{p_data.type}}");
-    </script>
+        d_typeger("{{b_enddate}}", "{{b_data.type}}");
+        d_typeger("{{s_enddate}}", "{{s_data.type}}");
+        d_typeger("{{g_enddate}}", "{{g_data.type}}");
+        d_typeger("{{p_enddate}}", "{{p_data.type}}");
+    </script> -->
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

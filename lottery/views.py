@@ -12,11 +12,11 @@ import json
 
 
 def index(request):
-    bronze_data = Drawing.objects.filter(status=True).filter(type="bronze").first()
+    bronze_data = Drawing.objects.filter(type="bronze", status=True).first()
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-    b_enddate = bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if bronze_data else ""
+    b_enddate = bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
     s_enddate = silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if silver_data else ""
     g_enddate = gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S") if gold_data else ""
     p_enddate = (
@@ -70,7 +70,9 @@ def draw(request, type, id):
         special_number = request.POST.get("special_number")
         print(ball_numbers)
         if draw.type == "bronze" and user.profile.balance >= 100:
-            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            ticket = Ticket.objects.create(
+                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+            )
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
@@ -87,11 +89,12 @@ def draw(request, type, id):
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
-                ball_number=ball_number,
                 special_number=special_number,
             )
             ticket.save()
             picks.save()
+            for ball in ball_numbers:
+                picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 200
             user.profile.save()
         elif draw.type == "gold" and user.profile.balance >= 350:
@@ -99,11 +102,12 @@ def draw(request, type, id):
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
-                ball_number=ball_number,
                 special_number=special_number,
             )
             ticket.save()
             picks.save()
+            for ball in ball_numbers:
+                picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 350
             user.profile.save()
         elif draw.type == "platinum" and user.profile.balance >= 500:
@@ -111,11 +115,12 @@ def draw(request, type, id):
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
-                ball_number=ball_number,
                 special_number=special_number,
             )
             ticket.save()
             picks.save()
+            for ball in ball_numbers:
+                picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 500
             user.profile.save()
         else:
@@ -150,6 +155,5 @@ def reset_draw(request):
 
         new_draw = Drawing.objects.create(type=draw.type, status=True)
         return JsonResponse({"result": new_draw.enddate})
-    else:
-        print("failed")
+
     return HttpResponse("Error access denied")
