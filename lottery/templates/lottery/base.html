@@ -28,15 +28,15 @@
                 <li class="nav-item">
                     <a class="nav-link  text-white" href="{% url 'account_login' %}">Login</a>
                 </li>
-                <span class=" text-white pt-2">|</span>
-                <li class="nav-item border-right border-4">
+                <span class=" text-white pt-2 d-none d-sm-block">|</span>
+                <li class="nav-item border-right border-4 d-none d-sm-block">
                     <a class="nav-link text-white" aria-current="page" href="{% url 'account_signup' %}">Sign
                         Up</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link text-white">
-                        <b style="font-size: 24px;">&#8358;{{user.profile.balance}}</b>
+                        <span style="font-size: 24px; color:#00ff00;">&#8358;{{user.profile.balance}}</span>
                     </a>
 
                 </li>
@@ -67,13 +67,21 @@
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">
-                    <i class="bi bi-list" style="font-size: 35px;"></i>
+                    <i class="bi bi-list text-white"
+                        style="font-size: 35px;"></i>
                 </span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'admin_index' user.username %}">ADMIN</a>
+                    </li>
+                </ul>
+                {% endif %}
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'all-games' %}">Games</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'all-games' %}">Games</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'bonus' %}">Bonuses</a>
@@ -235,56 +243,46 @@
     </script>
 
     <script>
-        var db_caller = function(d_type) {
-            console.log(d_type)
-            if (d_type == 'bronze') {
-                id = "{{b_data.id}}"
-            } else if (d_type == 'silver') {
-                id = "{{s_data.id}}"
-            } else if (d_type == 'gold') {
-                id = "{{g_data.id}}"
-            } else if (d_type == 'platinum') {
-                id = "{{p_data.id}}"
+        var f = function(trig, trig_id) {
+            var diff = new Date(trig)
+            var curr_date = new Date()
+            console.log(curr_date, diff)
+            if (curr_date.toString() == diff.toString()) {
+                $.ajax({
+                    url: "{% url 'reset_draw' %}",
+                    type: 'POST',
+                    data: {
+                        'draw_id': trig_id,
+                        'csrfmiddlewaretoken': "{{ csrf_token }}",
+                        'action': 'post'
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        location.reload()
+                    },
+                    error: function(rs, e) {
+                        console.log(rs.response)
+                    }
+                });
             }
 
-            $.ajax({
-                url: "{% url 'reset_draw' %}",
-                type: 'POST',
-                data: {
-                    'draw_id': id,
-                    'csrfmiddlewaretoken': "{{ csrf_token }}",
-                    'action': 'post'
-                },
-                success: function(response) {
-                    console.log(response)
-                    location.reload()
-                },
-                error: function(rs, e) {
-                    console.log(rs.response)
-                }
-            });
-        }
-        setInterval(() => (db_caller("{{b_data.type}}")), 1000 * 60 * 2)
-        setInterval(() => (db_caller("{{s_data.type}}")), 1000 * 60 * 4)
-            // setInterval(() => (db_caller("{{g_data.type}}")), 1000 * 60 * 6)
-            // setInterval(() => (db_caller("{{p_data.type}}")), 1000 * 60 * 8)
+        };
+
+        setInterval(() => {
+            f("{{b_enddate}}", "{{b_data.id}}")
+        }, 1000);
+        setInterval(() => {
+            f("{{s_enddate}}", "{{s_data.id}}")
+        }, 1000);
+        setInterval(() => {
+            f("{{g_enddate}}", "{{g_data.id}}")
+        }, 1000);
+        setInterval(() => {
+            f("{{p_enddate}}", "{{p_data.id}}")
+        }, 1000);
     </script>
 
-    <!-- <script>
-        var d_typeger = function(d_type, type) {
-            setInterval(() => {
-                var now = new Date().toString()
-                var d_type_time = new Date(d_type).toString();
-                if (now === d_type_time) {
-                    db_caller(type)
-                }
-            }, 1000)
-        }
-        d_typeger("{{b_enddate}}", "{{b_data.type}}");
-        d_typeger("{{s_enddate}}", "{{s_data.type}}");
-        d_typeger("{{g_enddate}}", "{{g_data.type}}");
-        d_typeger("{{p_enddate}}", "{{p_data.type}}");
-    </script> -->
+
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

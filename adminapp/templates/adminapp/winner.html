@@ -1,0 +1,58 @@
+{% extends "account/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+<section class=" bg-light" style="min-height:75vh; padding-top: 15vh; ">
+    <div class="container">
+        <section class="row">
+            <div class="col-12 col-md-5">
+                <div>
+                    <h1 class="pb-4">Selected User Details</h1>
+                    <p>
+                        <span><b>Name:</b></span> <span>{{user.first_name}}
+                            {{user.last_name}}</span>
+                    </p>
+                    <p>
+                        <span><b>Username:</b></span> {{user.username}}
+                    </p>
+                    <p>
+                        <span><b>Email:</b></span> {{user.email}}
+                    </p>
+                    <p>
+                        <span>
+                            <b>Phone Number:</b>
+                        </span>
+                        <span>{{user.profile.phone_number}}</span>
+                    </p>
+                    <p style="font-weight: 800 !important;">
+                        {% for number in ticket.ticket_pick.ball_numbers.all %}
+                        <span class="regular text-center">{{number}}</span> {% endfor %}
+                        <span class="special text-center">{{ticket.ticket_pick.special_number}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-7">
+                <div>
+                    <h1>Select Winning Numbers</h1>
+                    <form method="POST" class="pt-4">
+                        {% csrf_token %} {% for field in w_form %} {% for choice in field %}
+                        <div class="form-check form-check-inline m-0 p-1">
+                            {{choice}}
+                        </div>
+                        {% endfor %}
+                        <br />
+                        <hr /> {% endfor %}
+
+                        <p class="pt-4">
+                            <button class=" btn btn-success btn-lg rounded-9 p-3" type="submit">
+                                SUBMIT WINNER
+                            </button>
+                            <button type="button" class=" btn btn-dark rounded-pill reset">
+                                clear
+                            </button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+{% endblock content %}

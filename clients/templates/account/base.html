@@ -22,9 +22,15 @@
                 <img src="{% static 'lottery/images/swmlogo.svg' %}" alt="" class="img-fluid" style="height:50px;">
             </a>
             <ul class="navbar-nav ms-auto">
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'admin_index' user.username %}">ADMIN</a>
+                </li>
+                {% endif %} {% if request.user.is_authenticated and not request.user.is_staff %}
                 <li class="nav-item border-right border-4">
                     <a class="nav-link text-white" aria-current="page" href="{% url 'account_signup' %}">Sign Up</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -69,7 +75,46 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="{% static 'lottery/js/b5js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'lottery/js/b5js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
+    </script>
+
+    <script>
+        $(".reset").click(function(e) {
+            $(".draw").removeAttr("checked")
+            $(".draw").closest('label').removeClass("highlight-sp").removeClass("checkFaded");
+            $(".draw").not(":checked").removeAttr('disabled');
+
+            $(".draw").closest('label').removeClass("highlight");
+        });
+    </script>
+
+    <!-- <script src="{% static 'lottery/js/countdown.js' %}"></script> -->
+
+    <script>
+        let limit = 6
+        $('.test').click(function(e) {
+            $(this).closest('label').toggleClass("highlight");
+            if ($('.test:checked').length == limit) {
+                $(".test").not(":checked").attr("disabled", true)
+                var res = $(".test").not(":checked").closest('label').addClass("checkFaded")
+                    // console.log(res)
+            } else {
+                $(".test").not(":checked").removeAttr('disabled');
+                var res = $(".test").not(":checked").closest('label').removeClass("checkFaded")
+            }
+        });
+
+        $('.test2').click(function(e) {
+            $(this).closest('label').toggleClass("highlight-sp");
+            if ($('.test2:checked').length == 1) {
+                $(".test2").not(":checked").attr("disabled", true);
+                $(".test2").not(":checked").closest('label').addClass("checkFaded")
+            } else {
+                $(".test2").not(":checked").removeAttr('disabled')
+                $(".test2").not(":checked").closest('label').removeClass("checkFaded")
+            }
+        })
     </script>
 
 

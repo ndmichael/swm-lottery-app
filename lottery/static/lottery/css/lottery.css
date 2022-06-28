@@ -1,3 +1,12 @@
+.navbar-dark .navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
 label>input[type="checkbox"] {
     position: absolute;
     opacity: 0;
