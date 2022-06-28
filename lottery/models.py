@@ -115,7 +115,7 @@ class Ticket(models.Model):
 
 
 class BallNumbers(models.Model):
-    ball = models.CharField(max_length=6)
+    ball = models.CharField(max_length=20)
 
     def __str__(self):
         return f"{self.ball}"
