@@ -83,11 +83,12 @@ def draw(request, type, id):
             user.profile.balance -= 100
             user.profile.save()
         elif draw.type == "silver" and user.profile.balance >= 200:
-            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            ticket = Ticket.objects.create(
+                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+            )
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
-                draw_type=draw.type,
                 special_number=special_number,
             )
             ticket.save()
@@ -97,7 +98,9 @@ def draw(request, type, id):
             user.profile.balance -= 200
             user.profile.save()
         elif draw.type == "gold" and user.profile.balance >= 350:
-            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            ticket = Ticket.objects.create(
+                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+            )
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
@@ -110,7 +113,9 @@ def draw(request, type, id):
             user.profile.balance -= 350
             user.profile.save()
         elif draw.type == "platinum" and user.profile.balance >= 500:
-            ticket = Ticket.objects.create(user_id=user, status=True, drawing_id=draw)
+            ticket = Ticket.objects.create(
+                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+            )
             picks = Pick(
                 user_id=user,
                 ticket_id=ticket,
