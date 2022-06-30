@@ -82,9 +82,8 @@
                     <tr>
                         <td class="" style="font-weight: 800 !important;">
                             {% for number in ticket.ticket_pick.ball_numbers.all %}
-                                <span class="regular text-center">{{number}}</span>
-                            {% endfor %}
-                            <span  class="special text-center">{{ticket.ticket_pick.special_number}}</span>
+                            <span class="regular text-center">{{number}}</span> {% endfor %}
+                            <span class="special text-center">{{ticket.ticket_pick.special_number}}</span>
                         </td>
                         <td>{{ticket.date}}</td>
                         <td>{{ticket.drawing_id.type}}</td>
@@ -99,19 +98,20 @@
                         {% else %}
                         <td>&#8358;0</td>
                         {% endif %} {% if ticket.drawing_id.type == 'bronze' %}
-                        <td>&#8358;100000</td>
+                        <td>&#8358;100,000</td>
                         {% elif ticket.drawing_id.type == 'silver' %}
-                        <td>&#8358;1000000</td>
+                        <td>&#8358;1,000,000</td>
                         {% elif ticket.drawing_id.type == 'gold' %}
-                        <td>&#8358;10000000</td>
+                        <td>&#8358;10,000,000</td>
                         {% elif ticket.drawing_id.type == 'platinum' %}
-                        <td>&#8358;100000000</td>
+                        <td>&#8358;100,000,000</td>
                         {% else %}
                         <td>&#8358;0</td>
-                        {% endif %} {% if ticket.correct_count %}
-                        <td>WON</td>
+                        {% endif %}
+                        {% if ticket.correct_count %}
+                        <td>Won</td>
                         {% else %}
-                        <td>Pending</td>
+                        <td>...</td>
                         {% endif %}
                     </tr>
                     {% endfor %} {% else %}

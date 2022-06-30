@@ -88,12 +88,39 @@ class Drawing(models.Model):
         return f"{self.type}"
 
 
+class BallNumbers(models.Model):
+    ball = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.ball}"
+
+
+class WinningPick(models.Model):
+    drawing_id = models.OneToOneField(
+        Drawing, on_delete=models.CASCADE, related_name="winning_draw"
+    )
+    correct_number = models.ManyToManyField(BallNumbers)
+    special_number = models.CharField(max_length=10, default="")
+    date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.id}"
+
+
 class Ticket(models.Model):
     drawing_id = models.ForeignKey(
         Drawing, on_delete=models.CASCADE, related_name="draw_ticket"
     )
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_ticket"
+    )
+    winning = models.OneToOneField(
+        WinningPick,
+        on_delete=models.CASCADE,
+        related_name="winning_ticket",
+        null=True,
+        blank=True,
+        default="",
     )
     status = models.BooleanField(default=False)
     draw_type = models.CharField(max_length=50, default="bronze")
@@ -115,19 +142,14 @@ class Ticket(models.Model):
         return f"{self.id}"
 
 
-class BallNumbers(models.Model):
-    ball = models.CharField(max_length=20)
-
-    def __str__(self):
-        return f"{self.ball}"
-
-
 class Pick(models.Model):
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_pick"
     )
     ticket_id = models.OneToOneField(
-        Ticket, on_delete=models.CASCADE, related_name="ticket_pick"
+        Ticket,
+        on_delete=models.CASCADE,
+        related_name="ticket_pick",
     )
     ball_numbers = models.ManyToManyField(BallNumbers)
     special_number = models.CharField(max_length=10)
@@ -135,15 +157,3 @@ class Pick(models.Model):
 
     def __str__(self):
         return f"{self.ball_numbers}{self.special_number}"
-
-
-class WinningPick(models.Model):
-    drawing_id = models.OneToOneField(
-        Drawing, on_delete=models.CASCADE, related_name="winning_draw"
-    )
-    correct_number = models.ManyToManyField(BallNumbers)
-    special_number = models.CharField(max_length=10, default="")
-    date = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"{self.id}"
