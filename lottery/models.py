@@ -96,7 +96,7 @@ class BallNumbers(models.Model):
 
 
 class WinningPick(models.Model):
-    drawing_id = models.OneToOneField(
+    drawing_id = models.ForeignKey(
         Drawing, on_delete=models.CASCADE, related_name="winning_draw"
     )
     correct_number = models.ManyToManyField(BallNumbers)
