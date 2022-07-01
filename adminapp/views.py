@@ -5,6 +5,7 @@ from lottery.models import WinningPick, BallNumbers
 from .forms import WinnerForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -69,6 +70,19 @@ def winner(request, ticket_id):
         ticket.correct_count = True
         ticket.winning = winningpick
         ticket.save()
+        subject = (
+            "Winner for gameID:{ticket.drawing_id.id} TYPE:{ticket.drawing_id.type}"
+        )
+        email = f"{user.email}"
+        message = f"""Ticket with CODE: {ticket.ticket_code} has won
+        the game for {ticket.drawing_id.id} type: {ticket.drawing_id.type}
+        Visit your profile for all necessary updates.
+
+        signed
+        swmlottery team.
+        """
+
+        send_mail(subject, message, "Lttrglbl@gmail.com", [email])
         redirect("admin_index", request.user.username)
         messages.success(request, f"{user.username} has been confirmed as winner.")
     w_form = WinnerForm()
