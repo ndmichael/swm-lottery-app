@@ -56,7 +56,7 @@ label>input[type="checkbox"] {
 }
 
 #hero_page {
-    background-image: url("/static/lottery/images/banner.jpg");
+    background-image: url("/static/lottery/images/banner.d4474e959839.jpg");
     background-size: cover;
     min-height: 70vh;
     height: 70vh;
@@ -113,7 +113,7 @@ label>input[type="checkbox"] {
 
 @media(max-width: 48em) {
     #hero_page {
-        background-image: url("/static/lottery/images/banner-mobile.jpg");
+        background-image: url("/static/lottery/images/banner-mobile.1e88762cbaca.jpg");
         background-size: cover;
         min-height: 50vh;
         height: 50vh;
