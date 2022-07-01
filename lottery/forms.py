@@ -7,7 +7,7 @@ from .models import Drawing, Pick
 
 class ContactForm(forms.Form):
     email = forms.EmailField()
-    subject = forms.CharField(max_length=20)
+    subject = forms.CharField(max_length=100)
     message = forms.CharField(widget=forms.Textarea(attrs={"rows": "7"}))
 
     def __init__(self, *args, **kwargs):
