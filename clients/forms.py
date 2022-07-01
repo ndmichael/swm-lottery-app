@@ -137,25 +137,26 @@ class WithdrawalForm(forms.Form):
         max_digits=10,
         decimal_places=2,
     )
-    agreement = forms.BooleanField()
+    agreement = forms.BooleanField(
+        label="",
+        help_text="I declare that I have carefully read and fully understood the Withdrawal Terms and Conditions of SWM Lottery, which I accept and agree with, and that I understand that any fund withdrawals from my account will result in the proportional removal of the amount in my wallet. \
+        I also acknowledge and accept that my withdrawal request may be amended and completed according to the Withdrawal Priority Procedure. Furthermore, I consent to my personal data being stored and used for any future transactions.",
+    )
 
     def __init__(self, *args, **kwargs):
         super(WithdrawalForm, self).__init__(*args, **kwargs)
         self.fields["select_bank"].widget.attrs.update(
             {
-                "class": "form-control-lg rounded-9",
+                "class": "form-control-lg rounded-9 bg-success text-white",
             }
         )
         self.fields["account_number"].widget.attrs.update(
             {
-                "class": "form-control-lg rounded-9",
+                "class": "form-control-lg rounded-9 bg-success text-white",
                 "placeholder": "ENTER ACCOUNT NUMBER",
             }
         )
         self.fields["withdraw_amount"].widget.attrs.update(
-            {"class": "form-control-lg rounded-9"}
+            {"class": "form-control-lg rounded-9 bg-success text-white"}
         )
-        self.fields["agreement"].widget.attrs.update(
-            {"class": "form-control-lg rounded-9"}
-        )
-        self.fields["agreement"].widget.attrs["placeholder"] = ""
+        self.fields["agreement"].widget.attrs.update({"class": "text-success"})

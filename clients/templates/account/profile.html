@@ -132,7 +132,7 @@
                 <h1 class=" pb-4">
                     WITHDRAW FUNDS
                 </h1>
-                <form action="" class="row">
+                <form action="" method="POST" class="row">
                     {% csrf_token %}
                     <div class="row">
                         <div class="form-group col-6 col-md-4">
@@ -144,8 +144,11 @@
                         <div class="form-group col-12 col-md-4">
                             {{ w_form.withdraw_amount|as_crispy_field }}
                         </div>
+                        <div class="form-group col-12 pt-3">
+                            {{ w_form.agreement|as_crispy_field }}
+                        </div>
                         <div class="form-group col-12 pt-5">
-                            <input type="submit" class=" btn btnn-lg btn-success" value="REQUEST">
+                            <input type="submit" class=" btn btn-lg btn-success" value="REQUEST">
                         </div>
                     </div>
 
