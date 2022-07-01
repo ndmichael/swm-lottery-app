@@ -69,6 +69,7 @@ def winner(request, ticket_id):
             winningpick.correct_number.add(BallNumbers.objects.create(ball=ball))
         ticket.correct_count = True
         ticket.winning = winningpick
+        ticket.winning_set = True
         ticket.save()
         subject = (
             "Winner for gameID:{ticket.drawing_id.id} TYPE:{ticket.drawing_id.type}"

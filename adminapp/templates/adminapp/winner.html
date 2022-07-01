@@ -33,7 +33,7 @@
                     <h1>Select Winning Numbers</h1>
                     <form method="POST" class="pt-4">
                         {% csrf_token %} {% for field in w_form %} {% for choice in field %}
-                        <div class="form-check form-check-inline m-0 p-1">
+                        <div class="draw-check form-check form-check-inline m-0 p-1">
                             {{choice}}
                         </div>
                         {% endfor %}
