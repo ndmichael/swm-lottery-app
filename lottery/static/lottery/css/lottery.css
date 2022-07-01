@@ -30,7 +30,7 @@ label>input[type="checkbox"] {
     color: rgb(66, 65, 65) !important;
 }
 
-.form-check>label {
+.draw-check>label {
     cursor: pointer;
     width: 55px;
     height: 55px;
@@ -45,7 +45,7 @@ label>input[type="checkbox"] {
     margin: 5px 0;
 }
 
-.form-check>label:hover {
+.draw-check>label:hover {
     border: 4px solid #00ff00;
     box-shadow: 0 0 15px rgba(08, 08, 08, 0.2);
 }
