@@ -67,7 +67,7 @@ def contact(request):
                 ["Lttrglbl@gmail.com"],
             )
             messages.success(request, "Mail successfully sent.")
-            redirect("all-games")
+            return redirect("all-games")
     form = ContactForm()
 
     context = {"form": form}
