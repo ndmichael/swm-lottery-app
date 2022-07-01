@@ -30,7 +30,7 @@ def profile(request, username):
                 ["Lttrglbl@gmail.com"],
             )
             messages.success(request, "Withdrawal Request Has been successfully sent.")
-            return redirect("all-games")
+            return redirect("profile", user.username)
 
     else:
         w_form = WithdrawalForm()
