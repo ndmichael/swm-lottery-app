@@ -107,11 +107,12 @@
                         <td>&#8358;100,000,000</td>
                         {% else %}
                         <td>&#8358;0</td>
-                        {% endif %}
-                        {% if ticket.correct_count %}
-                        <td>Won</td>
+                        {% endif %} {% if ticket.winning == None %}
+                        <td>....</td>
+                        {% elif ticket.winning and ticket.correct_count %}
+                        <td>WON</td>
                         {% else %}
-                        <td>...</td>
+                        <td>NOT WINNING</td>
                         {% endif %}
                     </tr>
                     {% endfor %} {% else %}

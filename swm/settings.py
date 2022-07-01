@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "paystackpay",
     "adminapp",
     "crispy_forms",
+    "anymail",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -167,8 +168,16 @@ ACCOUNT_FORMS = {
     "login": "clients.forms.SelfLoginForm",
 }
 
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY_SWM"),
+    "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN_SWM"),
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = "Lttrglbl@gmail.com"
+SERVER_EMAIL = "contact@mg.swmlottery.com"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
