@@ -168,13 +168,15 @@ ACCOUNT_FORMS = {
     "login": "clients.forms.SelfLoginForm",
 }
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY_SWM"),
-    "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN_SWM"),
-}
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = "Lttrglbl@gmail.com"
-SERVER_EMAIL = "contact@mg.swmlottery.com"
+if not DEBUG:
+
+    ANYMAIL = {
+        "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY_SWM"),
+        "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN_SWM"),
+    }
+    EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+    DEFAULT_FROM_EMAIL = "Lttrglbl@gmail.com"
+    SERVER_EMAIL = "contact@mg.swmlottery.com"
 
 
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
