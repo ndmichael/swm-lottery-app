@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PickForm, ContactForm
-from .models import Drawing, Ticket, Pick, BallNumbers
+from .models import Drawing, Ticket, Pick, BallNumbers, WinningPick
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from django.http import JsonResponse, HttpResponse
 from django.template import loader
 import json
 from django.core.mail import send_mail
+import datetime
 
 # Create your views here.
 
@@ -17,10 +18,26 @@ def index(request):
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-    b_enddate = bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    s_enddate = silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    g_enddate = gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-    p_enddate = platinum_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+    b_enddate = (
+        bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+        if bronze_data
+        else datetime.datetime.now()
+    )
+    s_enddate = (
+        silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+        if silver_data
+        else datetime.datetime.now()
+    )
+    g_enddate = (
+        gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+        if gold_data
+        else datetime.datetime.now()
+    )
+    p_enddate = (
+        platinum_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
+        if platinum_data
+        else datetime.datetime.now()
+    )
 
     context = {
         "b_enddate": b_enddate,
@@ -162,14 +179,38 @@ def bonus(request):
 
 
 def result(request):
-    return render(request, "lottery/result.html")
+
+    bronze_result = Ticket.objects.filter(
+        status=True, draw_type="bronze", correct_count=True
+    ).first()
+    silver_result = Ticket.objects.filter(
+        status=True, draw_type="silver", correct_count=True
+    ).first()
+    gold_result = Ticket.objects.filter(
+        status=True, draw_type="gold", correct_count=True
+    ).first()
+    platinum_result = Ticket.objects.filter(
+        status=True, draw_type="platinum", correct_count=True
+    ).first()
+    context = {
+        "bronze_result": bronze_result,
+        "silver_result": silver_result,
+        "gold_result": gold_result,
+        "plat_result": platinum_result,
+        "title": "swm-results",
+    }
+    return render(request, "lottery/result.html", context)
 
 
 def reset_draw(request):
     if request.POST.get("action") == "post":
         drawid = int(request.POST.get("draw_id"))
         draw = get_object_or_404(Drawing, id=drawid)
-        draw.status = False
+
+        while True:
+            if draw.status:
+                draw.status = False
+                break
         draw.save()
 
         new_draw = Drawing.objects.create(type=draw.type, status=True)

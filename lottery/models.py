@@ -70,17 +70,18 @@ class Drawing(models.Model):
     type = models.CharField(max_length=20, choices=choices)
     created = models.DateTimeField(default=datetime.datetime.now)
     status = models.BooleanField(default=False)
+    winning_set = models.BooleanField(default=False)
 
     @property
     def enddate(self):
         if self.type == "bronze":
-            return self.created + datetime.timedelta(minutes=10)
+            return self.created + datetime.timedelta(minutes=4)
         elif self.type == "silver":
-            return self.created + datetime.timedelta(minutes=180)
+            return self.created + datetime.timedelta(minutes=9)
         elif self.type == "gold":
-            return self.created + datetime.timedelta(minutes=4320)
+            return self.created + datetime.timedelta(minutes=14)
         elif self.type == "platinum":
-            return self.created + datetime.timedelta(minutes=10080)
+            return self.created + datetime.timedelta(minutes=19)
         else:
             return self.created
 
@@ -122,7 +123,6 @@ class Ticket(models.Model):
         blank=True,
         default="",
     )
-    winning_set = models.BooleanField(default=False)
     status = models.BooleanField(default=False)
     draw_type = models.CharField(max_length=50, default="bronze")
     ticket_code = models.CharField(max_length=50, default="")
