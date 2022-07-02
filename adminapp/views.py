@@ -69,8 +69,9 @@ def winner(request, ticket_id):
             winningpick.correct_number.add(BallNumbers.objects.create(ball=ball))
         ticket.correct_count = True
         ticket.winning = winningpick
-        ticket.winning_set = True
+        draw.winning_set = True
         ticket.save()
+        draw.save()
         subject = (
             "Winner for gameID:{ticket.drawing_id.id} TYPE:{ticket.drawing_id.type}"
         )
@@ -82,7 +83,6 @@ def winner(request, ticket_id):
         signed
         swmlottery team.
         """
-
         send_mail(subject, message, "Lttrglbl@gmail.com", [email])
         redirect("admin_index", request.user.username)
         messages.success(request, f"{user.username} has been confirmed as winner.")
