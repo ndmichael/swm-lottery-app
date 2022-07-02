@@ -168,8 +168,7 @@ ACCOUNT_FORMS = {
     "login": "clients.forms.SelfLoginForm",
 }
 
-if not DEBUG:
-
+if DEBUG:
     ANYMAIL = {
         "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY_SWM"),
         "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN_SWM"),
