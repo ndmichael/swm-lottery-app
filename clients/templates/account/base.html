@@ -122,7 +122,7 @@
         var f = function(trig, trig_id, status) {
             var diff = new Date(trig)
             var curr_date = new Date()
-            console.log(curr_date, diff)
+                // console.log(curr_date, diff)
             if (curr_date.toString() > diff.toString()) {
                 $.ajax({
                     url: "{% url 'reset_draw' %}",
