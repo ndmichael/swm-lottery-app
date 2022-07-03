@@ -19,7 +19,11 @@
                         {% for detail in details %}
                         <tr>
                             <td>
-                                <a href="{% url 'winner' detail.pk %}">{{detail.ticket_code}}</a>
+                                {% if detail.drawing_id.winning_set %}
+                                    <span class="text-success">{{detail.ticket_code}}</span>
+                                {% else %}
+                                    <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a> 
+                                {% endif %}
                             </td>
                             <td class="" style="font-weight: 800 !important;">
                                 {% for number in detail.ticket_pick.ball_numbers.all %}
