@@ -182,16 +182,16 @@ def result(request):
 
     bronze_result = Ticket.objects.filter(
         status=True, draw_type="bronze", correct_count=True
-    ).first()
+    ).last()
     silver_result = Ticket.objects.filter(
         status=True, draw_type="silver", correct_count=True
-    ).first()
+    ).last()
     gold_result = Ticket.objects.filter(
         status=True, draw_type="gold", correct_count=True
-    ).first()
+    ).last()
     platinum_result = Ticket.objects.filter(
         status=True, draw_type="platinum", correct_count=True
-    ).first()
+    ).last()
     context = {
         "bronze_result": bronze_result,
         "silver_result": silver_result,

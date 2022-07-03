@@ -84,7 +84,7 @@ def winner(request, ticket_id):
         swmlottery team.
         """
         send_mail(subject, message, "Lttrglbl@gmail.com", [email])
-        redirect("admin_index", request.user.username)
+        return redirect("admin_index", request.user.username)
         messages.success(request, f"{user.username} has been confirmed as winner.")
     w_form = WinnerForm()
     context = {"user": user, "ticket": ticket, "w_form": w_form}
