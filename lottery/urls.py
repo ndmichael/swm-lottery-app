@@ -1,5 +1,16 @@
 from django.urls import path
-from .views import index, games, draw, contact, about, faq, bonus, result, terms
+from .views import (
+    index,
+    games,
+    draw,
+    contact,
+    about,
+    faq,
+    bonus,
+    result,
+    terms,
+    reset_draw,
+)
 
 
 urlpatterns = [
