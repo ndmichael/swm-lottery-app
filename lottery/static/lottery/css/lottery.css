@@ -129,3 +129,19 @@ label>input[type="checkbox"] {
         width: 120px;
     }
 }
+
+
+/* result css */
+
+.result-text {
+    color: #006633 !important;
+}
+
+.result-text>a {
+    color: inherit;
+    transition: color .2s ease-in;
+}
+
+.result-text>a:hover {
+    color: #18d777;
+}
