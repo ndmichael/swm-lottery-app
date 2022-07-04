@@ -153,15 +153,15 @@
                     <h3>Follow Us @</h3>
                     <p class="">
                         <span class="pe-4">
-                            <a href="https://www.instagram.com/swmlottery/">
+                            <a href="https://www.instagram.com/swm.lottery/">
                                 <img src="{% static 'lottery/images/instagram_icon.png' %}"
                                     alt="instagram icon" class="img-fluid"
                                     style="height: 40px; width: 40px;">
                             </a>
                         </span>
                         <span>
-                            <a
-                                href="https://web.facebook.com/SWM-Lottery-102134939217961">
+                            <a href="https://web.facebook.com/SWM-Lottery-1105757817073641"
+                                target="_blank">
                                 <img src="{% static 'lottery/images/facebook_icon.png' %}"
                                     alt="instagram icon" class="img-fluid"
                                     style="height: 40px; width: 40px;">
@@ -183,7 +183,9 @@
                         </span>
                         <span class=" text-success">|</span>
                         <span class=" text-muted">
-                            Terms & Conditions |
+                            <a href="{% url 'terms' %}" style="color: #00ff00;">
+                                Terms & Conditions
+                            </a> |
                             <a href="https://www.termsfeed.com/live/da29eabb-cdd3-4bbd-8a4c-337df6daebc7"
                                 target="_blank" class=" text-danger">
                                 privacy policy
@@ -191,16 +193,15 @@
                         </span>
                     </p>
                     <p>
-                        Developed by | <span class=" text-warning">Ballad-tech</span> softwares.
+                        Developed by | <b style="color: #00ff00;">Ballad-tech</b> softwares.
                     </p>
                 </div>
             </article>
         </div>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="{% static 'lottery/js/b5js/bootstrap.min.js' %}"></script>
     <script src="{% static 'lottery/js/b5js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'lottery/js/b5js/bootstrap.min.js' %}"></script>
     <script src="{% static 'lottery/js/mdb/mdb.min.js' %}">
     </script>
 
@@ -241,6 +242,7 @@
             }
         })
     </script>
+
 
     <script>
         var f = function(trig, trig_id, status) {
@@ -289,6 +291,7 @@
             setTimeout(run, 900000);
         }, 900000);
     </script>
+
 
 
 
