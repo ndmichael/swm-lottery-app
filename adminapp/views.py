@@ -76,16 +76,18 @@ def winner(request, ticket_id):
             "Winner for gameID:{ticket.drawing_id.id} TYPE:{ticket.drawing_id.type}"
         )
         email = f"{user.email}"
-        message = f"""Ticket with CODE: {ticket.ticket_code} has won
-        the game for {ticket.drawing_id.id} type: {ticket.drawing_id.type}
+        message = f"""Ticket with CODE: {ticket.ticket_code} has won the game
+        GameID:{ticket.drawing_id.id}
+        type: {ticket.drawing_id.type}
         Visit your profile for all necessary updates.
 
         signed
         swmlottery team.
         """
-        send_mail(subject, message, "Lttrglbl@gmail.com", [email])
-        return redirect("admin_index", request.user.username)
+        send_mail(subject, message, "Lttrglbl@gmail.com", [email], fail_silently=True)
         messages.success(request, f"{user.username} has been confirmed as winner.")
+        return redirect("admin_index", request.user.username)
+
     w_form = WinnerForm()
     context = {"user": user, "ticket": ticket, "w_form": w_form}
     return render(request, "adminapp/winner.html", context)
