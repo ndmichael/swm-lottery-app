@@ -31,10 +31,9 @@
                 <h6 class=" pt-2"><b>SWM BRONZE LOTTERY</b></h6>
             </div>
             <div class=" col-5 text-center p-2" style="color: #006633;">
-                {% for number in bronze_result.ticket_pick.ball_numbers.all %}
-                    <span class="regular text-center">{{number}}</span> 
-                {% endfor %}
-                    <span class="special text-center">{{bronze_result.ticket_pick.special_number}}</span>
+                {% for number in bronze_result.winning.correct_number.all %}
+                <span class="regular text-center">{{number}}</span> {% endfor %}
+                <span class="special text-center">{{bronze_result.winning.special_number}}</span>
             </div>
             <div class=" col-3 text-center" style="color: #006633;">
                 <h5><b>{{bronze_result.drawing_id.created}}</b></h5>
@@ -49,9 +48,7 @@
                 <h6 class=" pt-2"><b>Awaiting...</b></h6>
             </div>
         </div>
-        {% endif %}
-
-        {% if silver_result %}
+        {% endif %} {% if silver_result %}
         <div class=" row p-2" style="background-color: #FFF;">
             <div class=" col-1 p-2">
                 <img src="/platinum.png" width="40px" alt="" srcset="">
@@ -61,9 +58,8 @@
             </div>
             <div class=" col-5 text-center p-2" style="color: #006633;">
                 {% for number in silver_result.ticket_pick.ball_numbers.all %}
-                    <span class="regular text-center">{{number}}</span> 
-                {% endfor %}
-                    <span class="special text-center">{{silver_result.ticket_pick.special_number}}</span>
+                <span class="regular text-center">{{number}}</span> {% endfor %}
+                <span class="special text-center">{{silver_result.ticket_pick.special_number}}</span>
             </div>
             <div class=" col-3 text-center" style="color: #006633;">
                 <h5><b>{{silver_result.drawing_id.created}}</b></h5>
@@ -81,9 +77,7 @@
                 <h6 class=" pt-2"><b>Awaiting...</b></h6>
             </div>
         </div>
-        {% endif %}
-
-        {% if gold_result %}
+        {% endif %} {% if gold_result %}
         <div class=" row p-2" style="background-color: #F5F5F5;">
             <div class=" col-1 p-2">
                 <img src="/platinum.png" width="40px" alt="" srcset="">
@@ -93,9 +87,8 @@
             </div>
             <div class=" col-5 text-center p-2" style="color: #006633;">
                 {% for number in gold_result.ticket_pick.ball_numbers.all %}
-                    <span class="regular text-center">{{number}}</span> 
-                {% endfor %}
-                    <span class="special text-center">{{gold_result.ticket_pick.special_number}}</span>
+                <span class="regular text-center">{{number}}</span> {% endfor %}
+                <span class="special text-center">{{gold_result.ticket_pick.special_number}}</span>
             </div>
             <div class=" col-3 text-center" style="color: #006633;">
                 <h5><b>{{gold_result.drawing_id.created}}</b></h5>
@@ -103,16 +96,17 @@
         </div>
         {% else %}
         <div class=" row p-2" style="background-color: #F5F5F5;">
-            <div class=" col-3 text-center p-2 d-flex" style="color: #006633;">
+            <div class=" col-1 p-2">
+                <img src="/platinum.png" width="40px" alt="" srcset="">
+            </div>
+            <div class=" col-5 text-center p-2 d-flex" style="color: #006633;">
                 <h6 class=" pt-2"><b>SWM GOLD LOTTERY</b></h6>
             </div>
-            <div class=" col-6 text-center p-2 d-flex" style="color: #006633;">
+            <div class=" col-4 text-center p-2 d-flex" style="color: #006633;">
                 <h6 class=" pt-2"><b>Awaiting...</b></h6>
             </div>
         </div>
-        {% endif %}
-
-        {% if plat_result %}
+        {% endif %} {% if plat_result %}
         <div class=" row p-2" style="background-color: #FFF;">
             <div class=" col-1 p-2">
                 <img src="/platinum.png" width="40px" alt="" srcset="">
@@ -122,9 +116,8 @@
             </div>
             <div class=" col-5 text-center p-2" style="color: #006633;">
                 {% for number in plat_result.ticket_pick.ball_numbers.all %}
-                    <span class="regular text-center">{{number}}</span> 
-                {% endfor %}
-                    <span class="special text-center">{{plat_result.ticket_pick.special_number}}</span>
+                <span class="regular text-center">{{number}}</span> {% endfor %}
+                <span class="special text-center">{{plat_result.ticket_pick.special_number}}</span>
             </div>
             <div class=" col-3 text-center" style="color: #006633;">
                 <h5><b>{{plat_result.drawing_id.created}}</b></h5>
@@ -142,7 +135,7 @@
                 <h6 class=" pt-2"><b>Awaiting...</b></h6>
             </div>
         </div>
-        {% endif %}    
+        {% endif %}
     </div>
 </div>
 
