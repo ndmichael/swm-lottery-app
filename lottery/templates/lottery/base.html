@@ -249,7 +249,7 @@
             var diff = new Date(trig)
             var curr_date = new Date()
             console.log(curr_date, diff)
-            if (curr_date.toString() > diff.toString()) {
+            if (curr_date.toString() >= diff.toString() && status) {
                 $.ajax({
                     url: "{% url 'reset_draw' %}",
                     type: 'POST',
