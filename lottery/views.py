@@ -217,3 +217,8 @@ def reset_draw(request):
         return JsonResponse({"result": new_draw.enddate})
 
     return HttpResponse("Error access denied")
+
+
+def terms(request):
+    context = {"title": "Terms & Conditions"}
+    return render(request, "lottery/terms.html", context)
