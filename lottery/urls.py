@@ -12,5 +12,5 @@ urlpatterns = [
     path("bonus/", bonus, name="bonus"),
     path("result/", result, name="result"),
     path("terms/", terms, name="terms"),
-    # path("drawing/", reset_draw, name="reset_draw"),
+    path("drawing/", reset_draw, name="reset_draw"),
 ]
