@@ -10,6 +10,7 @@ from .views import (
     result,
     terms,
     reset_draw,
+    result_details,
 )
 
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path("faq/", faq, name="faq"),
     path("bonus/", bonus, name="bonus"),
     path("result/", result, name="result"),
+    path("result/<str:type>/", result_details, name="result-details"),
     path("terms/", terms, name="terms"),
     path("drawing/", reset_draw, name="reset_draw"),
 ]

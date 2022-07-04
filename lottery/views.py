@@ -180,17 +180,17 @@ def bonus(request):
 
 def result(request):
 
-    bronze_result = Ticket.objects.filter(
-        status=True, draw_type="bronze", correct_count=True
+    bronze_result = WinningPick.objects.filter(
+        drawing_id__type="bronze", drawing_id__winning_set=True
     ).last()
-    silver_result = Ticket.objects.filter(
-        status=True, draw_type="silver", correct_count=True
+    silver_result = WinningPick.objects.filter(
+        drawing_id__type="silver", drawing_id__winning_set=True
     ).last()
-    gold_result = Ticket.objects.filter(
-        status=True, draw_type="gold", correct_count=True
+    gold_result = WinningPick.objects.filter(
+        drawing_id__type="gold", drawing_id__winning_set=True
     ).last()
-    platinum_result = Ticket.objects.filter(
-        status=True, draw_type="platinum", correct_count=True
+    platinum_result = WinningPick.objects.filter(
+        drawing_id__type="platinum", drawing_id__winning_set=True
     ).last()
     context = {
         "bronze_result": bronze_result,
@@ -217,6 +217,28 @@ def reset_draw(request):
         return JsonResponse({"result": new_draw.enddate})
 
     return HttpResponse("Error access denied")
+
+
+def result_details(request, type):
+    if type == "bronze":
+        results = WinningPick.objects.filter(
+            drawing_id__type=type, drawing_id__winning_set=True
+        )
+    elif type == "silver":
+        results = WinningPick.objects.filter(
+            drawing_id__type=type, drawing_id__winning_set=True
+        )
+    elif type == "gold":
+        results = WinningPick.objects.filter(
+            drawing_id__type=type, drawing_id__winning_set=True
+        )
+    elif type == "platinum":
+        results = WinningPick.objects.filter(
+            drawing_id__type=type, drawing_id__winning_set=True
+        )
+    result_type = type
+    context = {"results": results, "title": "swm-results", "result_type": result_type}
+    return render(request, "lottery/result_details.html", context)
 
 
 def terms(request):
