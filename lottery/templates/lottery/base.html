@@ -245,11 +245,11 @@
 
 
     <script>
-        var f = function(trig, trig_id, status) {
+        var f = function(trig, trig_id) {
             var diff = new Date(trig)
             var curr_date = new Date()
-            console.log(curr_date, diff)
-            if (curr_date.toString() >= diff.toString() && status) {
+                // console.log(curr_date, diff)
+            if (curr_date.toString() >= diff.toString()) {
                 $.ajax({
                     url: "{% url 'reset_draw' %}",
                     type: 'POST',
@@ -260,7 +260,7 @@
                         'action': 'post'
                     },
                     success: function(response) {
-                        console.log(response)
+                        // console.log(response)
                         location.reload()
                     },
                     error: function(rs, e) {
@@ -272,22 +272,22 @@
         };
 
         setTimeout(function run() {
-            f("{{b_enddate}}", "{{b_data.id}}", "{{b_data.status}}");
+            f("{{b_enddate}}", "{{b_data.id}}");
             setTimeout(run, 60000);
         }, 60000);
 
         setTimeout(function run() {
-            f("{{s_enddate}}", "{{s_data.id}}", "{{s_data.status}}");
+            f("{{s_enddate}}", "{{s_data.id}}");
             setTimeout(run, 240000);
         }, 240000);
 
         setTimeout(function run() {
-            f("{{g_enddate}}", "{{g_data.id}}", "{{g_data.status}}");
+            f("{{g_enddate}}", "{{g_data.id}}");
             setTimeout(run, 600000);
         }, 600000);
 
         setTimeout(function run() {
-            f("{{p_enddate}}", "{{p_data.id}}", "{{p_data.status}}");
+            f("{{p_enddate}}", "{{p_data.id}}");
             setTimeout(run, 900000);
         }, 900000);
     </script>
