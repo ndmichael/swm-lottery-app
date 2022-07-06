@@ -180,34 +180,18 @@ def bonus(request):
 
 def result(request):
 
-    bronze_result = (
-        WinningPick.objects.filter(
-            drawing_id__type="bronze", drawing_id__winning_set=True
-        )
-        .order_by("-date")
-        .last()
-    )
-    silver_result = (
-        WinningPick.objects.filter(
-            drawing_id__type="silver", drawing_id__winning_set=True
-        )
-        .order_by("-date")
-        .last()
-    )
-    gold_result = (
-        WinningPick.objects.filter(
-            drawing_id__type="gold", drawing_id__winning_set=True
-        )
-        .order_by("-date")
-        .last()
-    )
-    platinum_result = (
-        WinningPick.objects.filter(
-            drawing_id__type="platinum", drawing_id__winning_set=True
-        )
-        .order_by("-date")
-        .last()
-    )
+    bronze_result = WinningPick.objects.filter(
+        drawing_id__type="bronze", drawing_id__winning_set=True
+    ).last()
+    silver_result = WinningPick.objects.filter(
+        drawing_id__type="silver", drawing_id__winning_set=True
+    ).last()
+    gold_result = WinningPick.objects.filter(
+        drawing_id__type="gold", drawing_id__winning_set=True
+    ).last()
+    platinum_result = WinningPick.objects.filter(
+        drawing_id__type="platinum", drawing_id__winning_set=True
+    ).last()
     context = {
         "bronze_result": bronze_result,
         "silver_result": silver_result,
@@ -237,19 +221,19 @@ def result_details(request, type):
     if type == "bronze":
         results = WinningPick.objects.filter(
             drawing_id__type=type, drawing_id__winning_set=True
-        )
+        ).order_by("-date")
     elif type == "silver":
         results = WinningPick.objects.filter(
             drawing_id__type=type, drawing_id__winning_set=True
-        )
+        ).order_by("-date")
     elif type == "gold":
         results = WinningPick.objects.filter(
             drawing_id__type=type, drawing_id__winning_set=True
-        )
+        ).order_by("-date")
     elif type == "platinum":
         results = WinningPick.objects.filter(
             drawing_id__type=type, drawing_id__winning_set=True
-        )
+        ).order_by("-date")
     result_type = type
     context = {"results": results, "title": "swm-results", "result_type": result_type}
     return render(request, "lottery/result_details.html", context)
