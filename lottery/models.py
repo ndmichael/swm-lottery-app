@@ -75,15 +75,13 @@ class Drawing(models.Model):
     @property
     def enddate(self):
         if self.type == "bronze":
-            return self.created + datetime.timedelta(hours=1)
+            return self.created + datetime.timedelta(hours=1, minutes=0)
         elif self.type == "silver":
-            return self.created + datetime.timedelta(hours=24)
+            return self.created + datetime.timedelta(hours=24, minutes=0)
         elif self.type == "gold":
-            return self.created + datetime.timedelta(hours=72)
+            return self.created + datetime.timedelta(hours=72, minutes=0)
         elif self.type == "platinum":
-            return self.created + datetime.timedelta(hours=168)
-        else:
-            return self.created
+            return self.created + datetime.timedelta(hours=168, minutes=0)
 
     def __str__(self):
         return f"{self.type}"
