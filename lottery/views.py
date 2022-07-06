@@ -180,18 +180,34 @@ def bonus(request):
 
 def result(request):
 
-    bronze_result = WinningPick.objects.filter(
-        drawing_id__type="bronze", drawing_id__winning_set=True
-    ).last()
-    silver_result = WinningPick.objects.filter(
-        drawing_id__type="silver", drawing_id__winning_set=True
-    ).last()
-    gold_result = WinningPick.objects.filter(
-        drawing_id__type="gold", drawing_id__winning_set=True
-    ).last()
-    platinum_result = WinningPick.objects.filter(
-        drawing_id__type="platinum", drawing_id__winning_set=True
-    ).last()
+    bronze_result = (
+        WinningPick.objects.filter(
+            drawing_id__type="bronze", drawing_id__winning_set=True
+        )
+        .order_by("-date")
+        .last()
+    )
+    silver_result = (
+        WinningPick.objects.filter(
+            drawing_id__type="silver", drawing_id__winning_set=True
+        )
+        .order_by("-date")
+        .last()
+    )
+    gold_result = (
+        WinningPick.objects.filter(
+            drawing_id__type="gold", drawing_id__winning_set=True
+        )
+        .order_by("-date")
+        .last()
+    )
+    platinum_result = (
+        WinningPick.objects.filter(
+            drawing_id__type="platinum", drawing_id__winning_set=True
+        )
+        .order_by("-date")
+        .last()
+    )
     context = {
         "bronze_result": bronze_result,
         "silver_result": silver_result,
@@ -206,11 +222,9 @@ def reset_draw(request):
     if request.POST.get("action") == "post":
         drawid = int(request.POST.get("draw_id"))
         draw = get_object_or_404(Drawing, id=drawid)
-
-        while True:
-            if draw.status:
-                draw.status = False
-                break
+        while draw.status:
+            draw.status = False
+            break
         draw.save()
 
         new_draw = Drawing.objects.create(type=draw.type, status=True)
