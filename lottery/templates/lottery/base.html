@@ -245,28 +245,6 @@
 
 
     <script>
-        $(document).ready(function() {
-            setTimeout(function run() {
-                f("{{b_enddate}}", "{{b_data.id}}");
-                setTimeout(run, 60000);
-            }, 60000); // 1min
-
-            setTimeout(function run1() {
-                f("{{s_enddate}}", "{{s_data.id}}");
-                setTimeout(run1, 240000);
-            }, 240000); // 4min
-
-            setTimeout(function run2() {
-                f("{{g_enddate}}", "{{g_data.id}}");
-                setTimeout(run2, 420000);
-            }, 420000); // 7min
-
-            setTimeout(function run3() {
-                f("{{p_enddate}}", "{{p_data.id}}");
-                setTimeout(run3, 600000);
-            }, 600000); // 10min
-        })
-
         var f = function(trig, trig_id) {
             var diff = new Date(trig)
             var curr_date = new Date()
@@ -275,25 +253,42 @@
                 $.ajax({
                     url: "{% url 'reset_draw' %}",
                     type: 'POST',
-                    cache: false,
                     data: {
                         'draw_id': trig_id,
                         'csrfmiddlewaretoken': "{{ csrf_token }}",
                         'action': 'post'
                     },
                     success: function(response) {
-                        // console.log(response)
                         location.reload()
                     },
                     error: function(rs, e) {
                         $.ajax(this);
-                    },
-                    timeout: 0
+                    }
                 });
             } else {
-                // console.log("not yet time") 
+                console.log("not yet time")
             }
         };
+
+        setTimeout(function run() {
+            f("{{b_data.enddate.isoformat}}", "{{b_data.id}}");
+            setTimeout(run, 60000);
+        }, 60000); // 1min
+
+        setTimeout(function run() {
+            f("{{s_data.enddate.isoformat}}", "{{s_data.id}}");
+            setTimeout(run, 240000);
+        }, 240000); // 4min
+
+        setTimeout(function run() {
+            f("{{g_data.enddate.isoformat}}", "{{g_data.id}}");
+            setTimeout(run, 420000);
+        }, 420000); // 7min
+
+        setTimeout(function run3() {
+            f("{{p_data.enddate.isoformat}}", "{{p_data.id}}");
+            setTimeout(run3, 600000);
+        }, 600000); // 10min
     </script>
 
 

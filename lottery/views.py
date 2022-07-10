@@ -18,32 +18,8 @@ def index(request):
     silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
     gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
     platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-    b_enddate = (
-        bronze_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-        if bronze_data
-        else datetime.datetime.now()
-    )
-    s_enddate = (
-        silver_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-        if silver_data
-        else datetime.datetime.now()
-    )
-    g_enddate = (
-        gold_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-        if gold_data
-        else datetime.datetime.now()
-    )
-    p_enddate = (
-        platinum_data.enddate.strftime("%Y-%m-%dT%H:%M:%S")
-        if platinum_data
-        else datetime.datetime.now()
-    )
 
     context = {
-        "b_enddate": b_enddate,
-        "s_enddate": s_enddate,
-        "g_enddate": g_enddate,
-        "p_enddate": p_enddate,
         "b_data": bronze_data,
         "s_data": silver_data,
         "g_data": gold_data,
@@ -203,12 +179,10 @@ def result(request):
 
 
 def reset_draw(request):
-    if request.POST.get("action") == "post":
+    if request.POST.get("action") == "post" and request.POST.get("draw_id") != "":
         drawid = int(request.POST.get("draw_id"))
         draw = get_object_or_404(Drawing, id=drawid)
-        while draw.status:
-            draw.status = False
-            break
+        draw.status = False
         draw.save()
 
         new_draw = Drawing.objects.create(type=draw.type, status=True)
