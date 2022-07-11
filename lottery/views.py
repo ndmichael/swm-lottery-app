@@ -40,16 +40,7 @@ def index(request):
 
 
 def games(request):
-    bronze_data = Drawing.objects.filter(status=True).filter(type="bronze").first()
-    silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
-    gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
-    platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
-    context = {
-        "b_data": bronze_data,
-        "s_data": silver_data,
-        "g_data": gold_data,
-        "p_data": platinum_data,
-    }
+    context = {"title": "swm-all games"}
     return render(request, "lottery/games.html", context)
 
 

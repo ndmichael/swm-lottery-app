@@ -3,7 +3,7 @@
     <div class="container">
         <section class="row py-3 px-2 ms-5 ">
             <article class="col-12 col-sm-8 mx-auto d-sm-flex">
-                {% if draw.type == 'platinum' %}
+                {% if draw_type == 'platinum' %}
                 <img src=" {% static 'lottery/images/platinum.png' %} " class="img-fluid" alt=" " style="height: 120px; width:120px; transform: translateX(-70px);">
                 <div class=" align-self-center">
                     <h1>SWM PLATINUM LOTTERY</h1>
@@ -12,7 +12,7 @@
                     </h2>
                     <p class=" text-muted ">Draw every Week</p>
                 </div>
-                {% elif draw.type == 'gold' %}
+                {% elif draw_type == 'gold' %}
                 <img src=" {% static 'lottery/images/gold.png' %} " class="img-fluid" alt=" " style="height: 120px; width:120px; transform: translateX(-70px);">
                 <div class=" align-self-center">
                     <h1>SWM GOLD LOTTERY</h1>
@@ -21,7 +21,7 @@
                     </h2>
                     <p class=" text-muted ">Draw every 3 days</p>
                 </div>
-                {% elif draw.type == 'bronze' %}
+                {% elif draw_type == 'bronze' %}
                 <img src=" {% static 'lottery/images/bronze.png' %} " class="img-fluid" alt=" " style="height: 120px; width:120px; transform: translateX(-70px);">
                 <div class=" align-self-center">
                     <h1>SWM BRONZE LOTTERY</h1>
@@ -30,7 +30,7 @@
                     </h2>
                     <p class=" text-muted ">Draw every 1 Hour</p>
                 </div>
-                {% elif draw.type == 'silver' %}
+                {% elif draw_type == 'silver' %}
                 <img src=" {% static 'lottery/images/silver.png' %} " class="img-fluid" alt=" " style="height: 120px; width:120px; transform: translateX(-70px);">
                 <div class=" align-self-center">
                     <h1>SWM SILVER LOTTERY</h1>

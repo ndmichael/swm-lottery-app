@@ -20,10 +20,8 @@
                         <tr>
                             <td>
                                 {% if detail.drawing_id.winning_set %}
-                                    <span class="text-success">{{detail.ticket_code}}</span>
-                                {% else %}
-                                    <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a> 
-                                {% endif %}
+                                <span class="text-success">{{detail.ticket_code}}</span> {% else %}
+                                <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a> {% endif %}
                             </td>
                             <td class="" style="font-weight: 800 !important;">
                                 {% for number in detail.ticket_pick.ball_numbers.all %}
@@ -31,7 +29,7 @@
                                 <span class="special text-center">{{detail.ticket_pick.special_number}}</span>
                             </td>
                             <td>{{detail.user_id.username}}</td>
-                            <td>{{detail.drawing_id.created}}</td>
+                            <td>{{detail.date}}</td>
                         </tr>
                         {% empty %}
                         <tr>

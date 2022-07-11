@@ -22,14 +22,22 @@
                     <tbody>
                         {% for result in results %}
                         <tr>
-                            <td>{{result.drawing_id.type}}</td>
+                            <td>{{result.ticket.draw_type}}</td>
                             <td>
                                 {% for number in result.correct_number.all %}
                                 <span class="regular text-center">{{number}}</span> {% endfor %}
                                 <span class="special text-center">{{result.special_number}}</span>
                             </td>
                             <td>
-                                {{ result.drawing_id.created }}
+                                {% if result.ticket.draw_type == 'bronze' %}
+                                    {{ result.ticket.bronze.startdate }}
+                                {% elif result.ticket.draw_type == 'silver' %}
+                                    {{ result.ticket.silver.startdate }}
+                                {% elif result.ticket.draw_type == 'gold' %}
+                                    {{ result.ticket.gold.startdate }}
+                                {% elif result.ticket.draw_type == 'platinum' %}
+                                    {{ result.ticket.platinum.startdate }}
+                                {% endif %}
                             </td>
                         </tr>
                         {% empty %}
