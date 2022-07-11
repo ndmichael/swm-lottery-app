@@ -267,15 +267,13 @@
                             $.ajax(this);
                         },
                     });
-                } else {
-                    console.log("Bronze not yet time")
                 }
             };
 
             setTimeout(function run() {
                 f();
-                setTimeout(run, 1000);
-            }, 1000); // 1min
+                setTimeout(run, 60000);
+            }, 60000); // 1min
         });
     </script>
 
@@ -285,7 +283,7 @@
             var f1 = function() {
                 var enddate = new Date("{{s_data.enddate.isoformat}}")
                 var curr_date = new Date()
-                console.log(curr_date, enddate)
+                    // console.log(curr_date, enddate)
                 if (curr_date.toString() >= enddate.toString() && "{{s_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_silver' %}",
@@ -303,8 +301,6 @@
                             $.ajax(this);
                         },
                     });
-                } else {
-                    console.log("silver not yet time")
                 }
             };
 
@@ -321,7 +317,7 @@
             var f2 = function() {
                 var enddate = new Date("{{g_data.enddate.isoformat}}")
                 var curr_date = new Date()
-                console.log(curr_date, enddate)
+                    // console.log(curr_date, enddate)
                 if (curr_date.toString() >= enddate.toString() && "{{g_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_gold' %}",
@@ -339,15 +335,13 @@
                             $.ajax(this);
                         },
                     });
-                } else {
-                    console.log("Gold not yet time")
                 }
             };
 
             setTimeout(function run2() {
                 f2();
-                setTimeout(run2, 240000);
-            }, 240000); // 1min
+                setTimeout(run2, 60000);
+            }, 60000); // 1min
         });
     </script>
 
@@ -358,7 +352,7 @@
             var f3 = function() {
                 var enddate = new Date("{{p_data.enddate.isoformat}}")
                 var curr_date = new Date()
-                console.log(curr_date, enddate)
+                    // console.log(curr_date, enddate)
                 if (curr_date.toString() >= enddate.toString() && "{{p_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_platinum' %}",
@@ -376,20 +370,15 @@
                             $.ajax(this);
                         },
                     });
-                } else {
-                    console.log("platinum not yet time")
                 }
             };
 
             setTimeout(function run3() {
                 f3();
-                setTimeout(run3, 420000);
-            }, 420000); // 7min
+                setTimeout(run3, 60000);
+            }, 60000); // 7min
         });
     </script>
-
-
-
 
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
