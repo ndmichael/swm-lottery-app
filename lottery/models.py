@@ -69,8 +69,11 @@ class Drawing(models.Model):
     )
     type = models.CharField(max_length=20, choices=choices)
 
+    class Meta:
+        ordering = ("-id",)
+
     def __str__(self):
-        return f"{self.type}"
+        return f"{self.type}-{self.id}"
 
 
 class Bronze(models.Model):
