@@ -86,32 +86,33 @@
                             <span class="special text-center">{{ticket.ticket_pick.special_number}}</span>
                         </td>
                         <td>{{ticket.date}}</td>
-                        <td>{{ticket.drawing_id.type}}</td>
-                        {% if ticket.drawing_id.type == 'bronze' %}
+                        <td>{{ticket.draw_type}}</td>
+                        {% if ticket.bronze or ticket.draw_type == 'bronze' %}
                         <td>&#8358;100</td>
-                        {% elif ticket.drawing_id.type == 'silver' %}
+                        {% elif ticket.silver or ticket.draw_type == 'silver' %}
                         <td>&#8358;200</td>
-                        {% elif ticket.drawing_id.type == 'gold' %}
+                        {% elif ticket.gold or ticket.draw_type == 'gold' %}
                         <td>&#8358;350</td>
-                        {% elif ticket.drawing_id.type == 'platinum' %}
+                        {% elif ticket.platinum or ticket.draw_type == 'platinum' %}
                         <td>&#8358;500</td>
                         {% else %}
                         <td>&#8358;0</td>
-                        {% endif %} {% if ticket.drawing_id.type == 'bronze' %}
+                        {% endif %} 
+                        {% if ticket.draw_type == 'bronze' %}
                         <td>&#8358;100,000</td>
-                        {% elif ticket.drawing_id.type == 'silver' %}
+                        {% elif ticket.draw_type == 'silver' %}
                         <td>&#8358;1,000,000</td>
-                        {% elif ticket.drawing_id.type == 'gold' %}
+                        {% elif ticket.draw_type == 'gold' %}
                         <td>&#8358;10,000,000</td>
-                        {% elif ticket.drawing_id.type == 'platinum' %}
+                        {% elif ticket.draw_type == 'platinum' %}
                         <td>&#8358;100,000,000</td>
                         {% else %}
                         <td>&#8358;0</td>
                         {% endif %}
                         <!--checking ticket and winning status -->
-                        {% if not ticket.drawing_id.winning_set %}
+                        {% if not ticket.bronze.winning_set or ticket.silver.winning_set or ticket.gold.winning_set or ticket.platinum.winning_set and not ticket.correct_count %}
                         <td>....</td>
-                        {% elif ticket.winning and ticket.correct_count %}
+                        {% elif ticket.correct_count %}
                         <td>WON</td>
                         {% else %}
                         <td>No winning</td>

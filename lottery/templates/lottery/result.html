@@ -35,7 +35,7 @@
                 <span class="special text-center">{{bronze_result.special_number}}</span>
             </div>
             <div class=" col-3 text-center">
-                <h5><b>{{bronze_result.drawing_id.created}}</b> </h5>
+                <h5><b>{{bronze_result.ticket.bronze.startdate}}</b> </h5>
             </div>
         </div>
         {% else %}
@@ -63,7 +63,7 @@
                 <span class="special text-center">{{silver_result.special_number}}</span>
             </div>
             <div class=" col-3 text-center">
-                <h5><b>{{silver_result.drawing_id.created}}</b></h5>
+                <h5><b>{{silver_result.ticket.silver.startdate}}</b></h5>
             </div>
         </div>
         {% else %}
@@ -90,7 +90,7 @@
                 <span class="special text-center">{{gold_result.special_number}}</span>
             </div>
             <div class=" col-3 text-center">
-                <h5><b>{{gold_result.drawing_id.created}}</b></h5>
+                <h5><b>{{gold_result.ticket.gold.startdate}}</b></h5>
             </div>
         </div>
         {% else %}
@@ -119,7 +119,7 @@
                 <span class="special text-center">{{plat_result.ticket_pick.special_number}}</span>
             </div>
             <div class=" col-3 text-center">
-                <h5><b>{{plat_result.drawing_id.created}}</b></h5>
+                <h5><b>{{plat_result.ticket.platinum.startdate}}</b></h5>
             </div>
         </div>
         {% else %}

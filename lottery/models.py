@@ -68,79 +68,89 @@ class Drawing(models.Model):
         ("platinum", "PLATINUM"),
     )
     type = models.CharField(max_length=20, choices=choices)
+
+    def __str__(self):
+        return f"{self.type}"
+
+
+class Bronze(models.Model):
+    draw = models.ForeignKey(
+        Drawing, on_delete=models.CASCADE, related_name="bronze_draw"
+    )
+    status = models.BooleanField(default=False)
     startdate = models.DateTimeField(default=datetime.now)
     enddate = models.DateTimeField(default=datetime.now)
-    status = models.BooleanField(default=False)
     winning_set = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        if self.type == "bronze":
-            self.enddate = self.startdate + timedelta(hours=1)
-        elif self.type == "silver":
-            self.enddate = self.startdate + timedelta(hours=24)
-        elif self.type == "gold":
-            self.enddate = self.startdate + timedelta(days=3)
-        elif self.type == "platinum":
-            self.enddate = self.startdate + timedelta(days=7)
+        self.enddate = self.startdate + timedelta(minutes=5)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.type}"
+        return f"{self.draw} {self.startdate}"
 
 
-# class Bronze(models.Model):
-#     draw = models.ForeignKey(
-#         Drawing, on_delete=models.CASCADE, related_name="bronze_draw"
-#     )
-#     status = models.BooleanField(default=False)
-#     created = models.DateTimeField(default=datetime.datetime.now)
-#     ended = models.DateTimeField(default=datetime.datetime.now)
-#     winning_set = models.BooleanField(default=False)
+class Silver(models.Model):
+    draw = models.ForeignKey(
+        Drawing, on_delete=models.CASCADE, related_name="silver_draw"
+    )
+    status = models.BooleanField(default=False)
+    startdate = models.DateTimeField(default=datetime.now)
+    enddate = models.DateTimeField(default=datetime.now)
+    winning_set = models.BooleanField(default=False)
 
-#     def __str__(self):
-#         return f"{self.draw} {self.created}"
+    class Meta:
+        ordering = ("-startdate",)
 
+    def save(self, *args, **kwargs):
+        self.enddate = self.startdate + timedelta(minutes=10)
+        super().save(*args, **kwargs)
 
-# class Silver(models.Model):
-#     draw = models.ForeignKey(
-#         Drawing, on_delete=models.CASCADE, related_name="silver_draw"
-#     )
-#     status = models.BooleanField(default=False)
-#     created = models.DateTimeField(default=datetime.datetime.now)
-#     ended = models.DateTimeField(default=datetime.datetime.now)
-#     winning_set = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return f"{self.draw} {self.created}"
+    def __str__(self):
+        return f"{self.draw} {self.startdate}"
 
 
-# class Gold(models.Model):
-#     draw = models.ForeignKey(
-#         Drawing, on_delete=models.CASCADE, related_name="gold_draw"
-#     )
-#     status = models.BooleanField(default=False)
-#     created = models.DateTimeField(default=datetime.datetime.now)
-#     ended = models.DateTimeField(default=datetime.datetime.now)
-#     winning_set = models.BooleanField(default=False)
+class Gold(models.Model):
+    draw = models.ForeignKey(
+        Drawing, on_delete=models.CASCADE, related_name="gold_draw"
+    )
+    status = models.BooleanField(default=False)
+    startdate = models.DateTimeField(default=datetime.now)
+    enddate = models.DateTimeField(default="")
+    winning_set = models.BooleanField(default=False)
 
-#     def __str__(self):
-#         return f"{self.draw} {self.created}"
+    class Meta:
+        ordering = ("-startdate",)
+
+    def save(self, *args, **kwargs):
+        self.enddate = self.startdate + timedelta(minutes=20)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.draw} {self.startdate}"
 
 
-# class Platinum(models.Model):
-#     draw = models.ForeignKey(
-#         Drawing, on_delete=models.CASCADE, related_name="platinum_draw"
-#     )
-#     status = models.BooleanField(default=False)
-#     created = models.DateTimeField(default=datetime.datetime.now)
-#     ended = models.DateTimeField(default=datetime.datetime.now)
-#     winning_set = models.BooleanField(default=False)
+class Platinum(models.Model):
+    draw = models.ForeignKey(
+        Drawing, on_delete=models.CASCADE, related_name="platinum_draw"
+    )
+    status = models.BooleanField(default=False)
+    startdate = models.DateTimeField(default=datetime.now)
+    enddate = models.DateTimeField(default=datetime.now)
+    winning_set = models.BooleanField(default=False)
 
-#     def __str__(self):
-#         return f"{self.draw} {self.created}"
+    class Meta:
+        ordering = ("-startdate",)
+
+    def save(self, *args, **kwargs):
+        self.enddate = self.startdate + timedelta(minutes=30)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.draw} {self.startdate}"
 
 
 class BallNumbers(models.Model):
@@ -150,32 +160,37 @@ class BallNumbers(models.Model):
         return f"{self.ball}"
 
 
-class WinningPick(models.Model):
-    drawing_id = models.ForeignKey(
-        Drawing, on_delete=models.CASCADE, related_name="winning_draw"
-    )
-    correct_number = models.ManyToManyField(BallNumbers)
-    special_number = models.CharField(max_length=10, default="")
-    date = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return f"{self.id}"
-
-
 class Ticket(models.Model):
-    drawing_id = models.ForeignKey(
-        Drawing, on_delete=models.CASCADE, related_name="draw_ticket"
+    bronze = models.ForeignKey(
+        Bronze,
+        on_delete=models.CASCADE,
+        related_name="bronze_ticket",
+        null=True,
+        blank=True,
+    )
+    silver = models.ForeignKey(
+        Silver,
+        on_delete=models.CASCADE,
+        related_name="silver_ticket",
+        null=True,
+        blank=True,
+    )
+    gold = models.ForeignKey(
+        Gold,
+        on_delete=models.CASCADE,
+        related_name="gold_ticket",
+        null=True,
+        blank=True,
+    )
+    platinum = models.ForeignKey(
+        Platinum,
+        on_delete=models.CASCADE,
+        related_name="platinum_ticket",
+        null=True,
+        blank=True,
     )
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_ticket"
-    )
-    winning = models.OneToOneField(
-        WinningPick,
-        on_delete=models.CASCADE,
-        related_name="winning_ticket",
-        null=True,
-        blank=True,
-        default="",
     )
     status = models.BooleanField(default=False)
     draw_type = models.CharField(max_length=50, default="bronze")
@@ -192,6 +207,22 @@ class Ticket(models.Model):
             if not objects_with_similar_ticket_code:
                 self.ticket_code = ticket_code
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.id}"
+
+
+class WinningPick(models.Model):
+    ticket = models.ForeignKey(
+        Ticket,
+        on_delete=models.CASCADE,
+        related_name="winning_ticket",
+        null=True,
+        blank=True,
+    )
+    correct_number = models.ManyToManyField(BallNumbers)
+    special_number = models.CharField(max_length=10, default="")
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.id}"

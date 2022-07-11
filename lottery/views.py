@@ -36,7 +36,6 @@ def index(request):
         "g_data": gold_data,
         "p_data": platinum_data,
     }
-    print("plat: ", bronze_data.enddate)
     return render(request, "lottery/index.html", context)
 
 
@@ -171,15 +170,15 @@ def bonus(request):
 
 def result(request):
 
-    bronze_result = WinningPick.objects.filter(drawing_id__type="bronze").last()
+    bronze_result = WinningPick.objects.filter(ticket__draw_type="bronze").last()
     silver_result = WinningPick.objects.filter(
-        drawing_id__type="silver",
+        ticket__draw_type="silver",
     ).last()
     gold_result = WinningPick.objects.filter(
-        drawing_id__type="gold",
+        ticket__draw_type="gold",
     ).last()
     platinum_result = WinningPick.objects.filter(
-        drawing_id__type="platinum",
+        ticket__draw_type="platinum",
     ).last()
     context = {
         "bronze_result": bronze_result,
@@ -249,21 +248,13 @@ def reset_platinum(request):
 
 def result_details(request, type):
     if type == "bronze":
-        results = WinningPick.objects.filter(
-            drawing_id__type=type, drawing_id__winning_set=True
-        ).order_by("-date")
+        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
     elif type == "silver":
-        results = WinningPick.objects.filter(
-            drawing_id__type=type, drawing_id__winning_set=True
-        ).order_by("-date")
+        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
     elif type == "gold":
-        results = WinningPick.objects.filter(
-            drawing_id__type=type, drawing_id__winning_set=True
-        ).order_by("-date")
+        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
     elif type == "platinum":
-        results = WinningPick.objects.filter(
-            drawing_id__type=type, drawing_id__winning_set=True
-        ).order_by("-date")
+        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
     result_type = type
     context = {"results": results, "title": "swm-results", "result_type": result_type}
     return render(request, "lottery/result_details.html", context)
