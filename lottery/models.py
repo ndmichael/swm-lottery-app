@@ -86,7 +86,7 @@ class Bronze(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(minutes=5)
+        self.enddate = self.startdate + timedelta(hours=1)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -106,7 +106,7 @@ class Silver(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(minutes=10)
+        self.enddate = self.startdate + timedelta(days=1)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -126,7 +126,7 @@ class Gold(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(minutes=20)
+        self.enddate = self.startdate + timedelta(days=3)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -146,7 +146,7 @@ class Platinum(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(minutes=30)
+        self.enddate = self.startdate + timedelta(days=7)
         super().save(*args, **kwargs)
 
     def __str__(self):
