@@ -1,6 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PickForm, ContactForm
-from .models import Drawing, Ticket, Pick, BallNumbers, WinningPick
+from .models import (
+    Drawing,
+    Ticket,
+    Pick,
+    BallNumbers,
+    WinningPick,
+    Bronze,
+    Silver,
+    Gold,
+    Platinum,
+)
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -14,10 +24,11 @@ import datetime
 
 
 def index(request):
-    bronze_data = Drawing.objects.filter(type="bronze", status=True).first()
-    silver_data = Drawing.objects.filter(status=True).filter(type="silver").first()
-    gold_data = Drawing.objects.filter(status=True).filter(type="gold").first()
-    platinum_data = Drawing.objects.filter(status=True).filter(type="platinum").first()
+    # bronze_data = Drawing.objects.filter(type="bronze", status=True).first()
+    bronze_data = Bronze.objects.filter(status=True).first()
+    silver_data = Silver.objects.filter(status=True).first()
+    gold_data = Gold.objects.filter(status=True).first()
+    platinum_data = Platinum.objects.filter(status=True).first()
 
     context = {
         "b_data": bronze_data,
@@ -25,6 +36,7 @@ def index(request):
         "g_data": gold_data,
         "p_data": platinum_data,
     }
+    print("plat: ", bronze_data.enddate)
     return render(request, "lottery/index.html", context)
 
 
@@ -69,15 +81,15 @@ def contact(request):
 
 @login_required
 def draw(request, type, id):
-    draw = get_object_or_404(Drawing, id=id)
     user = get_object_or_404(User, id=request.user.id)
     if request.method == "POST":
         ball_numbers = request.POST.getlist("ball_numbers")
         special_number = request.POST.get("special_number")
         print(ball_numbers)
-        if draw.type == "bronze" and user.profile.balance >= 100:
+        if type == "bronze" and user.profile.balance >= 100:
+            bronze = get_object_or_404(Bronze, id=id)
             ticket = Ticket.objects.create(
-                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+                user_id=user, status=True, draw_type=type, bronze=bronze
             )
             picks = Pick(
                 user_id=user,
@@ -90,9 +102,10 @@ def draw(request, type, id):
                 picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 100
             user.profile.save()
-        elif draw.type == "silver" and user.profile.balance >= 200:
+        elif type == "silver" and user.profile.balance >= 200:
+            silver = get_object_or_404(Silver, id=id)
             ticket = Ticket.objects.create(
-                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+                user_id=user, status=True, draw_type=type, silver=silver
             )
             picks = Pick(
                 user_id=user,
@@ -105,9 +118,10 @@ def draw(request, type, id):
                 picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 200
             user.profile.save()
-        elif draw.type == "gold" and user.profile.balance >= 350:
+        elif type == "gold" and user.profile.balance >= 350:
+            gold = get_object_or_404(Gold, id=id)
             ticket = Ticket.objects.create(
-                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+                user_id=user, status=True, draw_type=type, gold=gold
             )
             picks = Pick(
                 user_id=user,
@@ -120,9 +134,10 @@ def draw(request, type, id):
                 picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 350
             user.profile.save()
-        elif draw.type == "platinum" and user.profile.balance >= 500:
+        elif type == "platinum" and user.profile.balance >= 500:
+            platinum = get_object_or_404(Platinum, id=id)
             ticket = Ticket.objects.create(
-                user_id=user, status=True, draw_type=draw.type, drawing_id=draw
+                user_id=user, status=True, draw_type=type, platinum=platinum
             )
             picks = Pick(
                 user_id=user,
@@ -140,9 +155,9 @@ def draw(request, type, id):
             return redirect("initiate-payment")
         messages.success(request, f"{ticket.ticket_code} has been confirmed for game.")
         return redirect("profile", request.user)
-
+    draw_type = type
     form = PickForm()
-    context = {"form": form, "draw": draw}
+    context = {"form": form, "draw_type": draw_type}
     return render(request, "lottery/draw.html", context)
 
 
@@ -156,17 +171,15 @@ def bonus(request):
 
 def result(request):
 
-    bronze_result = WinningPick.objects.filter(
-        drawing_id__type="bronze", drawing_id__winning_set=True
-    ).last()
+    bronze_result = WinningPick.objects.filter(drawing_id__type="bronze").last()
     silver_result = WinningPick.objects.filter(
-        drawing_id__type="silver", drawing_id__winning_set=True
+        drawing_id__type="silver",
     ).last()
     gold_result = WinningPick.objects.filter(
-        drawing_id__type="gold", drawing_id__winning_set=True
+        drawing_id__type="gold",
     ).last()
     platinum_result = WinningPick.objects.filter(
-        drawing_id__type="platinum", drawing_id__winning_set=True
+        drawing_id__type="platinum",
     ).last()
     context = {
         "bronze_result": bronze_result,
@@ -178,15 +191,58 @@ def result(request):
     return render(request, "lottery/result.html", context)
 
 
-def reset_draw(request):
-    if request.POST.get("action") == "post" and request.POST.get("draw_id") != "":
-        drawid = int(request.POST.get("draw_id"))
-        draw = get_object_or_404(Drawing, id=drawid)
-        draw.status = False
-        draw.save()
+def reset_bronze(request):
+    id = request.POST.get("draw_id")
+    draw = Drawing.objects.filter(type="bronze").first()
+    if request.POST.get("action") == "post" and id != "":
+        bronze = get_object_or_404(Bronze, id=id)
+        bronze.status = False
+        bronze.save()  # set it to false then save.
+        print(bronze.status)
+        Bronze.objects.create(draw=draw, status=True)
+        return JsonResponse({"result": "Bronze updated successful"})
 
-        new_draw = Drawing.objects.create(type=draw.type, status=True)
-        return JsonResponse({"result": new_draw.enddate})
+    return HttpResponse("Error access denied")
+
+
+def reset_silver(request):
+    id = request.POST.get("draw_id")
+    draw = Drawing.objects.filter(type="silver").first()
+    if request.POST.get("action") == "post" and id != "":
+        silver = get_object_or_404(Silver, id=id)
+        silver.status = False
+        silver.save()  # set it to false then save.
+        print(silver.status)
+        Silver.objects.create(draw=draw, status=True)
+        return JsonResponse({"result": "Silver updated successful"})
+
+    return HttpResponse("Error access denied")
+
+
+def reset_gold(request):
+    id = request.POST.get("draw_id")
+    draw = Drawing.objects.filter(type="gold").first()
+    if request.POST.get("action") == "post" and id != "":
+        gold = get_object_or_404(Gold, id=id)
+        gold.status = False
+        gold.save()  # set it to false then save.
+        print(gold.status)
+        Gold.objects.create(draw=draw, status=True)
+        return JsonResponse({"result": "gold updated successful"})
+
+    return HttpResponse("Error access denied")
+
+
+def reset_platinum(request):
+    id = request.POST.get("draw_id")
+    draw = Drawing.objects.filter(type="platinum").first()
+    if request.POST.get("action") == "post" and id != "":
+        platinum = get_object_or_404(Platinum, id=id)
+        platinum.status = False
+        platinum.save()  # set it to false then save.
+        print(platinum.status)
+        Platinum.objects.create(draw=draw, status=True)
+        return JsonResponse({"result": "platinum updated successful"})
 
     return HttpResponse("Error access denied")
 
