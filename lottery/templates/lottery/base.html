@@ -266,14 +266,15 @@
                         error: function(rs, e) {
                             $.ajax(this);
                         },
+                        cache: false,
                     });
                 }
             };
 
             setTimeout(function run() {
                 f();
-                setTimeout(run, 60000);
-            }, 60000); // 1min
+                setTimeout(run, 1000);
+            }, 1000); // 1sec
         });
     </script>
 
@@ -300,6 +301,7 @@
                         error: function(rs, e) {
                             $.ajax(this);
                         },
+                        cache: false,
                     });
                 }
             };
@@ -334,6 +336,7 @@
                         error: function(rs, e) {
                             $.ajax(this);
                         },
+                        cache: false,
                     });
                 }
             };
@@ -369,6 +372,7 @@
                         error: function(rs, e) {
                             $.ajax(this);
                         },
+                        cache: false,
                     });
                 }
             };
