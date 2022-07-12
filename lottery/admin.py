@@ -10,7 +10,7 @@ from .models import (
     Gold,
     Platinum,
     Jackpot,
-    Mega,
+    Megawin,
 )
 
 # Register your models here.
@@ -22,7 +22,7 @@ admin.site.register(Silver)
 admin.site.register(Gold)
 admin.site.register(Platinum)
 admin.site.register(Jackpot)
-admin.site.register(Mega)
+admin.site.register(Megawin)
 
 admin.site.register(Ticket)
 admin.site.register(Pick)
