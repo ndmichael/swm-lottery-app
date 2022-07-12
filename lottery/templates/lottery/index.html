@@ -34,17 +34,34 @@
 
 <section class="pb-5">
     <div class="container ">
-        <section class="row border py-3 px-2 ms-5 ">
+        <section class="row border border-success py-3 px-2 ms-5 ">
             <article class="col-12 col-sm-3">
-                <img src=" {% static 'lottery/images/platinum.png' %} " class="img-fluid game_image" alt=" ">
+                <img src=" {% static 'lottery/images/jackpot.png' %} " class="img-fluid game_image" alt=" ">
             </article>
             <article class="col-12 col-sm-6 align-self-center">
-                <h1>SWM PLATINUM LOTTERY</h1>
-                <p class=" text-muted ">Draw every week</p>
+                <h1>SWM JACKPOT</h1>
+                <p class=" text-muted ">Draw every 3 hours</p>
             </article>
             <article class="col-12 col-sm-3 align-self-center">
                 <div class="pt-3 ">
-                    <a href="{% url 'pick' p_data.draw.type p_data.id %}" class=" btn btn-lg btn-success rounded-9">
+                    <a href="{% url 'pick' j_data.draw.type j_data.id %}" class=" btn btn-lg btn-success rounded-9">
+                        Play Now
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <section class="row border border-success py-3 px-2 ms-5  mt-4">
+            <article class="col-12 col-sm-3">
+                <img src=" {% static 'lottery/images/megawin.png' %} " class="img-fluid game_image" alt=" ">
+            </article>
+            <article class="col-12 col-sm-6 align-self-center">
+                <h1>SWM MEGAWIN</h1>
+                <p class=" text-muted ">Draw every 6 hours</p>
+            </article>
+            <article class="col-12 col-sm-3 align-self-center">
+                <div class="pt-3 ">
+                    <a href="{% url 'pick' mega_data.draw.type mega_data.id %}" class=" btn btn-lg btn-success rounded-9">
                         Play Now
                     </a>
                 </div>
@@ -147,6 +164,53 @@
                     </div>
                 </div>
             </article>
+
+            <article class="col-12 col-sm-6 pb-4">
+                <div class="d-flex bg-light p-2 p-sm-3 justify-content-around shadow-sm">
+                    <div>
+                        <img src=" {% static 'lottery/images/jackpot.png' %} " class="img-fluid ball_image" alt=" ">
+                    </div>
+                    <div class=" align-self-center">
+                        <span>SWM Jackpot</span>
+                        <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>15,000,000
+                        </h1>
+                        {% if p_data %}
+                        <p>
+                            {% include "lottery/platinum_timer.html" %}
+                        </p>
+                        {% endif %}
+                        <div class="pt-3">
+                            <a href="{% url 'pick' j_data.draw.type j_data.id %}" class=" btn btn-success rounded-9">
+                                Play Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-12 col-sm-6 pb-4">
+                <div class="d-flex bg-light p-2 p-sm-3 justify-content-around shadow-sm">
+                    <div>
+                        <img src=" {% static 'lottery/images/megawin.png' %} " class="img-fluid ball_image" alt=" ">
+                    </div>
+                    <div class=" align-self-center">
+                        <span>SWM Megawin</span>
+                        <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>30,000,000
+                        </h1>
+                        {% if p_data %}
+                        <p>
+                            {% include "lottery/platinum_timer.html" %}
+                        </p>
+                        {% endif %}
+                        <div class="pt-3">
+                            <a href="{% url 'pick' mega_data.draw.type mega_data.id %}" class=" btn btn-success rounded-9">
+                                Play Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
         </section>
     </div>
 </section>
