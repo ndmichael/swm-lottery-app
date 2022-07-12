@@ -117,15 +117,26 @@
                         <td>&#8358;0</td>
                         {% endif %}
                         <!--checking ticket and winning status -->
-                        {% if not ticket.bronze.winning_set or ticket.jackpot.winning_set or ticket.megawin.winning_set and not ticket.correct_count %}
-                        <td>{{ticket.jackpot.winning_set}}</td>
+                        {% if ticket.draw_type == 'jackpot' and not ticket.jackpot.winning_set %}
+                        <td>...</td>
+                        {% elif ticket.draw_type == 'megawin' and not ticket.megawin.winning_set %}
+                        <td>...</td>
+                        {% elif ticket.draw_type == 'platinum' and not ticket.platinum.winning_set %}
+                        <td>...</td> 
+                        {% elif ticket.draw_type == 'gold' and not ticket.gold.winning_set %}
+                        <td>...</td>
+                        {% elif ticket.draw_type == 'silver' and not ticket.silver.winning_set %}
+                        <td>...</td>
+                        {% elif ticket.draw_type == 'bronze' and not ticket.bronze.winning_set %}
+                        <td>...</td>
                         {% elif ticket.correct_count %}
-                        <td>WON</td>
+                            <td>WON</td>
                         {% else %}
-                        <td>No winning</td>
+                            <td>No Winning</td>
                         {% endif %}
                     </tr>
-                    {% endfor %} {% else %}
+                    {% endfor %} 
+                    {% else %}
                     <h1>Ticket not available yet</h1>
                     {% endif %}
 
