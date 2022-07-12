@@ -21,6 +21,7 @@ from django.template import loader
 import json
 from django.core.mail import send_mail
 import datetime
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -317,17 +318,41 @@ def reset_megawin(request):
 
 def result_details(request, type):
     if type == "bronze":
-        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+        p = Paginator(
+            WinningPick.objects.filter(ticket__draw_type=type).order_by("-date"), 20
+        )
+        page = request.GET.get("page")
+        results = p.get_page(page)
     elif type == "silver":
-        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+        p = Paginator(
+            WinningPick.objects.filter(ticket__draw_type=type).order_by("-date"), 20
+        )
+        page = request.GET.get("page")
+        results = p.get_page(page)
     elif type == "gold":
-        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+        p = Paginator(
+            WinningPick.objects.filter(ticket__draw_type=type).order_by("-date"), 20
+        )
+        page = request.GET.get("page")
+        results = p.get_page(page)
     elif type == "platinum":
-        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+        p = Paginator(
+            WinningPick.objects.filter(ticket__draw_type=type).order_by("-date"), 20
+        )
+        page = request.GET.get("page")
+        results = p.get_page(page)
     elif type == "jackpot":
-        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+        p = Paginator(
+            WinningPick.objects.filter(ticket__draw_type=type).order_by("-date"), 20
+        )
+        page = request.GET.get("page")
+        results = p.get_page(page)
     elif type == "megawin":
-        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+        p = Paginator(
+            WinningPick.objects.filter(ticket__draw_type=type).order_by("-date"), 20
+        )
+        page = request.GET.get("page")
+        results = p.get_page(page)
     result_type = type
     context = {"results": results, "title": "swm-results", "result_type": result_type}
     return render(request, "lottery/result_details.html", context)
