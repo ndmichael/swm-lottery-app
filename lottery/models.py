@@ -234,6 +234,20 @@ class Ticket(models.Model):
         null=True,
         blank=True,
     )
+    jackpot = models.ForeignKey(
+        Jackpot,
+        on_delete=models.CASCADE,
+        related_name="jackpot_ticket",
+        null=True,
+        blank=True,
+    )
+    megawin = models.ForeignKey(
+        Megawin,
+        on_delete=models.CASCADE,
+        related_name="megawin_ticket",
+        null=True,
+        blank=True,
+    )
     user_id = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_ticket"
     )
