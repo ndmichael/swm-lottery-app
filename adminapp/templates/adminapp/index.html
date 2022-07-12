@@ -2,10 +2,22 @@
 <section class=" bg-light" style="min-height:75vh; padding-top: 10vh; ">
     <div class="container">
         <section class="row">
-            <article class="col-6 col-md-4 offset-md-2 pb-4">
+            <article class="col-6 col-md-4 pb-4">
                 <a href="{% url 'admin_games' 'bronze' %}" class=" bg-white shadow text-center p-4 d-block">
                     <img src=" {% static 'lottery/images/bronze.png' %} " class="img-fluid" alt=" " style="height: 80px;">
                     <h3 class="pt-3 text-dark">Bronze Game</h3>
+                </a>
+            </article>
+            <article class="col-6 col-md-4 pb-4">
+                <a href="{% url 'admin_games' 'jackpot' %}" class=" bg-white shadow text-center p-4 d-block">
+                    <img src=" {% static 'lottery/images/jackpot.png' %} " class="img-fluid" alt=" " style="height: 80px;">
+                    <h3 class="pt-3 text-dark">jackpot Game</h3>
+                </a>
+            </article>
+            <article class="col-6 col-md-4 pb-4">
+                <a href="{% url 'admin_games' 'megawin' %}" class=" bg-white shadow text-center p-4 d-block">
+                    <img src=" {% static 'lottery/images/megawin.png' %} " class="img-fluid" alt=" " style="height: 80px;">
+                    <h3 class="pt-3 text-dark">Megawin Game</h3>
                 </a>
             </article>
             <article class="col-6 col-md-4 pb-4">
@@ -14,7 +26,7 @@
                     <h3 class="pt-3 text-dark">Silver Game</h3>
                 </a>
             </article>
-            <article class="col-6 col-md-4 offset-md-2  pb-4">
+            <article class="col-6 col-md-4 pb-4">
                 <a href="{% url 'admin_games' 'gold' %}" class=" bg-white shadow text-center p-4 d-block">
                     <img src=" {% static 'lottery/images/gold.png' %} " class="img-fluid" alt=" " style="height: 80px;">
                     <h3 class="pt-3 text-dark">Gold Game</h3>

@@ -19,7 +19,7 @@
                         {% for detail in details %}
                         <tr>
                             <td>
-                                {% if detail.drawing_id.winning_set %}
+                                {% if detail.bronze.winning_set or detail.silver.winning_set or detail.gold.winning_set %}
                                 <span class="text-success">{{detail.ticket_code}}</span> {% else %}
                                 <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a> {% endif %}
                             </td>
@@ -28,7 +28,9 @@
                                 <span class="regular text-center">{{number}}</span> {% endfor %}
                                 <span class="special text-center">{{detail.ticket_pick.special_number}}</span>
                             </td>
-                            <td>{{detail.user_id.username}}</td>
+                            <td>
+                                {{detail.user_id.username}}
+                            </td>
                             <td>{{detail.date}}</td>
                         </tr>
                         {% empty %}
