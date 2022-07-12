@@ -40,7 +40,7 @@ def index(request):
         "g_data": gold_data,
         "p_data": platinum_data,
         "j_data": jackpot_data,
-        "mega_data": mega_data,
+        "m_data": mega_data,
     }
     return render(request, "lottery/index.html", context)
 
