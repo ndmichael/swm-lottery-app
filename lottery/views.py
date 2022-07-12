@@ -10,6 +10,8 @@ from .models import (
     Silver,
     Gold,
     Platinum,
+    Jackpot,
+    Megawin,
 )
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -29,12 +31,16 @@ def index(request):
     silver_data = Silver.objects.filter(status=True).first()
     gold_data = Gold.objects.filter(status=True).first()
     platinum_data = Platinum.objects.filter(status=True).first()
+    jackpot_data = Jackpot.objects.filter(status=True).first()
+    mega_data = Megawin.objects.filter(status=True).first()
 
     context = {
         "b_data": bronze_data,
         "s_data": silver_data,
         "g_data": gold_data,
         "p_data": platinum_data,
+        "j_data": jackpot_data,
+        "mega_data": mega_data,
     }
     return render(request, "lottery/index.html", context)
 
@@ -140,6 +146,40 @@ def draw(request, type, id):
                 picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
             user.profile.balance -= 500
             user.profile.save()
+
+        elif type == "jackpot" and user.profile.balance >= 300:
+            jackpot = get_object_or_404(Jackpot, id=id)
+            ticket = Ticket.objects.create(
+                user_id=user, status=True, draw_type=type, jackpot=jackpot
+            )
+            picks = Pick(
+                user_id=user,
+                ticket_id=ticket,
+                special_number=special_number,
+            )
+            ticket.save()
+            picks.save()
+            for ball in ball_numbers:
+                picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
+            user.profile.balance -= 300
+            user.profile.save()
+
+        elif type == "megawin" and user.profile.balance >= 400:
+            megawin = get_object_or_404(Megawin, id=id)
+            ticket = Ticket.objects.create(
+                user_id=user, status=True, draw_type=type, megawin=megawin
+            )
+            picks = Pick(
+                user_id=user,
+                ticket_id=ticket,
+                special_number=special_number,
+            )
+            ticket.save()
+            picks.save()
+            for ball in ball_numbers:
+                picks.ball_numbers.add(BallNumbers.objects.create(ball=ball))
+            user.profile.balance -= 400
+            user.profile.save()
         else:
             messages.warning(request, f"Insufficient balance.")
             return redirect("initiate-payment")
@@ -171,11 +211,19 @@ def result(request):
     platinum_result = WinningPick.objects.filter(
         ticket__draw_type="platinum",
     ).last()
+    jackpot_result = WinningPick.objects.filter(
+        ticket__draw_type="jackpot",
+    ).last()
+    megawin_result = WinningPick.objects.filter(
+        ticket__draw_type="megawin",
+    ).last()
     context = {
         "bronze_result": bronze_result,
         "silver_result": silver_result,
         "gold_result": gold_result,
         "plat_result": platinum_result,
+        "jackpot_result": jackpot_result,
+        "megawin_result": megawin_result,
         "title": "swm-results",
     }
     return render(request, "lottery/result.html", context)
@@ -245,6 +293,10 @@ def result_details(request, type):
     elif type == "gold":
         results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
     elif type == "platinum":
+        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+    elif type == "jackpot":
+        results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
+    elif type == "megawin":
         results = WinningPick.objects.filter(ticket__draw_type=type).order_by("-date")
     result_type = type
     context = {"results": results, "title": "swm-results", "result_type": result_type}
