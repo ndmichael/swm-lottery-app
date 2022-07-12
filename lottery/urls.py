@@ -28,8 +28,8 @@ urlpatterns = [
     path("result/", result, name="result"),
     path("result/<str:type>/", result_details, name="result-details"),
     path("terms/", terms, name="terms"),
-    path("drawing/reset_bronze", reset_bronze, name="reset_bronze"),
-    path("drawing/reset_silver", reset_silver, name="reset_silver"),
-    path("drawing/reset_gold", reset_gold, name="reset_gold"),
-    path("drawing/reset_platinum", reset_platinum, name="reset_platinum"),
+    path("drawing/reset_bronze/", reset_bronze, name="reset_bronze"),
+    path("drawing/reset_silver/", reset_silver, name="reset_silver"),
+    path("drawing/reset_gold/", reset_gold, name="reset_gold"),
+    path("drawing/reset_platinum/", reset_platinum, name="reset_platinum"),
 ]
