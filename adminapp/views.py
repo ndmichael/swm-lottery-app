@@ -15,6 +15,7 @@ from .forms import WinnerForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -35,17 +36,34 @@ def admin_games(request, game_type):
         messages.success(request, "You do not have permission to access this page.")
         return redirect("index")
     if game_type == "bronze":
-        details = Ticket.objects.filter(draw_type=game_type).order_by("-date")
-        print(details)
+        p = Paginator(Ticket.objects.filter(draw_type=game_type).order_by("-date"), 20)
+        page = request.GET.get("page")
+        details = p.get_page(page)
 
     elif game_type == "silver":
-        details = Ticket.objects.filter(draw_type=game_type).order_by("-date")
+        p = Paginator(Ticket.objects.filter(draw_type=game_type).order_by("-date"), 20)
+        page = request.GET.get("page")
+        details = p.get_page(page)
 
     elif game_type == "gold":
-        details = Ticket.objects.filter(draw_type=game_type).order_by("-date")
+        p = Paginator(Ticket.objects.filter(draw_type=game_type).order_by("-date"), 20)
+        page = request.GET.get("page")
+        details = p.get_page(page)
 
-    else:
-        details = Ticket.objects.filter(draw_type=game_type).order_by("-date")
+    elif game_type == "platinum":
+        p = Paginator(Ticket.objects.filter(draw_type=game_type).order_by("-date"), 20)
+        page = request.GET.get("page")
+        details = p.get_page(page)
+
+    elif game_type == "jackpot":
+        p = Paginator(Ticket.objects.filter(draw_type=game_type).order_by("-date"), 20)
+        page = request.GET.get("page")
+        details = p.get_page(page)
+
+    elif game_type == "megawin":
+        p = Paginator(Ticket.objects.filter(draw_type=game_type).order_by("-date"), 20)
+        page = request.GET.get("page")
+        details = p.get_page(page)
 
     context = {"details": details, "type": game_type}
     return render(request, "adminapp/admin_games.html", context)

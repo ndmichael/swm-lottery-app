@@ -1,4 +1,5 @@
-{% extends "account/base.html" %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+{% extends "account/base.html" %} {% load static %} {% load crispy_forms_tags %}
+{% block content %}
 <section class=" bg-light" style="min-height:75vh; padding-top: 15vh; ">
     <div class="container">
         <section class="row">
@@ -20,12 +21,15 @@
                         <tr>
                             <td>
                                 {% if detail.bronze.winning_set or detail.silver.winning_set or detail.gold.winning_set or detail.platinum.winning_set or detail.jackpot.winning_set or detail.megawin.winning_set %}
-                                <span class="text-success">{{detail.ticket_code}}</span> {% else %}
-                                <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a> {% endif %}
+                                <span class="text-success">{{detail.ticket_code}}</span>
+                                {% else %}
+                                <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a>
+                                {% endif %}
                             </td>
                             <td class="" style="font-weight: 800 !important;">
                                 {% for number in detail.ticket_pick.ball_numbers.all %}
-                                <span class="regular text-center">{{number}}</span> {% endfor %}
+                                <span class="regular text-center">{{number}}</span>
+                                {% endfor %}
                                 <span class="special text-center">{{detail.ticket_pick.special_number}}</span>
                             </td>
                             <td>
@@ -35,13 +39,37 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <h5 class="text-danger">No Available players or tickets.
+                            <h5 class="text-danger">No Available players or
+                                details.
                             </h5>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+
+            <div class="text-center pt-3">
+                {% if details %}
+                {% if details.has_previous %}
+                <a class="btn btn-danger" href="?page=1">First</a>
+                <a class="btn btn-outline-success"
+                    href="?page={{ details.previous_page_number }}">Previous</a>
+                {% endif %}
+                {% for num in details.paginator.page_range %}
+                {% if details.number == num %}
+                <a class="btn btn-success" href="?page={{ num }}">
+                    {{ num}}
+                </a>
+                {% elif num > details.number|add:'-3' and num < details.number|add:'3' %} 
+                <a class="btn btn-outline-success" href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
+                    {% if details.has_next %}
+                    <a class="btn btn-outline-success" href="?page={{ details.next_page_number }}">Next</a>
+                    <a class="btn btn-danger" href="?page={{ details.paginator.num_pages }}">Last</a>
+                    {% endif %}
+                    {% endif %}
+            </div> <!-- end of paginator-->
         </section>
     </div>
 </section>
