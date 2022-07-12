@@ -95,10 +95,13 @@
                         <td>&#8358;350</td>
                         {% elif ticket.platinum or ticket.draw_type == 'platinum' %}
                         <td>&#8358;500</td>
+                        {% elif ticket.platinum or ticket.draw_type == 'jackpot' %}
+                        <td>&#8358;300</td>
+                        {% elif ticket.platinum or ticket.draw_type == 'megawin' %}
+                        <td>&#8358;400</td>
                         {% else %}
                         <td>&#8358;0</td>
-                        {% endif %} 
-                        {% if ticket.draw_type == 'bronze' %}
+                        {% endif %} {% if ticket.draw_type == 'bronze' %}
                         <td>&#8358;100,000</td>
                         {% elif ticket.draw_type == 'silver' %}
                         <td>&#8358;1,000,000</td>
@@ -106,6 +109,10 @@
                         <td>&#8358;10,000,000</td>
                         {% elif ticket.draw_type == 'platinum' %}
                         <td>&#8358;100,000,000</td>
+                        {% elif ticket.draw_type == 'jackpot' %}
+                        <td>&#8358;15,000,000</td>
+                        {% elif ticket.draw_type == 'megawin' %}
+                        <td>&#8358;30,000,000</td>
                         {% else %}
                         <td>&#8358;0</td>
                         {% endif %}
