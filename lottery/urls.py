@@ -13,6 +13,8 @@ from .views import (
     reset_silver,
     reset_gold,
     reset_platinum,
+    reset_jackpot,
+    reset_megawin,
     result_details,
 )
 
@@ -31,5 +33,7 @@ urlpatterns = [
     path("drawing/reset_bronze/", reset_bronze, name="reset_bronze"),
     path("drawing/reset_silver/", reset_silver, name="reset_silver"),
     path("drawing/reset_gold/", reset_gold, name="reset_gold"),
+    path("drawing/reset_jackpot/", reset_jackpot, name="reset_jackpot"),
+    path("drawing/reset_megawin/", reset_megawin, name="reset_megawin"),
     path("drawing/reset_platinum/", reset_platinum, name="reset_platinum"),
 ]

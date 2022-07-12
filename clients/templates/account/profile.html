@@ -117,8 +117,8 @@
                         <td>&#8358;0</td>
                         {% endif %}
                         <!--checking ticket and winning status -->
-                        {% if not ticket.bronze.winning_set or ticket.silver.winning_set or ticket.gold.winning_set or ticket.platinum.winning_set and not ticket.correct_count %}
-                        <td>....</td>
+                        {% if not ticket.bronze.winning_set or ticket.jackpot.winning_set or ticket.megawin.winning_set and not ticket.correct_count %}
+                        <td>{{ticket.jackpot.winning_set}}</td>
                         {% elif ticket.correct_count %}
                         <td>WON</td>
                         {% else %}

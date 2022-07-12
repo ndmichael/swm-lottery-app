@@ -19,7 +19,7 @@
                         {% for detail in details %}
                         <tr>
                             <td>
-                                {% if detail.bronze.winning_set or detail.silver.winning_set or detail.gold.winning_set %}
+                                {% if detail.bronze.winning_set or detail.silver.winning_set or detail.gold.winning_set or detail.platinum.winning_set or detail.jackpot.winning_set or detail.megawin.winning_set %}
                                 <span class="text-success">{{detail.ticket_code}}</span> {% else %}
                                 <a href="{% url 'winner' detail.pk %}"><b>{{detail.ticket_code}}</b></a> {% endif %}
                             </td>

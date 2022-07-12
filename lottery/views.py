@@ -237,7 +237,6 @@ def reset_bronze(request):
         if datetime.datetime.now() >= bronze.enddate:
             bronze.status = False
             bronze.save()  # set it to false then save.
-            print(bronze.status)
             Bronze.objects.create(draw=draw, status=True)
             return JsonResponse({"result": "Bronze updated successful"})
 
@@ -253,7 +252,6 @@ def reset_silver(request):
         if datetime.datetime.now() >= silver.enddate:
             silver.status = False
             silver.save()  # set it to false then save.
-            print(silver.status)
             Silver.objects.create(draw=draw, status=True)
             return JsonResponse({"result": "Silver updated successful"})
 
@@ -269,7 +267,6 @@ def reset_gold(request):
         if datetime.datetime.now() >= gold.enddate:
             gold.status = False
             gold.save()  # set it to false then save.
-            print(gold.status)
             Gold.objects.create(draw=draw, status=True)
             return JsonResponse({"result": "gold updated successful"})
 
@@ -284,9 +281,36 @@ def reset_platinum(request):
         if datetime.datetime.now() >= platinum.enddate:
             platinum.status = False
             platinum.save()  # set it to false then save.
-            print(platinum.status)
             Platinum.objects.create(draw=draw, status=True)
             return JsonResponse({"result": "platinum updated successful"})
+
+    return HttpResponse("Error access denied")
+
+
+def reset_jackpot(request):
+    id = request.POST.get("draw_id")
+    draw = Drawing.objects.filter(type="jackpot").first()
+    if request.POST.get("action") == "post" and id != "":
+        jackpot = get_object_or_404(Jackpot, id=id)
+        if datetime.datetime.now() >= jackpot.enddate:
+            jackpot.status = False
+            jackpot.save()  # set it to false then save.
+            Jackpot.objects.create(draw=draw, status=True)
+            return JsonResponse({"result": "jackpot updated successful"})
+
+    return HttpResponse("Error access denied")
+
+
+def reset_megawin(request):
+    id = request.POST.get("draw_id")
+    draw = Drawing.objects.filter(type="megawin").first()
+    if request.POST.get("action") == "post" and id != "":
+        megawin = get_object_or_404(Jackpot, id=id)
+        if datetime.datetime.now() >= megawin.enddate:
+            megawin.status = False
+            megawin.save()  # set it to false then save.
+            Megawin.objects.create(draw=draw, status=True)
+            return JsonResponse({"result": "megawin updated successful"})
 
     return HttpResponse("Error access denied")
 

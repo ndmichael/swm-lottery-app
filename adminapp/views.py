@@ -1,7 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from lottery.models import Ticket, Drawing
 from django.contrib.auth.models import User
-from lottery.models import WinningPick, BallNumbers, Bronze, Silver, Gold, Platinum
+from lottery.models import (
+    WinningPick,
+    BallNumbers,
+    Bronze,
+    Silver,
+    Gold,
+    Platinum,
+    Jackpot,
+    Megawin,
+)
 from .forms import WinnerForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -85,6 +94,16 @@ def winner(request, ticket_id):
             platinum.winning_set = True
             game_id = platinum.id
             platinum.save()
+        elif ticket.draw_type == "jackpot" and not ticket.jackpot.winning_set:
+            jackpot = get_object_or_404(Jackpot, id=ticket.jackpot.id)
+            jackpot.winning_set = True
+            game_id = jackpot.id
+            jackpot.save()
+        elif ticket.draw_type == "megawin" and not ticket.megawin.winning_set:
+            megawin = get_object_or_404(Megawin, id=ticket.megawin.id)
+            megawin.winning_set = True
+            game_id = jackpot.id
+            megawin.save()
         else:
             messages.warning(request, f"winner has already been set for that game.")
             return redirect("admin_index", request.user.username)

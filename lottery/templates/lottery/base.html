@@ -246,10 +246,10 @@
     <!-- bronze ajax -->
     <script>
         $(document).ready(function() {
-            var enddate = new Date("{{b_data.enddate.isoformat}}")
             var f = function() {
                 var curr_date = new Date()
-                    // console.log(curr_date, enddate)
+                var enddate = new Date("{{b_data.enddate.isoformat}}")
+                    // console.log(curr_date.getTime(), enddate.getTime())
                 if (curr_date.getTime() >= enddate.getTime() && "{{b_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_bronze' %}",
@@ -261,7 +261,6 @@
                         },
                         success: function(response) {
                             location.reload()
-                            console.log(response["result"])
                         },
                         error: function(rs, e) {
                             $.ajax(this);
@@ -278,13 +277,83 @@
         });
     </script>
 
+    <!-- jackpot ajax -->
+    <script>
+        $(document).ready(function() {
+            var f4 = function() {
+                var curr_date = new Date()
+                var enddate = new Date("{{j_data.enddate.isoformat}}")
+                    // console.log(curr_date.getTime(), enddate.getTime())
+                if (curr_date.getTime() >= enddate.getTime() && "{{j_data.status}}") {
+                    $.ajax({
+                        url: "{% url 'reset_jackpot' %}",
+                        type: 'POST',
+                        data: {
+                            'draw_id': "{{j_data.id}}",
+                            'csrfmiddlewaretoken': "{{ csrf_token }}",
+                            'action': 'post'
+                        },
+                        success: function(response) {
+                            location.reload()
+                            console.log(response["result"])
+                        },
+                        error: function(rs, e) {
+                            $.ajax(this);
+                        },
+                        cache: false,
+                    });
+                }
+            };
+
+            setTimeout(function run4() {
+                f4();
+                setTimeout(run4, 1000);
+            }, 1000); // 1sec
+        });
+    </script>
+
+    <!-- megawin ajax -->
+    <script>
+        $(document).ready(function() {
+            var f5 = function() {
+                var curr_date = new Date()
+                var enddate = new Date("{{m_data.enddate.isoformat}}")
+                    // console.log(curr_date.getTime(), enddate.getTime())
+                if (curr_date.getTime() >= enddate.getTime() && "{{m_data.status}}") {
+                    $.ajax({
+                        url: "{% url 'reset_megawin' %}",
+                        type: 'POST',
+                        data: {
+                            'draw_id': "{{m_data.id}}",
+                            'csrfmiddlewaretoken': "{{ csrf_token }}",
+                            'action': 'post'
+                        },
+                        success: function(response) {
+                            location.reload()
+                            console.log(response["result"])
+                        },
+                        error: function(rs, e) {
+                            $.ajax(this);
+                        },
+                        cache: false,
+                    });
+                }
+            };
+
+            setTimeout(function run5() {
+                f5();
+                setTimeout(run5, 1000);
+            }, 1000); // 1sec
+        });
+    </script>
+
     <!-- silver ajax -->
     <script>
         $(document).ready(function() {
-            var enddate = new Date("{{s_data.enddate.isoformat}}")
             var f1 = function() {
                 var curr_date = new Date()
                     // console.log(curr_date, enddate)
+                var enddate = new Date("{{s_data.enddate.isoformat}}")
                 if (curr_date.getTime() >= enddate.getTime() && "{{s_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_silver' %}",
@@ -296,7 +365,7 @@
                         },
                         success: function(response) {
                             location.reload()
-                            console.log(response["result"])
+                                // console.log(response["result"])
                         },
                         error: function(rs, e) {
                             $.ajax(this);
@@ -316,10 +385,10 @@
     <!-- for gold reset -->
     <script>
         $(document).ready(function() {
-            var enddate = new Date("{{g_data.enddate.isoformat}}")
             var f2 = function() {
                 var curr_date = new Date()
-                console.log(curr_date, enddate)
+                var enddate = new Date("{{g_data.enddate.isoformat}}")
+                    // console.log(curr_date, enddate)
                 if (curr_date.getTime() >= enddate.getTime() && "{{g_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_gold' %}",
@@ -331,7 +400,7 @@
                         },
                         success: function(response) {
                             location.reload()
-                            console.log(response["result"])
+                                // console.log(response["result"])
                         },
                         error: function(rs, e) {
                             $.ajax(this);
@@ -352,9 +421,9 @@
     <!-- for platinum reset -->
     <script>
         $(document).ready(function() {
-            var enddate = new Date("{{p_data.enddate.isoformat}}")
             var f3 = function() {
                 var curr_date = new Date()
+                var enddate = new Date("{{p_data.enddate.isoformat}}")
                     // console.log(curr_date, enddate)
                 if (curr_date.getTime() >= enddate.getTime() && "{{p_data.status}}") {
                     $.ajax({
@@ -367,7 +436,7 @@
                         },
                         success: function(response) {
                             location.reload()
-                            console.log(response["result"])
+                                // console.log(response["result"])
                         },
                         error: function(rs, e) {
                             $.ajax(this);
