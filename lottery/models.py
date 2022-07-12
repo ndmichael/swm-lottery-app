@@ -156,6 +156,46 @@ class Platinum(models.Model):
         return f"{self.draw} {self.startdate}"
 
 
+class Jackpot(models.Model):
+    draw = models.ForeignKey(
+        Drawing, on_delete=models.CASCADE, related_name="jackpot_draw"
+    )
+    status = models.BooleanField(default=False)
+    startdate = models.DateTimeField(default=datetime.now)
+    enddate = models.DateTimeField(default=datetime.now)
+    winning_set = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ("-startdate",)
+
+    def save(self, *args, **kwargs):
+        self.enddate = self.startdate + timedelta(days=7)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.draw} {self.startdate}"
+
+
+class Mega(models.Model):
+    draw = models.ForeignKey(
+        Drawing, on_delete=models.CASCADE, related_name="mega_draw"
+    )
+    status = models.BooleanField(default=False)
+    startdate = models.DateTimeField(default=datetime.now)
+    enddate = models.DateTimeField(default=datetime.now)
+    winning_set = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ("-startdate",)
+
+    def save(self, *args, **kwargs):
+        self.enddate = self.startdate + timedelta(days=7)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.draw} {self.startdate}"
+
+
 class BallNumbers(models.Model):
     ball = models.CharField(max_length=20)
 
