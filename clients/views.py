@@ -5,13 +5,16 @@ from lottery.models import Ticket, WinningPick
 from .forms import WithdrawalForm
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    tickets = Ticket.objects.filter(user_id=user.id).order_by("-date")
+    p = Paginator(Ticket.objects.filter(user_id=user.id).order_by("-date"), 10)
+    page = request.GET.get("page")
+    tickets = p.get_page(page)
 
     if request.method == "POST":
         w_form = WithdrawalForm(request.POST)
