@@ -66,6 +66,8 @@ class Drawing(models.Model):
         ("silver", "SILVER"),
         ("gold", "GOLD"),
         ("platinum", "PLATINUM"),
+        ("jackpot", "JACKPOT"),
+        ("megawin", "MEGAWIN"),
     )
     type = models.CharField(max_length=20, choices=choices)
 
@@ -169,14 +171,14 @@ class Jackpot(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(days=7)
+        self.enddate = self.startdate + timedelta(hours=3)
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.draw} {self.startdate}"
 
 
-class Mega(models.Model):
+class Megawin(models.Model):
     draw = models.ForeignKey(
         Drawing, on_delete=models.CASCADE, related_name="mega_draw"
     )
@@ -189,7 +191,7 @@ class Mega(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(days=7)
+        self.enddate = self.startdate + timedelta(hours=6)
         super().save(*args, **kwargs)
 
     def __str__(self):
