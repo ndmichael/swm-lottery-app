@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("adminapp.urls")),
     path("profile/<str:username>", profile, name="profile"),
     path("accounts/", include("allauth.urls")),
+    path("clients/", include("clients.urls")),
 ]
 
 if settings.DEBUG:
