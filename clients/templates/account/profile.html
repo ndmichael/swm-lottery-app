@@ -17,6 +17,13 @@
                                 Withdrawal
                             </a>
                         </div>
+                        <div class=" col-12 pb-4 text-center text-dark ">
+                            
+                            <a href="{% url 'update_profile' request.user.username %}" class=" btn btn-warning text-center rounded-9">
+                                <span class="bi bi-gear text-success pe-2" style="font-size: 1.3em;"></span> 
+                                Edit Profile
+                            </a>
+                        </div>
                         <div class=" col-12 text-center">
                             <a href="{% url 'account_logout' %}" class=" btn btn-dark text-center rounded-9">
                                 Logout
@@ -69,6 +76,7 @@
             <table class="table table-responsive text-success">
                 <thead class="" style="color: white; background-color: #006633;">
                     <tr>
+                        <th>Ticket Code</th>
                         <th scope="col">Numbers Choices</th>
                         <th scope="col">Date/Time</th>
                         <th scope="col">Game</th>
@@ -80,6 +88,11 @@
                 <tbody>
                     {% if tickets %} {% for ticket in tickets %}
                     <tr>
+                        <td class="result-text">
+                            <a  href="{% url 'receipt' ticket.id %}">
+                                <h6>{{ticket.ticket_code}}</h6>
+                            </a>
+                        </td>
                         <td class="" style="font-weight: 800 !important;">
                             {% for number in ticket.ticket_pick.ball_numbers.all %}
                             <span class="regular text-center">{{number}}</span> {% endfor %}
@@ -95,9 +108,9 @@
                         <td>&#8358;350</td>
                         {% elif ticket.platinum or ticket.draw_type == 'platinum' %}
                         <td>&#8358;500</td>
-                        {% elif ticket.platinum or ticket.draw_type == 'jackpot' %}
+                        {% elif ticket.jackpot or ticket.draw_type == 'jackpot' %}
                         <td>&#8358;300</td>
-                        {% elif ticket.platinum or ticket.draw_type == 'megawin' %}
+                        {% elif ticket.jackpot or ticket.draw_type == 'megawin' %}
                         <td>&#8358;400</td>
                         {% else %}
                         <td>&#8358;0</td>

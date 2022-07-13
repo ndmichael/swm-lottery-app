@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from lottery.models import Profile
 from lottery.models import Ticket, WinningPick
-from .forms import WithdrawalForm
+from .forms import WithdrawalForm, UserUpdateForm, ProfileUpdateForm
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -43,3 +43,24 @@ def profile(request, username):
         "w_form": w_form,
     }
     return render(request, "account/profile.html", context)
+
+
+def update_profile(request, username):
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user.profile
+        )
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f"account successfully updated")
+            return redirect(
+                "profile", username=request.user.username
+            )  # i solved that by passing the requesting user username
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {"u_form": u_form, "p_form": p_form}
+    return render(request, "account/update_profile.html", context)

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from lottery.models import Profile
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from allauth.account.forms import SignupForm, LoginForm
@@ -160,3 +161,46 @@ class WithdrawalForm(forms.Form):
             {"class": "form-control-lg rounded-9 bg-success text-white"}
         )
         self.fields["agreement"].widget.attrs.update({"class": "text-success"})
+
+
+class UserUpdateForm(forms.ModelForm):
+    username = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+        self.fields["email"].disabled = True
+        self.fields["username"].disabled = True
+
+        self.fields["first_name"].widget.attrs.update(
+            {
+                "class": "form-control-lg rounded-9 bg-success text-white",
+            }
+        )
+        self.fields["last_name"].widget.attrs.update(
+            {
+                "class": "form-control-lg rounded-9 bg-success text-white",
+            }
+        )
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "first_name", "last_name"]
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields["phone_number"].widget.attrs.update(
+            {
+                "class": "form-control-lg rounded-9 bg-success text-white",
+            }
+        )
+        self.fields["city"].widget.attrs.update(
+            {
+                "class": "form-control-lg rounded-9 bg-success text-white",
+            }
+        )
+
+    class Meta:
+        model = Profile
+        fields = ["phone_number", "city"]
