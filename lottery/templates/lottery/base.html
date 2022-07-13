@@ -250,7 +250,7 @@
                 var curr_date = new Date()
                 var enddate = new Date("{{b_data.enddate.isoformat}}")
                     // console.log(curr_date.getTime(), enddate.getTime())
-                if (curr_date.getTime() >= enddate.getTime() && "{{b_data.status}}") {
+                if (curr_date.getTime() == enddate.getTime() && "{{b_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_bronze' %}",
                         type: 'POST',
@@ -272,8 +272,8 @@
 
             setTimeout(function run() {
                 f();
-                setTimeout(run, 60000);
-            }, 60000); // 1sec
+                setTimeout(run, 1000);
+            }, 1000); // 1sec
         });
     </script>
 
@@ -284,7 +284,7 @@
                 var curr_date = new Date()
                 var enddate = new Date("{{j_data.enddate.isoformat}}")
                     // console.log(curr_date.getTime(), enddate.getTime())
-                if (curr_date.getTime() >= enddate.getTime() && "{{j_data.status}}") {
+                if (curr_date.getTime() == enddate.getTime() && "{{j_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_jackpot' %}",
                         type: 'POST',
@@ -307,8 +307,8 @@
 
             setTimeout(function run4() {
                 f4();
-                setTimeout(run4, 60000);
-            }, 60000); // 1sec
+                setTimeout(run4, 1000);
+            }, 1000); // 1sec
         });
     </script>
 
@@ -319,7 +319,7 @@
                 var curr_date = new Date()
                 var enddate = new Date("{{m_data.enddate.isoformat}}")
                     // console.log(curr_date.getTime(), enddate.getTime())
-                if (curr_date.getTime() >= enddate.getTime() && "{{m_data.status}}") {
+                if (curr_date.getTime() == enddate.getTime() && "{{m_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_megawin' %}",
                         type: 'POST',
@@ -342,8 +342,8 @@
 
             setTimeout(function run5() {
                 f5();
-                setTimeout(run5, 60000);
-            }, 60000); // 1sec
+                setTimeout(run5, 1000);
+            }, 1000); // 1sec
         });
     </script>
 
@@ -354,7 +354,7 @@
                 var curr_date = new Date()
                     // console.log(curr_date, enddate)
                 var enddate = new Date("{{s_data.enddate.isoformat}}")
-                if (curr_date.getTime() >= enddate.getTime() && "{{s_data.status}}") {
+                if (curr_date.getTime() == enddate.getTime() && "{{s_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_silver' %}",
                         type: 'POST',
@@ -377,8 +377,8 @@
 
             setTimeout(function run1() {
                 f1();
-                setTimeout(run1, 60000);
-            }, 60000); // 1min
+                setTimeout(run1, 1000);
+            }, 1000); // 1min
         });
     </script>
 
@@ -389,7 +389,7 @@
                 var curr_date = new Date()
                 var enddate = new Date("{{g_data.enddate.isoformat}}")
                     // console.log(curr_date, enddate)
-                if (curr_date.getTime() >= enddate.getTime() && "{{g_data.status}}") {
+                if (curr_date.getTime() == enddate.getTime() && "{{g_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_gold' %}",
                         type: 'POST',
@@ -412,8 +412,8 @@
 
             setTimeout(function run2() {
                 f2();
-                setTimeout(run2, 60000);
-            }, 60000); // 1sec
+                setTimeout(run2, 1000);
+            }, 1000); // 1sec
         });
     </script>
 
@@ -425,7 +425,7 @@
                 var curr_date = new Date()
                 var enddate = new Date("{{p_data.enddate.isoformat}}")
                     // console.log(curr_date, enddate)
-                if (curr_date.getTime() >= enddate.getTime() && "{{p_data.status}}") {
+                if (curr_date.getTime() == enddate.getTime() && "{{p_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_platinum' %}",
                         type: 'POST',
@@ -448,8 +448,8 @@
 
             setTimeout(function run3() {
                 f3();
-                setTimeout(run3, 60000);
-            }, 60000); // 7min
+                setTimeout(run3, 1000);
+            }, 1000); // 1sec
         });
     </script>
 
