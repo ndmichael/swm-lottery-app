@@ -55,6 +55,12 @@ def about(request):
     return render(request, "lottery/about.html")
 
 
+def receipt(request, id):
+    ticket = get_object_or_404(Ticket, id=id)
+    context = {"ticket": ticket}
+    return render(request, "lottery/receipt.html", context)
+
+
 def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
