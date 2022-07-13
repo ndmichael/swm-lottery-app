@@ -1,0 +1,42 @@
+{% extends 'account/base.html' %} {% load crispy_forms_tags %} {% load static %} {% block content %}
+<section class="py-5">
+    <article class="container">
+        {% if request.user.username == user.username %}
+        <form method="POST" enctype="multipart/form-data" class="offset-sm-3 col-sm-6 form-override">
+            {% csrf_token %}
+            <legend class="form-group mb-4 mt-4"><strong>
+                    Update Profile Information
+                    <br />
+                </strong>
+            </legend>
+
+            <div class="row">
+                <div class="form-group col-md-6 mb-2">
+                    {{ u_form.email|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-2">
+                    {{ u_form.username|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-2">
+                    {{ u_form.first_name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-2">
+                    {{ u_form.last_name|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-2">
+                    {{ p_form.city|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-2">
+                    {{ p_form.phone_number|as_crispy_field }}
+                </div>
+            </div>
+            <div class="pt-4">
+                <button type="submit" class="btn btn-outline-success rounded-9 btn-lg">
+                    Update Profile
+                </button>
+            </div>
+        </form>
+        {% endif %}
+    </article>
+</section>
+{% endblock content %}
