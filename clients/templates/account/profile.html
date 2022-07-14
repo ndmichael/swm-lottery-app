@@ -18,10 +18,9 @@
                             </a>
                         </div>
                         <div class=" col-12 pb-4 text-center text-dark ">
-                            
+
                             <a href="{% url 'update_profile' request.user.username %}" class=" btn btn-warning text-center rounded-9">
-                                <span class="bi bi-gear text-success pe-2" style="font-size: 1.3em;"></span> 
-                                Edit Profile
+                                <span class="bi bi-gear text-success pe-2" style="font-size: 1.3em;"></span> Edit Profile
                             </a>
                         </div>
                         <div class=" col-12 text-center">
@@ -89,7 +88,7 @@
                     {% if tickets %} {% for ticket in tickets %}
                     <tr>
                         <td class="result-text">
-                            <a  href="#">
+                            <a href="{% url 'receipt' ticket.id %}">
                                 <h6>{{ticket.ticket_code}}</h6>
                             </a>
                         </td>
@@ -135,7 +134,7 @@
                         {% elif ticket.draw_type == 'megawin' and not ticket.megawin.winning_set %}
                         <td>...</td>
                         {% elif ticket.draw_type == 'platinum' and not ticket.platinum.winning_set %}
-                        <td>...</td> 
+                        <td>...</td>
                         {% elif ticket.draw_type == 'gold' and not ticket.gold.winning_set %}
                         <td>...</td>
                         {% elif ticket.draw_type == 'silver' and not ticket.silver.winning_set %}
@@ -143,13 +142,12 @@
                         {% elif ticket.draw_type == 'bronze' and not ticket.bronze.winning_set %}
                         <td>...</td>
                         {% elif ticket.correct_count %}
-                            <td>WON</td>
+                        <td>WON</td>
                         {% else %}
-                            <td>No Winning</td>
+                        <td>No Winning</td>
                         {% endif %}
                     </tr>
-                    {% endfor %} 
-                    {% else %}
+                    {% endfor %} {% else %}
                     <h1>Ticket not available yet</h1>
                     {% endif %}
 
@@ -158,25 +156,16 @@
         </div>
 
         <div class="text-center border-top border-success pt-2">
-            {% if tickets %} 
-            {% if tickets.has_previous %}
+            {% if tickets %} {% if tickets.has_previous %}
             <a class="btn btn-danger" href="?page=1">First</a>
-            <a class="btn btn-outline-success" href="?page={{ tickets.previous_page_number }}">Previous</a> 
-            {% endif %} 
-            {% for num in tickets.paginator.page_range %} 
-            {% if tickets.number == num %}
+            <a class="btn btn-outline-success" href="?page={{ tickets.previous_page_number }}">Previous</a> {% endif %} {% for num in tickets.paginator.page_range %} {% if tickets.number == num %}
             <a class="btn btn-success" href="?page={{ num }}">
                 {{ num}}
-            </a> 
-            {% elif num > tickets.number|add:'-3' and num < tickets.number|add:'3' %}
-            <a class="btn btn-outline-success" href="?page={{ num }}">{{ num }}</a>
-            {% endif %} 
-            {% endfor %} 
-            {% if tickets.has_next %}
+            </a> {% elif num > tickets.number|add:'-3' and num
+            < tickets.number|add: '3' %} <a class="btn btn-outline-success" href="?page={{ num }}">{{ num }}</a>
+                {% endif %} {% endfor %} {% if tickets.has_next %}
                 <a class="btn btn-outline-success" href="?page={{ tickets.next_page_number }}">Next</a>
-                <a class="btn btn-danger" href="?page={{ tickets.paginator.num_pages }}">Last</a> 
-            {% endif %} 
-            {% endif %}
+                <a class="btn btn-danger" href="?page={{ tickets.paginator.num_pages }}">Last</a> {% endif %} {% endif %}
         </div>
 
     </div>
