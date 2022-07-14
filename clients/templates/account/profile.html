@@ -156,12 +156,17 @@
         </div>
 
         <div class="text-center border-top border-success pt-2">
-            {% if tickets %} {% if tickets.has_previous %}
-            <a class="btn btn-danger" href="?page=1">First</a>
-            <a class="btn btn-outline-success" href="?page={{ tickets.previous_page_number }}">Previous</a> {% endif %} {% for num in tickets.paginator.page_range %} {% if tickets.number == num %}
-            <a class="btn btn-success" href="?page={{ num }}">
-                {{ num}}
-            </a> {% elif num > tickets.number|add:'-3' and num < tickets.number|add: '3' %} 
+            {% if tickets %} 
+            {% if tickets.has_previous %}
+                <a class="btn btn-danger" href="?page=1">First</a>
+                <a class="btn btn-outline-success" href="?page={{ tickets.previous_page_number }}">Previous</a> 
+                {% endif %} 
+                {% for num in tickets.paginator.page_range %} 
+                    {% if tickets.number == num %}
+                        <a class="btn btn-success" href="?page={{ num }}">
+                            {{ num}}
+                        </a> 
+            {% elif num > tickets.number|add:'-3' and num < tickets.number|add:'3' %} 
             <a class="btn btn-outline-success" href="?page={{ num }}">{{ num }}</a> 
             {% endif %} 
             {% endfor %} 
