@@ -241,11 +241,11 @@ def reset_bronze(request):
     draw = Drawing.objects.filter(type="bronze").first()
     if request.POST.get("action") == "post" and id != "":
         bronze = get_object_or_404(Bronze, id=id)
-        if datetime.datetime.now() == bronze.enddate:
-            bronze.status = False
-            bronze.save()  # set it to false then save.
-            Bronze.objects.create(draw=draw, status=True)
-            return JsonResponse({"result": "Bronze updated successful"})
+        # if datetime.datetime.now() >= bronze.enddate:
+        bronze.status = False
+        bronze.save()  # set it to false then save.
+        Bronze.objects.create(draw=draw, status=True)
+        return JsonResponse({"result": "Bronze updated successful"})
 
     return HttpResponse("Error access denied")
 
@@ -299,11 +299,11 @@ def reset_jackpot(request):
     draw = Drawing.objects.filter(type="jackpot").first()
     if request.POST.get("action") == "post" and id != "":
         jackpot = get_object_or_404(Jackpot, id=id)
-        if datetime.datetime.now() == jackpot.enddate:
-            jackpot.status = False
-            jackpot.save()  # set it to false then save.
-            Jackpot.objects.create(draw=draw, status=True)
-            return JsonResponse({"result": "jackpot updated successful"})
+        # if datetime.datetime.now() >= jackpot.enddate:
+        jackpot.status = False
+        jackpot.save()  # set it to false then save.
+        Jackpot.objects.create(draw=draw, status=True)
+        return JsonResponse({"result": "jackpot updated successful"})
 
     return HttpResponse("Error access denied")
 
@@ -313,7 +313,7 @@ def reset_megawin(request):
     draw = Drawing.objects.filter(type="megawin").first()
     if request.POST.get("action") == "post" and id != "":
         megawin = get_object_or_404(Jackpot, id=id)
-        if datetime.datetime.now() == megawin.enddate:
+        if datetime.datetime.now() >= megawin.enddate:
             megawin.status = False
             megawin.save()  # set it to false then save.
             Megawin.objects.create(draw=draw, status=True)

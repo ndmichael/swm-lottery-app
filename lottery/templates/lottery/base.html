@@ -249,8 +249,10 @@
             var f = function() {
                 var curr_date = new Date()
                 var enddate = new Date("{{b_data.enddate.isoformat}}")
-                    // console.log(curr_date.getTime(), enddate.getTime())
-                if (curr_date.getTime() == enddate.getTime() && "{{b_data.status}}") {
+                var diff = curr_date.getMinutes() - enddate.getMinutes()
+                console.log(curr_date.getMinutes(), enddate.getMinutes())
+                if (curr_date.getMinutes() == enddate.getMinutes() || (diff > 0 && diff <= 2)) {
+                    console.log("popped!!!")
                     $.ajax({
                         url: "{% url 'reset_bronze' %}",
                         type: 'POST',
@@ -272,8 +274,8 @@
 
             setTimeout(function run() {
                 f();
-                setTimeout(run, 1000);
-            }, 1000); // 1sec
+                setTimeout(run, 60000);
+            }, 60000); // 1sec
         });
     </script>
 
@@ -283,8 +285,9 @@
             var f4 = function() {
                 var curr_date = new Date()
                 var enddate = new Date("{{j_data.enddate.isoformat}}")
-                    // console.log(curr_date.getTime(), enddate.getTime())
-                if (curr_date.getTime() == enddate.getTime() && "{{j_data.status}}") {
+                var diff = curr_date.getMinutes() - enddate.getMinutes()
+                    //console.log(curr_date.getTime(), enddate.getTime())
+                if (curr_date.getMinutes() == enddate.getMinutes() || (diff > 0 && diff <= 2)) {
                     $.ajax({
                         url: "{% url 'reset_jackpot' %}",
                         type: 'POST',
@@ -302,13 +305,15 @@
                         },
                         cache: false,
                     });
+                } else {
+                    console.log("false")
                 }
             };
 
             setTimeout(function run4() {
                 f4();
-                setTimeout(run4, 1000);
-            }, 1000); // 1sec
+                setTimeout(run4, 60000);
+            }, 60000); // 1sec
         });
     </script>
 
@@ -318,7 +323,7 @@
             var f5 = function() {
                 var curr_date = new Date()
                 var enddate = new Date("{{m_data.enddate.isoformat}}")
-                    // console.log(curr_date.getTime(), enddate.getTime())
+                    //console.log(curr_date.getTime(), enddate.getTime())
                 if (curr_date.getTime() == enddate.getTime() && "{{m_data.status}}") {
                     $.ajax({
                         url: "{% url 'reset_megawin' %}",
@@ -452,7 +457,6 @@
             }, 1000); // 1sec
         });
     </script>
-
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
