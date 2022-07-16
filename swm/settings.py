@@ -40,7 +40,8 @@ ALLOWED_HOSTS = ["swmlottery.com", "www.swmlottery.com", "localhost"]
 INSTALLED_APPS = [
     "lottery",
     "clients",
-    "paystackpay",
+    # "paystackpay",
+    "ravepay",
     "adminapp",
     "crispy_forms",
     "anymail",
@@ -182,8 +183,11 @@ if DEBUG:
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
-PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
-PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
+# PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY_SWM")
+# PAYSTACK_PUBLIC_KEY = os.environ.get("PAYSTACK_PUBLIC_KEY_SWM")
+
+FLUTTERWAVE_SECRET_KEY = "FLWSECK_TEST-4f92fc4806b2a5a1642cd4d52550c452-Xy"
+FLUTTERWAVE_PUBLIC_KEY = "FLWPUBK_TEST-92021d5125667b056c52e8adbd6e457a-X"
 # print(type(PAYSTACK_SECRET_KEY))
 # print(type(PAYSTACK_PUBLIC_KEY))
 
