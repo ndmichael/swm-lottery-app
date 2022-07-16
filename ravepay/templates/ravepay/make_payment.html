@@ -1,0 +1,50 @@
+{% extends 'account/base.html' %} {% load crispy_forms_tags %}{% load static %} {% block content %}
+
+<section class="" style="min-height: 73vh; padding-top: 14vh;">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-6 mx-auto">
+                <h1>Make Payment For: NGN{{payment.amount}}</h1>
+                <script src="https://checkout.flutterwave.com/v3.js"></script>
+                <p class=" pt-4">
+                    <input type="submit" onclick="makePayment()" class="btn btn-success btn-lg rounded-9" value="Make Payment">
+                </p>
+            </article>
+        </section>
+    </div>
+</section>
+
+<script>
+    function makePayment() {
+        console.log("verify pay: ", "{{ payment.ref }} ")
+        base_url = 'http://127.0.0.1:8000/'
+        var modal = FlutterwaveCheckout({
+            public_key: "{{flutterwave_public_key}}",
+            tx_ref: "{{payment.ref}}",
+            amount: "{{payment.amount_value}}",
+            currency: "NGN",
+            payment_options: "card",
+            redirect_url: base_url + "{{payment.ref}}" + "/",
+            callback: function(payment) {
+                verifyTransactionOnBackend();
+            },
+            customer: {
+                email: "{{request.user.email}}",
+            },
+            customizations: {
+                title: "SWM LOTTERY",
+                description: "ACCOUNT CREDIT FOR SWM GAMES",
+                logo: "https://www.logolynx.com/images/logolynx/22/2239ca38f5505fbfce7e55bbc0604386.jpeg",
+            },
+        });
+    }
+
+    function verifyTransactionOnBackend() {
+        window.location.href = "{% url 'verify-payment' payment.ref %}";
+    }
+</script>
+
+
+
+
+{% endblock content %}
