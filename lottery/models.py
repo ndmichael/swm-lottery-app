@@ -91,7 +91,7 @@ class Bronze(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(hours=0, minutes=4)
+        self.enddate = self.startdate + timedelta(hours=0, minutes=60)
         super().save(*args, **kwargs)
 
     def __str__(self):
