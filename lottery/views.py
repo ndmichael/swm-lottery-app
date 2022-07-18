@@ -316,12 +316,11 @@ def reset_megawin(request):
     draw = Drawing.objects.filter(type="megawin").first()
     if request.POST.get("action") == "post" and id != "":
         megawin = get_object_or_404(Jackpot, id=id)
-        if datetime.datetime.now() >= megawin.enddate:
-            megawin.status = False
-            megawin.save()  # set it to false then save.
-            Megawin.objects.create(draw=draw, status=True)
-            mega_data = Megawin.objects.filter(status=True).first()
-            return JsonResponse({"enddate": mega_data.enddate})
+        megawin.status = False
+        megawin.save()  # set it to false then save.
+        Megawin.objects.create(draw=draw, status=True)
+        mega_data = Megawin.objects.filter(status=True).first()
+        return JsonResponse({"enddate": mega_data.enddate})
 
     return HttpResponse("Error access denied")
 
