@@ -396,7 +396,7 @@
                     var days = clock.querySelector('.days');
                     var hrs = clock.querySelector('.hrs');
                     var min = clock.querySelector('.min');
-                    var sec = clock.querySelector('.sec');
+                    // var sec = clock.querySelector('.sec');
                 }
 
                 function updateClock() {
@@ -413,7 +413,7 @@
                         days.innerHTML = t.days;
                         hrs.innerHTML = t.hours;
                         min.innerHTML = t.min;
-                        sec.innerHTML = ('0' + t.sec).slice(-2);
+                        // sec.innerHTML = ('0' + t.sec).slice(-2);
                     }
                     if (t.total <= 0) {
                         if (id == 'btimer') {
