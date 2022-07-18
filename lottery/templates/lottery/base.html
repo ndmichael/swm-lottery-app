@@ -416,6 +416,19 @@
                         sec.innerHTML = ('0' + t.sec).slice(-2);
                     }
                     if (t.total <= 0) {
+                        if (id == 'btimer') {
+                            min.innerHTML = 00;
+                            sec.innerHTML = 00;
+                        } else if (id == 'stimer' || id == 'jtimer' || id == 'mtimer') {
+                            hrs.innerHTML = 00;
+                            min.innerHTML = 00;
+                            sec.innerHTML = 00;
+                        } else if (id == 'gtimer' || id == 'ptimer') {
+                            days.innerHTML = 00;
+                            hrs.innerHTML = 00;
+                            min.innerHTML = 00;
+                            sec.innerHTML = 00;
+                        }
                         func();
                         clearInterval(timeinterval)
                     }
