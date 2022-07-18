@@ -85,11 +85,12 @@
                         </h1>
                         {% if b_data %}
                         <p>
+                            <!-- Game closes: Sec:<span id="bronze_sec"></span> -->
                             {% include "lottery/bronze_timer.html" %}
                         </p>
                         {% endif %}
                         <div class="pt-3">
-                            <a href="{% url 'pick' b_data.draw.type b_data.id %}" class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' b_data.draw.type b_data.id %}" class=" btn btn-lg btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -111,7 +112,7 @@
                         </p>
                         {% endif %}
                         <div class="pt-3">
-                            <a href="{% url 'pick' g_data.draw.type g_data.id %}" class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' g_data.draw.type g_data.id %}" class=" btn btn-lg btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -134,7 +135,7 @@
                         </p>
                         {% endif %}
                         <div class="pt-3">
-                            <a href="{% url 'pick' s_data.draw.type s_data.id %}" class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' s_data.draw.type s_data.id %}" class=" btn btn-lg btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -157,7 +158,7 @@
                         </p>
                         {% endif %}
                         <div class="pt-3">
-                            <a href="{% url 'pick' p_data.draw.type p_data.id %}" class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' p_data.draw.type p_data.id %}" class=" btn btn-lg btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -174,13 +175,13 @@
                         <span>SWM Jackpot</span>
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>15,000,000
                         </h1>
-                        {% if p_data %}
+                        {% if j_data %}
                         <p>
                             {% include "lottery/jackpot_timer.html" %}
                         </p>
                         {% endif %}
                         <div class="pt-3">
-                            <a href="{% url 'pick' j_data.draw.type j_data.id %}" class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' j_data.draw.type j_data.id %}" class=" btn btn-lg btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
@@ -197,13 +198,13 @@
                         <span>SWM Megawin</span>
                         <h1 class=" text-success"><span style="color: lightgreen">&#8358;</span>30,000,000
                         </h1>
-                        {% if p_data %}
+                        {% if m_data %}
                         <p>
                             {% include "lottery/mega_timer.html" %}
                         </p>
                         {% endif %}
                         <div class="pt-3">
-                            <a href="{% url 'pick' m_data.draw.type m_data.id %}" class=" btn btn-success rounded-9">
+                            <a href="{% url 'pick' m_data.draw.type m_data.id %}" class=" btn btn-lg btn-success rounded-9">
                                 Play Now
                             </a>
                         </div>
