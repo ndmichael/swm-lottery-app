@@ -63,6 +63,15 @@ label>input[type="checkbox"] {
     width: 100%;
 }
 
+#jackpotsection {
+    background-image: url("/static/lottery/images/bar.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 40vh;
+    height: 40vh;
+    width: 100%;
+}
+
 .btn-success {
     background: #006633;
 }
