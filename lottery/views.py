@@ -241,7 +241,6 @@ def reset_bronze(request):
     draw = Drawing.objects.filter(type="bronze").first()
     if request.POST.get("action") == "post" and id != "":
         bronze = get_object_or_404(Bronze, id=id)
-        # if datetime.datetime.now() >= bronze.enddate:
         bronze.status = False
         bronze.save()  # set it to false then save.
         Bronze.objects.create(draw=draw, status=True)
@@ -257,12 +256,11 @@ def reset_silver(request):
 
     if request.POST.get("action") == "post" and id != "":
         silver = get_object_or_404(Silver, id=id)
-        if datetime.datetime.now() == silver.enddate:
-            silver.status = False
-            silver.save()  # set it to false then save.
-            Silver.objects.create(draw=draw, status=True)
-            silver_data = Silver.objects.filter(status=True).first()
-            return JsonResponse({"enddate": silver_data.enddate})
+        silver.status = False
+        silver.save()  # set it to false then save.
+        Silver.objects.create(draw=draw, status=True)
+        silver_data = Silver.objects.filter(status=True).first()
+        return JsonResponse({"enddate": silver_data.enddate})
 
     return HttpResponse("Error access denied")
 
@@ -273,12 +271,11 @@ def reset_gold(request):
 
     if request.POST.get("action") == "post" and id != "":
         gold = get_object_or_404(Gold, id=id)
-        if datetime.datetime.now() == gold.enddate:
-            gold.status = False
-            gold.save()  # set it to false then save.
-            Gold.objects.create(draw=draw, status=True)
-            gold_data = Gold.objects.filter(status=True).first()
-            return JsonResponse({"enddate": gold_data.enddate})
+        gold.status = False
+        gold.save()  # set it to false then save.
+        Gold.objects.create(draw=draw, status=True)
+        gold_data = Gold.objects.filter(status=True).first()
+        return JsonResponse({"enddate": gold_data.enddate})
     return HttpResponse("Error access denied")
 
 
@@ -287,12 +284,11 @@ def reset_platinum(request):
     draw = Drawing.objects.filter(type="platinum").first()
     if request.POST.get("action") == "post" and id != "":
         platinum = get_object_or_404(Platinum, id=id)
-        if datetime.datetime.now() == platinum.enddate:
-            platinum.status = False
-            platinum.save()  # set it to false then save.
-            Platinum.objects.create(draw=draw, status=True)
-            platinum_data = Platinum.objects.filter(status=True).first()
-            return JsonResponse({"enddate": platinum_data.enddate})
+        platinum.status = False
+        platinum.save()  # set it to false then save.
+        Platinum.objects.create(draw=draw, status=True)
+        platinum_data = Platinum.objects.filter(status=True).first()
+        return JsonResponse({"enddate": platinum_data.enddate})
     return HttpResponse("Error access denied")
 
 
@@ -301,7 +297,6 @@ def reset_jackpot(request):
     draw = Drawing.objects.filter(type="jackpot").first()
     if request.POST.get("action") == "post" and id != "":
         jackpot = get_object_or_404(Jackpot, id=id)
-        # if datetime.datetime.now() >= jackpot.enddate:
         jackpot.status = False
         jackpot.save()  # set it to false then save.
         Jackpot.objects.create(draw=draw, status=True)

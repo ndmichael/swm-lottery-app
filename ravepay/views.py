@@ -26,6 +26,7 @@ def initiate_payment(request):
     return render(request, "ravepay/initiate_payment.html", {"p_form": p_form})
 
 
+@login_required
 def verify_payment(request, ref):
     payment = get_object_or_404(Payment, ref=ref)
     verified = payment.verify_payment()
@@ -33,7 +34,7 @@ def verify_payment(request, ref):
         user = Profile.objects.get(user=request.user)
         user.balance += payment.amount
         user.save()
-        messages.success(request, "Verification successful")
+        messages.success(request, "Payment Verification successful")
     else:
-        messages.error(request, "Verification failed.")
+        messages.error(request, "Payment Verification failed.")
     return redirect("initiate-payment")
