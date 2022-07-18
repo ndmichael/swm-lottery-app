@@ -17,7 +17,7 @@
 <script>
     function makePayment() {
         console.log("verify pay: ", "{{ payment.ref }} ")
-        base_url = 'http://127.0.0.1:8000/'
+        base_url = 'https://swmlottery.com/'
         var modal = FlutterwaveCheckout({
             public_key: "{{flutterwave_public_key}}",
             tx_ref: "{{payment.ref}}",
