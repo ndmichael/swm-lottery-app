@@ -245,7 +245,8 @@ def reset_bronze(request):
         bronze.status = False
         bronze.save()  # set it to false then save.
         Bronze.objects.create(draw=draw, status=True)
-        return JsonResponse({"result": "Bronze updated successful"})
+        bronze_data = Bronze.objects.filter(status=True).first()
+        return JsonResponse({"enddate": bronze_data.enddate})
 
     return HttpResponse("Error access denied")
 
@@ -260,7 +261,8 @@ def reset_silver(request):
             silver.status = False
             silver.save()  # set it to false then save.
             Silver.objects.create(draw=draw, status=True)
-            return JsonResponse({"result": "Silver updated successful"})
+            silver_data = Silver.objects.filter(status=True).first()
+            return JsonResponse({"enddate": silver_data.enddate})
 
     return HttpResponse("Error access denied")
 
@@ -275,8 +277,8 @@ def reset_gold(request):
             gold.status = False
             gold.save()  # set it to false then save.
             Gold.objects.create(draw=draw, status=True)
-            return JsonResponse({"result": "gold updated successful"})
-
+            gold_data = Gold.objects.filter(status=True).first()
+            return JsonResponse({"enddate": gold_data.enddate})
     return HttpResponse("Error access denied")
 
 
@@ -289,8 +291,8 @@ def reset_platinum(request):
             platinum.status = False
             platinum.save()  # set it to false then save.
             Platinum.objects.create(draw=draw, status=True)
-            return JsonResponse({"result": "platinum updated successful"})
-
+            platinum_data = Platinum.objects.filter(status=True).first()
+            return JsonResponse({"enddate": platinum_data.enddate})
     return HttpResponse("Error access denied")
 
 
@@ -303,7 +305,8 @@ def reset_jackpot(request):
         jackpot.status = False
         jackpot.save()  # set it to false then save.
         Jackpot.objects.create(draw=draw, status=True)
-        return JsonResponse({"result": "jackpot updated successful"})
+        jackpot_data = Jackpot.objects.filter(status=True).first()
+        return JsonResponse({"enddate": jackpot_data.enddate})
 
     return HttpResponse("Error access denied")
 
@@ -317,7 +320,8 @@ def reset_megawin(request):
             megawin.status = False
             megawin.save()  # set it to false then save.
             Megawin.objects.create(draw=draw, status=True)
-            return JsonResponse({"result": "megawin updated successful"})
+            mega_data = Megawin.objects.filter(status=True).first()
+            return JsonResponse({"enddate": mega_data.enddate})
 
     return HttpResponse("Error access denied")
 
