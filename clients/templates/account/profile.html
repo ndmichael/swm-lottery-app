@@ -129,7 +129,7 @@
                         <td>&#8358;0</td>
                         {% endif %}
                         <!--checking ticket and winning status -->
-                        {% if ticket.draw_type == 'jackpot' and not ticket.jackpot.winning_set %}
+                        {% if ticket.draw_type == 'jackpot' and not ticket.jackpot.winning_set and now|date:"YmdHis" < ticket.bronze.enddate|date:"YmdHis" %}
                         <td>...</td>
                         {% elif ticket.draw_type == 'megawin' and not ticket.megawin.winning_set %}
                         <td>...</td>
@@ -139,7 +139,7 @@
                         <td>...</td>
                         {% elif ticket.draw_type == 'silver' and not ticket.silver.winning_set %}
                         <td>...</td>
-                        {% elif ticket.draw_type == 'bronze' and not ticket.bronze.winning_set %}
+                        {% elif ticket.draw_type == 'bronze' and not ticket.bronze.winning_set  %}
                         <td>...</td>
                         {% elif ticket.correct_count %}
                         <td>WON</td>

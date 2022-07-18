@@ -253,7 +253,6 @@ def reset_bronze(request):
 def reset_silver(request):
     id = request.POST.get("draw_id")
     draw = Drawing.objects.filter(type="silver").first()
-
     if request.POST.get("action") == "post" and id != "":
         silver = get_object_or_404(Silver, id=id)
         silver.status = False
@@ -261,6 +260,8 @@ def reset_silver(request):
         Silver.objects.create(draw=draw, status=True)
         silver_data = Silver.objects.filter(status=True).first()
         return JsonResponse({"enddate": silver_data.enddate})
+    else:
+        print("failed here")
 
     return HttpResponse("Error access denied")
 
