@@ -317,6 +317,8 @@ def reset_megawin(request):
         Megawin.objects.create(draw=draw, status=True)
         mega_data = Megawin.objects.filter(status=True).first()
         return JsonResponse({"enddate": mega_data.enddate})
+    else:
+        print("failed.")
 
     return HttpResponse("Error access denied")
 

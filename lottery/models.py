@@ -91,7 +91,7 @@ class Bronze(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(hours=0, minutes=60)
+        self.enddate = self.startdate + timedelta(hours=0, minutes=5)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -171,7 +171,7 @@ class Jackpot(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(hours=3)
+        self.enddate = self.startdate + timedelta(hours=0, minutes=7)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -191,7 +191,7 @@ class Megawin(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(hours=6)
+        self.enddate = self.startdate + timedelta(hours=0, minutes=10)
         super().save(*args, **kwargs)
 
     def __str__(self):
