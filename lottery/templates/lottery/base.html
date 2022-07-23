@@ -294,197 +294,197 @@
     </script> -->
 
     <script>
-        $(document).ready(function() {
-            function getRemainingTime(endtime) {
-                now = new Date()
-                const total = new Date(endtime) - now;
-                var days = Math.floor(total / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-                var min = Math.floor(((total / 1000 / 60)) % 60);
-                var sec = Math.floor(((total / 1000)) % 60);
+        // $(document).ready(function() {
+        function getRemainingTime(endtime) {
+            now = new Date()
+            const total = new Date(endtime) - now;
+            var days = Math.floor(total / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+            var min = Math.floor(((total / 1000 / 60)) % 60);
+            var sec = Math.floor(((total / 1000)) % 60);
 
-                return {
-                    total,
-                    days,
-                    hours,
-                    min,
-                    sec
-                }
+            return {
+                total,
+                days,
+                hours,
+                min,
+                sec
+            }
+        }
+
+        function initializeClock(id, endtime, func) {
+            const clock = document.getElementById(id);
+            if (clock == null) {
+                return
+            }
+            if (id == 'btimer' || id == 'stimer' || id == 'jtimer' || id == 'mtimer') {
+                var hrs = clock.querySelector('.hrs');
+                var min = clock.querySelector('.min');
+                var sec = clock.querySelector('.sec');
+            } else if (id == 'gtimer' || id == 'ptimer') {
+                var days = clock.querySelector('.days');
+                var hrs = clock.querySelector('.hrs');
+                var min = clock.querySelector('.min');
+                // var sec = clock.querySelector('.sec');
             }
 
-            function initializeClock(id, endtime, func) {
-                const clock = document.getElementById(id);
-                if (clock == null) {
-                    return
-                }
+            function updateClock() {
+                const t = getRemainingTime(endtime);
+                // day.innerHTML = ('0' + t.days).slice(-2);
                 if (id == 'btimer' || id == 'stimer' || id == 'jtimer' || id == 'mtimer') {
-                    var hrs = clock.querySelector('.hrs');
-                    var min = clock.querySelector('.min');
-                    var sec = clock.querySelector('.sec');
+                    hrs.innerHTML = t.hours;
+                    min.innerHTML = t.min;
+                    sec.innerHTML = ('0' + t.sec).slice(-2);
                 } else if (id == 'gtimer' || id == 'ptimer') {
-                    var days = clock.querySelector('.days');
-                    var hrs = clock.querySelector('.hrs');
-                    var min = clock.querySelector('.min');
-                    // var sec = clock.querySelector('.sec');
+                    days.innerHTML = t.days;
+                    hrs.innerHTML = t.hours;
+                    min.innerHTML = t.min;
+                    // sec.innerHTML = ('0' + t.sec).slice(-2);
                 }
-
-                function updateClock() {
-                    const t = getRemainingTime(endtime);
-                    // day.innerHTML = ('0' + t.days).slice(-2);
+                if (t.total <= 0) {
                     if (id == 'btimer' || id == 'stimer' || id == 'jtimer' || id == 'mtimer') {
-                        hrs.innerHTML = t.hours;
-                        min.innerHTML = t.min;
-                        sec.innerHTML = ('0' + t.sec).slice(-2);
+                        hrs.innerHTML = 00;
+                        min.innerHTML = 00;
+                        sec.innerHTML = 00;
                     } else if (id == 'gtimer' || id == 'ptimer') {
-                        days.innerHTML = t.days;
-                        hrs.innerHTML = t.hours;
-                        min.innerHTML = t.min;
-                        // sec.innerHTML = ('0' + t.sec).slice(-2);
+                        days.innerHTML = 00;
+                        hrs.innerHTML = 00;
+                        min.innerHTML = 00;
                     }
-                    if (t.total <= 0) {
-                        if (id == 'btimer' || id == 'stimer' || id == 'jtimer' || id == 'mtimer') {
-                            hrs.innerHTML = 00;
-                            min.innerHTML = 00;
-                            sec.innerHTML = 00;
-                        } else if (id == 'gtimer' || id == 'ptimer') {
-                            days.innerHTML = 00;
-                            hrs.innerHTML = 00;
-                            min.innerHTML = 00;
-                        }
-                        clearInterval(timeinterval)
-                        func();
-                    }
+                    clearInterval(timeinterval)
+                    func();
                 }
-                // updateClock();
-                var timeinterval = setInterval(updateClock, 1000);
             }
+            // updateClock();
+            var timeinterval = setInterval(updateClock, 1000);
+        }
 
-            var f = function() {
-                $.ajax({
-                    url: "{% url 'reset_bronze' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{b_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        // location.reload()
-                        enddate = response['enddate']
-                        console.log("bronze: ", enddate)
-                        initializeClock('btimer', enddate, f);
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
+        var f = function() {
+            $.ajax({
+                url: "{% url 'reset_bronze' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': "{{b_data.id}}",
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    // location.reload()
+                    enddate = response['enddate']
+                    console.log("bronze: ", enddate)
+                    initializeClock('btimer', enddate, f);
+                },
+                error: function(rs, e) {
+                    $.ajax(this);
+                },
+            });
+        };
 
-            var f1 = function() {
-                $.ajax({
-                    url: "{% url 'reset_silver' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{s_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        // location.reload()
-                        enddate = response['enddate']
-                        console.log("silver: ", enddate)
-                        initializeClock('stimer', enddate, f);
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
+        var f1 = function() {
+            $.ajax({
+                url: "{% url 'reset_silver' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': "{{s_data.id}}",
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    // location.reload()
+                    enddate = response['enddate']
+                    console.log("silver: ", enddate)
+                    initializeClock('stimer', enddate, f);
+                },
+                error: function(rs, e) {
+                    $.ajax(this);
+                },
+            });
+        };
 
-            var f2 = function() {
-                $.ajax({
-                    url: "{% url 'reset_gold' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{g_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        enddate = response['enddate']
-                        console.log("gold: ", enddate)
-                        initializeClock('gtimer', enddate, f);
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
+        var f2 = function() {
+            $.ajax({
+                url: "{% url 'reset_gold' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': "{{g_data.id}}",
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    enddate = response['enddate']
+                    console.log("gold: ", enddate)
+                    initializeClock('gtimer', enddate, f);
+                },
+                error: function(rs, e) {
+                    $.ajax(this);
+                },
+            });
+        };
 
-            var f3 = function() {
-                $.ajax({
-                    url: "{% url 'reset_platinum' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{p_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        data = response['enddate']
-                        initializeClock('ptimer', data, f3);
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
+        var f3 = function() {
+            $.ajax({
+                url: "{% url 'reset_platinum' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': "{{p_data.id}}",
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    data = response['enddate']
+                    initializeClock('ptimer', data, f3);
+                },
+                error: function(rs, e) {
+                    $.ajax(this);
+                },
+            });
+        };
 
-            var f4 = function() {
-                $.ajax({
-                    url: "{% url 'reset_jackpot' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{j_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        data = response['enddate']
-                        initializeClock('jtimer', data, f4);
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
+        var f4 = function() {
+            $.ajax({
+                url: "{% url 'reset_jackpot' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': "{{j_data.id}}",
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    data = response['enddate']
+                    initializeClock('jtimer', data, f4);
+                },
+                error: function(rs, e) {
+                    $.ajax(this);
+                },
+            });
+        };
 
-            var f5 = function() {
-                $.ajax({
-                    url: "{% url 'reset_megawin' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{m_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        data = response['enddate']
-                        initializeClock('mtimer', data, f5);
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
+        var f5 = function() {
+            $.ajax({
+                url: "{% url 'reset_megawin' %}",
+                type: 'POST',
+                data: {
+                    'draw_id': "{{m_data.id}}",
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(response) {
+                    data = response['enddate']
+                    initializeClock('mtimer', data, f5);
+                },
+                error: function(rs, e) {
+                    $.ajax(this);
+                },
+            });
+        };
 
-            initializeClock('btimer', "{{b_data.enddate.isoformat}}", f);
-            initializeClock('stimer', "{{s_data.enddate.isoformat}}", f1);
-            initializeClock('gtimer', "{{g_data.enddate.isoformat}}", f2);
-            initializeClock('ptimer', "{{p_data.enddate.isoformat}}", f3);
-            initializeClock('jtimer', "{{j_data.enddate.isoformat}}", f4);
-            initializeClock('mtimer', "{{m_data.enddate.isoformat}}", f5);
-        });
+        initializeClock('btimer', "{{b_data.enddate.isoformat}}", f);
+        initializeClock('stimer', "{{s_data.enddate.isoformat}}", f1);
+        initializeClock('gtimer', "{{g_data.enddate.isoformat}}", f2);
+        initializeClock('ptimer', "{{p_data.enddate.isoformat}}", f3);
+        initializeClock('jtimer', "{{j_data.enddate.isoformat}}", f4);
+        initializeClock('mtimer', "{{m_data.enddate.isoformat}}", f5);
+        // });
     </script>
 
 
