@@ -6,6 +6,7 @@ from .forms import WithdrawalForm, UserUpdateForm, ProfileUpdateForm
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.core.paginator import Paginator
+from datetime import datetime
 
 # Create your views here.
 
@@ -15,6 +16,7 @@ def profile(request, username):
     p = Paginator(Ticket.objects.filter(user_id=user.id).order_by("-date"), 10)
     page = request.GET.get("page")
     tickets = p.get_page(page)
+    today = datetime.now()
 
     if request.method == "POST":
         w_form = WithdrawalForm(request.POST)
@@ -41,6 +43,7 @@ def profile(request, username):
         "user": user,
         "tickets": tickets,
         "w_form": w_form,
+        "today": today,
     }
     return render(request, "account/profile.html", context)
 

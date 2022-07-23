@@ -97,10 +97,10 @@
                             <span class="regular text-center">{{number}}</span> {% endfor %}
                             <span class="special text-center">{{ticket.ticket_pick.special_number}}</span>
                         </td>
-                        <td>{{ticket.date}}</td>
+                        <td>{{ticket.date}} </td>
                         <td>{{ticket.draw_type}}</td>
                         {% if ticket.bronze or ticket.draw_type == 'bronze' %}
-                        <td>&#8358;100</td>
+                        <td>&#8358;100</td> 
                         {% elif ticket.silver or ticket.draw_type == 'silver' %}
                         <td>&#8358;200</td>
                         {% elif ticket.gold or ticket.draw_type == 'gold' %}
@@ -129,22 +129,22 @@
                         <td>&#8358;0</td>
                         {% endif %}
                         <!--checking ticket and winning status -->
-                        {% if ticket.draw_type == 'jackpot' and not ticket.jackpot.winning_set and now|date:"YmdHis" < ticket.bronze.enddate|date:"YmdHis" %}
+                        {% if ticket.draw_type == 'jackpot' and not ticket.jackpot.winning_set and today < ticket.jackpot.enddate %}
                         <td>...</td>
-                        {% elif ticket.draw_type == 'megawin' and not ticket.megawin.winning_set %}
+                        {% elif ticket.draw_type == 'megawin' and not ticket.megawin.winning_set  %}
                         <td>...</td>
                         {% elif ticket.draw_type == 'platinum' and not ticket.platinum.winning_set %}
                         <td>...</td>
-                        {% elif ticket.draw_type == 'gold' and not ticket.gold.winning_set %}
+                        {% elif ticket.draw_type == 'gold' and not ticket.gold.winning_set  %}
                         <td>...</td>
-                        {% elif ticket.draw_type == 'silver' and not ticket.silver.winning_set %}
+                        {% elif ticket.draw_type == 'silver' and not ticket.silver.winning_set  %}
                         <td>...</td>
-                        {% elif ticket.draw_type == 'bronze' and not ticket.bronze.winning_set  %}
+                        {% elif ticket.draw_type == 'bronze' and not ticket.bronze.winning_set and today < ticket.bronze.enddate  %}
                         <td>...</td>
                         {% elif ticket.correct_count %}
                         <td>WON</td>
                         {% else %}
-                        <td>No Winning</td>
+                            <td>No Winning</td>
                         {% endif %}
                     </tr>
                     {% endfor %} {% else %}
