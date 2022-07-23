@@ -139,6 +139,12 @@ label>input[type="checkbox"] {
     }
 }
 
+@media print {
+    .hide-print {
+        display: none;
+    }
+}
+
 
 /* result css */
 
