@@ -133,17 +133,17 @@
                     <h3 class="pb-2">Quick Links</h3>
                     <div class="ps-4">
                         <p>
-                            <a href="#" class="text-light">
+                            <a href="{% url 'account_login' %}" class="text-light">
                                 Login
                             </a>
                         </p>
                         <p>
-                            <a href="#" class="text-light">
+                            <a href="{% url 'result' %}" class="text-light">
                                 Results
                             </a>
                         </p>
                         <p>
-                            <a href="#" class="text-light">
+                            <a href="{% url 'bonus' %}" class="text-light">
                                 Bonuses
                             </a>
                         </p>
@@ -243,56 +243,6 @@
         })
     </script>
 
-
-    <!-- bronze ajax -->
-
-    <!-- <script>
-        $(document).ready(function() {
-
-            var x = function() {
-                now = new Date()
-                enddate = new Date("{{b_data.enddate.isoformat}}")
-                const total = enddate - now;
-                console.log(total)
-                var days = Math.floor(total / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-                var min = Math.floor(((total / 1000 / 60)) % 60);
-                var sec = Math.floor(((total / 1000)) % 60);
-
-                document.getElementById('b_min').innerHTML = min;
-                document.getElementById('b_sec').innerHTML = sec;
-                if (total <= 0) {
-                    console.log("cleared.");
-                    document.getElementById('b_min').innerHTML = '00';
-                    document.getElementById('b_sec').innerHTML = '00';
-                    clearInterval(timeCounter);
-                    f();
-                }
-            }
-
-
-            var f = function() {
-                $.ajax({
-                    url: "{% url 'reset_bronze' %}",
-                    type: 'POST',
-                    data: {
-                        'draw_id': "{{b_data.id}}",
-                        'csrfmiddlewaretoken': "{{ csrf_token }}",
-                        'action': 'post'
-                    },
-                    success: function(response) {
-                        location.reload()
-                    },
-                    error: function(rs, e) {
-                        $.ajax(this);
-                    },
-                });
-            };
-            x();
-            var timeCounter = setInterval(x, 1000);
-        });
-    </script> -->
-
     <script>
         // $(document).ready(function() {
         function getRemainingTime(endtime) {
@@ -351,8 +301,9 @@
                         hrs.innerHTML = 00;
                         min.innerHTML = 00;
                     }
-                    clearInterval(timeinterval)
+
                     func();
+                    clearInterval(timeinterval)
                 }
             }
             // updateClock();
@@ -449,9 +400,12 @@
                     'csrfmiddlewaretoken': "{{ csrf_token }}",
                     'action': 'post'
                 },
+                cache: false,
                 success: function(response) {
-                    data = response['enddate']
-                    initializeClock('jtimer', data, f4);
+                    // location.reload()
+                    enddate = response['enddate']
+                    console.log("jackpot: ", enddate)
+                    initializeClock('jtimer', enddate, f4);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
@@ -468,9 +422,12 @@
                     'csrfmiddlewaretoken': "{{ csrf_token }}",
                     'action': 'post'
                 },
+                cache: false,
                 success: function(response) {
-                    data = response['enddate']
-                    initializeClock('mtimer', data, f5);
+                    // location.reload()
+                    enddate = response['enddate']
+                    console.log("megawin: ", enddate)
+                    initializeClock('mtimer', enddate, f5);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
