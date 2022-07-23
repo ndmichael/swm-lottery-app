@@ -120,7 +120,7 @@ def winner(request, ticket_id):
         elif ticket.draw_type == "megawin" and not ticket.megawin.winning_set:
             megawin = get_object_or_404(Megawin, id=ticket.megawin.id)
             megawin.winning_set = True
-            game_id = jackpot.id
+            game_id = megawin.id
             megawin.save()
         else:
             messages.warning(request, f"winner has already been set for that game.")

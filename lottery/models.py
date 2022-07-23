@@ -111,7 +111,7 @@ class Silver(models.Model):
         ordering = ("-startdate",)
 
     def save(self, *args, **kwargs):
-        self.enddate = self.startdate + timedelta(days=1)
+        self.enddate = self.startdate + timedelta(days=1, minutes=0)
         super().save(*args, **kwargs)
 
     def __str__(self):
