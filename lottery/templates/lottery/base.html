@@ -320,10 +320,10 @@
                     'action': 'post'
                 },
                 success: function(response) {
-                    // location.reload()
-                    enddate = response['enddate']
-                    console.log("bronze: ", enddate)
-                    initializeClock('btimer', enddate, f);
+                    location.reload()
+                        // enddate = response['enddate']
+                        // console.log("bronze: ", enddate)
+                        // initializeClock('btimer', enddate, f);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
@@ -341,10 +341,10 @@
                     'action': 'post'
                 },
                 success: function(response) {
-                    // location.reload()
-                    enddate = response['enddate']
-                    console.log("silver: ", enddate)
-                    initializeClock('stimer', enddate, f);
+                    location.reload()
+                        // enddate = response['enddate']
+                        // console.log("silver: ", enddate)
+                        // initializeClock('stimer', enddate, f);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
@@ -362,9 +362,10 @@
                     'action': 'post'
                 },
                 success: function(response) {
-                    enddate = response['enddate']
-                    console.log("gold: ", enddate)
-                    initializeClock('gtimer', enddate, f);
+                    location.reload()
+                        // enddate = response['enddate']
+                        // console.log("gold: ", enddate)
+                        // initializeClock('gtimer', enddate, f);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
@@ -382,8 +383,9 @@
                     'action': 'post'
                 },
                 success: function(response) {
-                    data = response['enddate']
-                    initializeClock('ptimer', data, f3);
+                    location.reload()
+                        // data = response['enddate']
+                        // initializeClock('ptimer', data, f3);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
@@ -402,10 +404,10 @@
                 },
                 cache: false,
                 success: function(response) {
-                    // location.reload()
-                    enddate = response['enddate']
-                    console.log("jackpot: ", enddate)
-                    initializeClock('jtimer', enddate, f4);
+                    location.reload()
+                        // enddate = response['enddate']
+                        // console.log("jackpot: ", enddate)
+                        // initializeClock('jtimer', enddate, f4);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
@@ -413,7 +415,7 @@
             });
         };
 
-        var f5 = function() {
+        var f = function() {
             $.ajax({
                 url: "{% url 'reset_megawin' %}",
                 type: 'POST',
@@ -422,12 +424,11 @@
                     'csrfmiddlewaretoken': "{{ csrf_token }}",
                     'action': 'post'
                 },
-                cache: false,
                 success: function(response) {
-                    // location.reload()
-                    enddate = response['enddate']
-                    console.log("megawin: ", enddate)
-                    initializeClock('mtimer', enddate, f5);
+                    location.reload()
+                        // enddate = response['enddate']
+                        // console.log("bronze: ", enddate)
+                        // initializeClock('btimer', enddate, f);
                 },
                 error: function(rs, e) {
                     $.ajax(this);
